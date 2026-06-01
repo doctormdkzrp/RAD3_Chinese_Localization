@@ -1,0 +1,15 @@
+{
+  "creativetab.daggerofbloodlettingtab": "放血匕首",
+  "item.dagger_of_bloodletting.daggeroforb": "血珠匕首",
+  "item.dagger_of_bloodletting.daggerofbloodletting": "放血匕首",
+  "item.dagger_of_bloodletting.sfbldagger": "灵智放血匕首",
+  "item.dagger_of_bloodletting.bladeofbloodletting": "放血之刃",
+  "tooltip.dagger_of_bloodletting.boundorb_0": "绑定血珠：无",
+  "tooltip.dagger_of_bloodletting.boundorb_1": "绑定血珠：弱化血珠",
+  "tooltip.dagger_of_bloodletting.boundorb_2": "绑定血珠：学徒血珠",
+  "tooltip.dagger_of_bloodletting.boundorb_3": "绑定血珠：魔术师血珠",
+  "tooltip.dagger_of_bloodletting.boundorb_4": "绑定血珠：大师血珠",
+  "tooltip.dagger_of_bloodletting.boundorb_5": "绑定血珠：大法师血珠",
+  "attribute.dobl.bloodletting": "放血",
+  "attribute.dobl.soulfilling": "灵魂上限"
+}
