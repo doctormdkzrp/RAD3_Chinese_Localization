@@ -1,0 +1,18 @@
+{
+  "creativetab.daggerofbloodlettingtab": "Dagger of Bloodletting",
+
+  "item.dagger_of_bloodletting.daggeroforb": "Dagger of the Orb",
+  "item.dagger_of_bloodletting.daggerofbloodletting": "Dagger of Bloodletting",
+  "item.dagger_of_bloodletting.sfbldagger": "Sentient Dagger of Bloodletting",
+  "item.dagger_of_bloodletting.bladeofbloodletting": "Blade of Bloodletting",
+
+  "tooltip.dagger_of_bloodletting.boundorb_0": "Bound Orb: NONE",
+  "tooltip.dagger_of_bloodletting.boundorb_1": "Bound Orb: Weak Blood Orb",
+  "tooltip.dagger_of_bloodletting.boundorb_2": "Bound Orb: Apprentice Blood Orb",
+  "tooltip.dagger_of_bloodletting.boundorb_3": "Bound Orb: Magician's Blood Orb",
+  "tooltip.dagger_of_bloodletting.boundorb_4": "Bound Orb: Master Blood Orb",
+  "tooltip.dagger_of_bloodletting.boundorb_5": "Bound Orb: Archmage's Blood Orb",
+
+  "attribute.dobl.bloodletting": "Bloodletting",
+  "attribute.dobl.soulfilling": "Soulcap"
+}

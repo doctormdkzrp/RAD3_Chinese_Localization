@@ -1,0 +1,58 @@
+{
+  "item.creatures_of_petrichor.coin": "Coin",
+  "item.creatures_of_petrichor.ten_coin": "Ten Coin",
+  "item.creatures_of_petrichor.hundred_coin": "Hundred Coin",
+  "item.creatures_of_petrichor.frog_ingot": "Frog Ingot",
+
+  "item.creatures_of_petrichor.meadow_slime_bucket": "Bucket of Slime",
+
+
+  "item.creatures_of_petrichor.boulder_spirit_spawn_egg": "Boulder Spirit Spawn Egg",
+  "item.creatures_of_petrichor.vengeful_gravestone_spawn_egg": "Vengeful Gravestone Spawn Egg",
+  "item.creatures_of_petrichor.direwolf_spawn_egg": "Direwolf Spawn Egg",
+  "item.creatures_of_petrichor.haunt_spawn_egg": "Haunt Spawn Egg",
+  "item.creatures_of_petrichor.meadow_slime_spawn_egg": "Meadow Slime Spawn Egg",
+  "item.creatures_of_petrichor.meadow_slime_small_spawn_egg": "Small Meadow Slime Spawn Egg",
+  "item.creatures_of_petrichor.shade_spawn_egg": "Shade Spawn Egg",
+  "item.creatures_of_petrichor.death_knell_spawn_egg": "Death Knell Spawn Egg",
+  "item.creatures_of_petrichor.specter_spawn_egg": "Specter Spawn Egg",
+  "item.creatures_of_petrichor.cursed_doll_spawn_egg": "Cursed Doll Spawn Egg",
+  "item.creatures_of_petrichor.nameless_spawn_egg": "Nameless Spawn Egg",
+  "item.creatures_of_petrichor.shroomin_spawn_egg": "Shroomin Spawn Egg",
+  "item.creatures_of_petrichor.sprite_spawn_egg": "Sprite Spawn Egg",
+  "item.creatures_of_petrichor.will_o_wisp_spawn_egg": "Will O Wisp Spawn Egg",
+  "item.creatures_of_petrichor.wandering_lantern_spawn_egg": "Wandering Lantern Spawn Egg",
+  "item.creatures_of_petrichor.fallen_star_spawn_egg": "Fallen Star Spawn Egg",
+
+
+
+  "block.creatures_of_petrichor.forgotten_gravestone_block_entity": "Forgotten Gravestone",
+
+  "block.creatures_of_petrichor.alexandrite_block": "Block of Alexandrite",
+  "block.creatures_of_petrichor.raw_alexandrite_block": "Block of Raw Alexandrite",
+
+
+  "entity.creatures_of_petrichor.boulder_spirit": "Boulder Spirit",
+  "entity.creatures_of_petrichor.vengeful_gravestone": "Vengeful Gravestone",
+  "entity.creatures_of_petrichor.direwolf": "Direwolf",
+  "entity.creatures_of_petrichor.haunt": "Haunt",
+  "entity.creatures_of_petrichor.meadow_slime": "Meadow Slime",
+  "entity.creatures_of_petrichor.meadow_slime_small": "Small Meadow Slime",
+  "entity.creatures_of_petrichor.shade": "Shade",
+  "entity.creatures_of_petrichor.death_knell": "Death Knell",
+  "entity.creatures_of_petrichor.specter": "Specter",
+  "entity.creatures_of_petrichor.cursed_doll": "Cursed Doll",
+  "entity.creatures_of_petrichor.nameless": "Nameless",
+  "entity.creatures_of_petrichor.shroomin": "Shroomin",
+  "entity.creatures_of_petrichor.sprite": "Sprite",
+  "entity.creatures_of_petrichor.will_o_wisp": "Will O Wisp",
+  "entity.creatures_of_petrichor.wandering_lantern": "Wandering Lantern",
+  "entity.creatures_of_petrichor.fallen_star": "Fallen Star",
+
+
+
+
+
+
+  "creativetab.petrichor_tab": "Petrichor"
+}
