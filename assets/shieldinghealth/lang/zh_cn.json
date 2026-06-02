@@ -1,0 +1,22 @@
+{
+  "attribute.shieldinghealth.shield_delay": "护盾恢复延迟",
+  "attribute.shieldinghealth.shield_delay.desc": "护盾开始恢复所需的时间",
+  "attribute.shieldinghealth.shield_regen": "护盾恢复速度",
+  "attribute.shieldinghealth.shield_regen.desc": "护盾完全恢复所需的时间，以刻为单位",
+  "attribute.shieldinghealth.shield_value": "最大护盾容量",
+  "attribute.shieldinghealth.shield_value.desc": "护盾的缩放量",
+  "effect.shieldinghealth.interference": "干扰",
+  "effect.shieldinghealth.interference.description": "延长完全恢复护盾所需的时间",
+  "effect.shieldinghealth.tainted": "污染",
+  "effect.shieldinghealth.tained.description": "降低你的最大护盾值",
+  "enchantment.shieldinghealth.shield_reaver": "护盾掠夺者",
+  "enchantment.shieldinghealth.shield_reaver.desc": "减少目标的护盾值",
+  "enchantment.shieldinghealth.bastion_of_flesh": "血肉堡垒",
+  "enchantment.shieldinghealth.bastion_of_flesh.desc": "减少护甲和护甲韧性以增加总护盾容量",
+  "enchantment.shieldinghealth.shielding": "护盾强化",
+  "enchantment.shieldinghealth.shielding.desc": "直接增加护盾容量",
+  "item.shieldinghealth.power_token": "力量令牌",
+  "item.shieldinghealth.power_token_info": "首次击杀实体类型时获得，或作为稀有战利品获取",
+  "item.shieldinghealth.shield_power": "护盾力量",
+  "item.shieldinghealth.shield_power_message": "已达到 %d/%d 额外护盾"
+}

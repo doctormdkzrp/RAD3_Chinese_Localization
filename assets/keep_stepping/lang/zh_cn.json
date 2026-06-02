@@ -1,0 +1,9 @@
+{
+  "key.categories.keep_stepping.keep_stepping": "自动上坡",
+  "key.keep_stepping.mode_toggle": "模式切换",
+  "keep_stepping.mode": "台阶模式",
+  "keep_stepping.mode.disabled": "已禁用",
+  "keep_stepping.mode.stepup": "上台阶",
+  "keep_stepping.mode.auto_jump": "自动跳跃",
+  "keep_stepping.mode.toggle_key": "按 %s 切换模式"
+}

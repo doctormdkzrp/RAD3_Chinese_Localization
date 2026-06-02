@@ -1,0 +1,33 @@
+{
+  "itemGroup.gearupgrades.gear_upgrades_tab": "Gear Upgrades",
+  "attribute.name.gearupgrades.mastery": "Mastery",
+  "attribute.name.gearupgrades.mastery.desc": "Increases proficiency gain",
+  "attribute.name.gearupgrades.nullness": "NULL Attribute",
+  "attribute.name.gearupgrades.nullness.desc": "Should not be obtainable unless someone messed up datapacks",
+  "effect.gearupgrades.mastery": "Mastery",
+  "effect.gearupgrades.mastery.desc": "Increases proficiency gain by 25% per level",
+
+  "tooltip.gearupgrades.mastery_item": "Combine with upgradeable item in Anvil to receive %s proficiency",
+
+  "tooltip.gearupgrades.proficiency": "Proficiency: %s",
+  "tooltip.gearupgrades.refinements": "Upgrades (%s/%s)",
+  "tooltip.gearupgrades.refinements.view": "Upgrades:",
+  "tooltip.gearupgrades.refinements.upgrades": "Upgrades: %s/%s",
+  "tooltip.gearupgrades.refinements.option": "%s: %s - %sP %sL > %s x%s",
+  "tooltip.gearupgrades.refinements.incompats": " - Incompatible with: %s",
+  "tooltip.gearupgrades.refinements.entry": " - %s",
+  "tooltip.gearupgrades.refinements.attributes": "   - %s: %s",
+  "tooltip.gearupgrades.refinements.missing": " - Upgrade Available",
+
+  "tooltip.gearupgrades.refinements.shift": "Hold [%s] to see Upgrade Details",
+  "tooltip.gearupgrades.refinements.alt": "Hold [%s] to see Upgrade Options",
+  "tooltip.gearupgrades.refinements.instructins": "Combine in Anvil to Upgrade",
+
+  "command.gearupgrades.no_item": "%s has no item in main hand",
+  "command.gearupgrades.invalid": "%s cannot receive proficiency",
+  "command.gearupgrades.added": "Added %s proficiency to %s %s",
+  "command.gearupgrades.removed": "Removed %s proficiency from %s %s",
+  "command.gearupgrades.set": "Set %s %s proficiency to %s",
+  "command.gearupgrades.syntax": "Invalid action. Use add/remove/set."
+
+}

@@ -1,0 +1,5 @@
+{
+  "key.categories.mobplaques": "显示怪物生命值",
+  "key.togglePlaques": "切换怪物生命值显示",
+  "key.togglePlaques.message": "怪物生命值显示设置为: %s"
+}
