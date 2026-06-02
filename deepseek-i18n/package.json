@@ -5,6 +5,11 @@
   "type": "module",
   "description": "Use DeepSeek API to translate Minecraft en_us.json into zh_cn.json with placeholder-safe validation.",
   "scripts": {
-    "translate": "node ./translate.mjs"
+    "translate": "node ./translate.mjs",
+    "kubejs": "node ./kubejs-translate.mjs"
+  },
+  "dependencies": {
+    "@babel/parser": "^7.26.0",
+    "@babel/traverse": "^7.26.0"
   }
 }
