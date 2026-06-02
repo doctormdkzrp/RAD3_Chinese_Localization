@@ -1,0 +1,10 @@
+{
+  "name": "rad3-deepseek-i18n",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Use DeepSeek API to translate Minecraft en_us.json into zh_cn.json with placeholder-safe validation.",
+  "scripts": {
+    "translate": "node ./translate.mjs"
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "style": {
+    "tone": "自然、简洁、符合 Minecraft 1.20.1 语境",
+    "audience": "玩家界面文本",
+    "preserveEnglishNames": [
+      "NewTrials",
+      "Guster",
+      "Flow"
+    ]
+  },
+  "exactTerms": {
+    "Trial Chamber": "试炼密室",
+    "Trial Key": "试炼钥匙",
+    "Ominous Trial Key": "不祥试炼钥匙",
+    "Boss Trial Key": "首领试炼钥匙",
+    "Vault": "宝库",
+    "Ominous Vault": "不祥宝库",
+    "Boss Vault": "首领宝库",
+    "Smithing Template": "锻造模板",
+    "Armor Trim": "盔甲纹饰",
+    "Spawn Egg": "刷怪蛋",
+    "Copper Door": "铜门",
+    "Copper Trapdoor": "铜活板门",
+    "Copper Bulb": "铜灯",
+    "Copper Grate": "铜格栅",
+    "Waxed": "涂蜡",
+    "Exposed": "斑驳",
+    "Weathered": "锈蚀",
+    "Oxidized": "氧化",
+    "Polished": "磨制",
+    "Chiseled": "雕纹",
+    "Tuff": "凝灰岩"
+  }
+}

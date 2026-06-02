@@ -1,0 +1,22 @@
+# Secrets and local env files
+.env
+.env.*
+!.env.example
+
+# Node.js dependencies and logs
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*.tmp
+
+# Python cache (in case helper scripts are used)
+__pycache__/
+*.pyc
