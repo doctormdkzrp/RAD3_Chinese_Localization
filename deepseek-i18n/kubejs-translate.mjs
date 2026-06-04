@@ -168,6 +168,13 @@ function getCalleeName(node) {
   return null;
 }
 
+function getPropertyKeyName(node) {
+  if (!node) return null;
+  if (node.type === "Identifier") return node.name;
+  if (node.type === "StringLiteral") return node.value;
+  return null;
+}
+
 function hasLatinLetters(text) {
   return /[A-Za-z]/.test(String(text));
 }
@@ -269,6 +276,31 @@ function extractFromFile(filePath, inputDir) {
           return;
         }
         if (arg) recordSkipped(arg, callee, "unsupported event.addItem payload");
+      }
+    },
+    ObjectProperty(pathNode) {
+      const keyName = getPropertyKeyName(pathNode.node.key);
+      if (keyName === "lore") {
+        const valueNode = pathNode.node.value;
+        if (isStringLiteral(valueNode)) {
+          pushEntry(valueNode, "object.lore");
+        } else if (valueNode) {
+          recordSkipped(valueNode, "object.lore", "unsupported lore value");
+        }
+        return;
+      }
+
+      if (keyName === "mechanics" || keyName === "machanics") {
+        const valueNode = pathNode.node.value;
+        if (valueNode && valueNode.type === "ArrayExpression") {
+          for (const element of valueNode.elements) {
+            if (isStringLiteral(element)) {
+              pushEntry(element, "object.mechanics");
+            }
+          }
+        } else if (valueNode) {
+          recordSkipped(valueNode, "object.mechanics", "unsupported mechanics value");
+        }
       }
     },
   });

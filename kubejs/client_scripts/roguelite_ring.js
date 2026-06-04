@@ -17,13 +17,13 @@ ItemEvents.tooltip(event => {
         let percent = Math.floor((milestones.length / 16) * 100);
 
         // Build Tooltip (Safe Append Only)
-        text.add(Text.of("A heavy burden for a second chance...").gray().italic());
+        text.add(Text.of("沉重的负担，换来第二次机会……").gray().italic());
 
         if (!event.shift) {
-            text.add(Text.of("Hold [Shift] for mechanics.").yellow());
+            text.add(Text.of("按住[Shift]查看机制。").yellow());
         } else {
-            text.add(Text.of("Clears your inventory and spawn you in random location on death").white());
-            text.add(Text.of("Gives different loot based on unlocked milestones").white());
+            text.add(Text.of("死亡时清空物品栏并在随机位置重生").white());
+            text.add(Text.of("根据解锁的里程碑给予不同战利品").white());
 
             // Use the data from NBT
             text.add(Text.of(` 1. §6Rank:§r ${rankColor}${rankName}§r (§f${pts} Pts§r)`));

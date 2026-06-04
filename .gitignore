@@ -9,6 +9,7 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
+.kubejs-work
 
 # OS/editor noise
 .DS_Store

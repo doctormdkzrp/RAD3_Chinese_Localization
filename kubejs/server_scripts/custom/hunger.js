@@ -256,19 +256,19 @@ const TIERS = {
 
 function getTierMessages(tier) {
     if (tier === TIERS.ZERO) return [
-        '§c✖ Eat something! §7Stamina recovery halted, actions cost more.',
-        '§c✖ Hunger gnaws at you — §7stamina drains faster. Eat something!',
+        '§c✖ 吃点东西! §7耐力恢复已停止，行动花费更多。',
+        '§c✖ 饥饿折磨着你 — §7耐力流失加快。吃点东西!',
     ];
     if (tier === TIERS.LOW) return [
-        '§e● Fed. §7No bonuses active — cook a proper meal for stamina benefits.',
+        '§e● 已进食。 §7无加成激活 — 烹饪一顿真正的饭菜以获得耐力福利。',
     ];
     if (tier === TIERS.MID) return [
-        '§a✦ Well-Fed! §7Combat stamina improved — §a+1 heart, faster rolls§7.',
-        '§a✦ Nourished! §7You feel stronger — §astamina and health boosted§7.',
+        '§a✦ 饱腹! §7战斗耐力提高 — §a+1生命值，翻滚速度更快§7。',
+        '§a✦ 营养充足! §7你感到更强壮 — §a耐力和生命值提高§7。',
     ];
     if (tier === TIERS.HIGH) return [
-        '§6★ Peak Nourishment! §7All stamina bonuses active — §6shield, speed, recovery§7.',
-        '§6★ A feast worthy of an adventurer! §7You are at your absolute peak.',
+        '§6★ 营养巅峰! §7所有耐力加成激活 — §6护盾、速度、恢复§7。',
+        '§6★ 一顿冒险家级别的盛宴! §7你处于绝对巅峰状态。',
     ];
     return null;
 }
