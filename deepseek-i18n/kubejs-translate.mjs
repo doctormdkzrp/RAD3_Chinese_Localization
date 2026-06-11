@@ -216,6 +216,21 @@ function getStaticStringNodeValue(node) {
   return null;
 }
 
+function templateLiteralToFormatString(node) {
+  if (!node || node.type !== "TemplateLiteral") return null;
+  const quasis = Array.isArray(node.quasis) ? node.quasis : [];
+  const expressions = Array.isArray(node.expressions) ? node.expressions : [];
+  if (quasis.length === 0 || quasis.length !== expressions.length + 1) return null;
+
+  let value = "";
+  for (let i = 0; i < quasis.length; i++) {
+    const cooked = quasis[i]?.value?.cooked ?? "";
+    value += String(cooked).replace(/%/g, "%%");
+    if (i < expressions.length) value += "%s";
+  }
+  return { value, expressionCount: expressions.length };
+}
+
 function extractIdentifierNames(node, out = new Set()) {
   if (!node || typeof node !== "object") return out;
   if (node.type === "Identifier") {
@@ -344,6 +359,45 @@ function extractFromFile(filePath, inputDir) {
     seenRewriteSpans.add(key);
   }
 
+  function pushTemplateEntry(node, kind, metadata = {}) {
+    const templateInfo = templateLiteralToFormatString(node);
+    if (!templateInfo || templateInfo.expressionCount <= 0) return null;
+    const entry = extractStringEntry({
+      source,
+      file: relativeFile,
+      lineStarts,
+      start: node.start,
+      end: node.end,
+      value: templateInfo.value,
+      kind,
+      sequence: ++sequence,
+      objectName: metadata.objectName,
+      propertyKey: metadata.propertyKey,
+    });
+    if (!entry) return null;
+    entry.skipLiteralRewrite = true;
+    entries.push(entry);
+    return entry;
+  }
+
+  function registerTemplateArgRewrite(callNode, argNode, entry) {
+    if (!callNode || !argNode || !entry) return;
+    if (argNode.type !== "TemplateLiteral" || !Array.isArray(argNode.expressions) || argNode.expressions.length === 0) return;
+    const exprSources = argNode.expressions
+      .map((expr) => source.slice(expr.start, expr.end).trim())
+      .filter((s) => s.length > 0);
+    const keyLiteral = quoteJsString(entry.key, entry.quote || '"');
+    const replaceWith = exprSources.length > 0 ? `${keyLiteral}, ${exprSources.join(", ")}` : keyLiteral;
+    rewrites.push({
+      file: relativeFile,
+      start: argNode.start,
+      end: argNode.end,
+      raw: source.slice(argNode.start, argNode.end),
+      replaceWith,
+      kind: "Text.of.template.args",
+    });
+  }
+
   traverse(ast, {
     CallExpression(pathNode) {
       const callee = getCalleeName(pathNode.node.callee);
@@ -354,6 +408,14 @@ function extractFromFile(filePath, inputDir) {
         if (staticValue != null) {
           const entry = pushEntry(arg, callee);
           if (entry) registerTextTranslateRewrite(pathNode.node);
+        } else if (arg.type === "TemplateLiteral" && Array.isArray(arg.expressions) && arg.expressions.length > 0) {
+          const entry = pushTemplateEntry(arg, "Text.of.template");
+          if (entry) {
+            registerTextTranslateRewrite(pathNode.node);
+            registerTemplateArgRewrite(pathNode.node, arg, entry);
+          } else {
+            recordSkipped(arg, "Text.of.template", "template had no translatable text");
+          }
         } else if (
           arg.type === "LogicalExpression" &&
           referencesAnyIdentifier(arg.left, keyObjectNames) &&
@@ -895,6 +957,7 @@ function applyKeyRewritesToSource(source, fileEntries, fileRewrites) {
   const patches = [];
 
   for (const entry of fileEntries) {
+    if (entry.skipLiteralRewrite) continue;
     const keyValue = quoteJsString(entry.key, entry.quote || '"');
     patches.push({
       start: entry.start,

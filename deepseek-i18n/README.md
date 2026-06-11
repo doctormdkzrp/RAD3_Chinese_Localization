@@ -32,28 +32,40 @@
 - `DEEPSEEK_MODEL`
 
 ## KubeJS 处理工具
-如果你要处理 `kubejs/client_scripts/**/*.js`，请使用独立管线，不要走旧的 `translate.mjs`。
+如果你要处理 KubeJS 脚本文案，请使用独立管线，不要走旧的 `translate.mjs`。
+
+当前脚本支持 `kubejs/client_scripts/**/*.js` 与 `kubejs/server_scripts/**/*.js` 双目录提取；默认输入根目录是 `kubejs`。
 
 这个新管线只会抽取白名单里的安全文案节点，例如 `event.addItem(...)`、`event.add(...)`、`Text.of(...)` 这类用户可见字符串；它会跳过注释、模板插值、动态拼接和不明确的表达式。
 
 ### 命令
 - 抽取：
-  - `node deepseek-i18n/kubejs-translate.mjs extract --input kubejs/client_scripts`
+  - `node deepseek-i18n/kubejs-translate.mjs extract --input kubejs`
 - 翻译：
-  - `node deepseek-i18n/kubejs-translate.mjs translate --input kubejs/client_scripts`
+  - `node deepseek-i18n/kubejs-translate.mjs translate --input kubejs`
 - 回写：
-  - `node deepseek-i18n/kubejs-translate.mjs apply --input kubejs/client_scripts --translations deepseek-i18n/.kubejs-work/translations.json`
+  - `node deepseek-i18n/kubejs-translate.mjs apply --input kubejs --translations deepseek-i18n/.kubejs-work/translations.json`
 - 一次跑完：
-  - `node deepseek-i18n/kubejs-translate.mjs roundtrip --input kubejs/client_scripts`
+  - `node deepseek-i18n/kubejs-translate.mjs roundtrip --input kubejs`
+
+### Key 化新流程（推荐）
+- 提取 Translation Key + 生成/更新 `assets/kubejs/lang/en_us.json`：
+  - `node deepseek-i18n/kubejs-translate.mjs extract-keys --input kubejs`
+- 仅将 payload 同步到 `en_us.json`：
+  - `node deepseek-i18n/kubejs-translate.mjs sync-lang --payload deepseek-i18n/.kubejs-work/payload.json`
+- 按 manifest 自动把脚本文案改写为 key 引用：
+  - `node deepseek-i18n/kubejs-translate.mjs rewrite-keys --input kubejs`
 
 ### 专用参数
-- 位置命令（四选一）：`extract` / `translate` / `apply` / `roundtrip`
-- `--input <dir>`: KubeJS JS 文件根目录（默认 `kubejs/client_scripts`）
+- 位置命令：`extract` / `translate` / `apply` / `roundtrip` / `extract-keys` / `sync-lang` / `rewrite-keys`
+- `--input <dir>`: KubeJS JS 文件根目录（默认 `kubejs`）
 - `--work-dir <dir>`: 中间产物目录（默认 `deepseek-i18n/.kubejs-work`）
 - `--manifest <file>`: 指定 manifest 文件路径
 - `--payload <file>`: 指定 payload 文件路径
 - `--translations <file>`: 指定 translations 文件路径
 - `--report <file>`: 指定 report 文件路径
+- `--lang-output <file>`: `sync-lang` 输出路径（默认 `assets/kubejs/lang/en_us.json`）
+- `--no-merge-lang`: `sync-lang` 覆盖模式（默认是增量 merge）
 
 ### 默认输出
 - `manifest.json`
@@ -68,6 +80,7 @@
 - 如果源码结构变化，回写会跳过对应项
 - 保留占位符、`§` 颜色码和原有引号风格
 - 遇到动态字符串或不安全结构会在 report 里列出来，方便手工处理
+- `rewrite-keys` 会将符合条件的 `Text.of(...)` 改成 `Text.translate(...)`，并将提取文案替换为 Translation Key
 
 
 
