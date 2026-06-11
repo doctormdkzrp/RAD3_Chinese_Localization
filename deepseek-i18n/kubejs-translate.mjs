@@ -9,12 +9,13 @@ const traverse = traverseModule.default || traverseModule;
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const repoRoot = path.resolve(__dirname, "..");
-const defaultInputDir = path.join(repoRoot, "kubejs", "client_scripts");
+const defaultInputDir = path.join(repoRoot, "kubejs");
 const defaultWorkDir = path.join(__dirname, ".kubejs-work");
 const defaultManifestPath = path.join(defaultWorkDir, "manifest.json");
 const defaultPayloadPath = path.join(defaultWorkDir, "payload.json");
 const defaultTranslationsPath = path.join(defaultWorkDir, "translations.json");
 const defaultReportPath = path.join(defaultWorkDir, "report.json");
+const defaultLangOutputPath = path.join(repoRoot, "assets", "kubejs", "lang", "en_us.json");
 
 function loadDotEnv(filePath) {
   if (!fs.existsSync(filePath)) return;
@@ -39,6 +40,8 @@ function parseArgs(argv) {
     payloadPath: defaultPayloadPath,
     translationsPath: defaultTranslationsPath,
     reportPath: defaultReportPath,
+    langOutputPath: defaultLangOutputPath,
+    mergeLang: true,
     batchSize: Number(process.env.DEEPSEEK_BATCH_SIZE || 80),
     temperature: Number(process.env.DEEPSEEK_TEMPERATURE || 0.2),
     maxRetry: Number(process.env.DEEPSEEK_MAX_RETRY || 2),
@@ -74,7 +77,8 @@ function parseArgs(argv) {
     } else if (a === "--report") {
       out.reportPath = argv[++i] || out.reportPath;
       provided.report = true;
-    }
+    } else if (a === "--lang-output") out.langOutputPath = argv[++i] || out.langOutputPath;
+    else if (a === "--no-merge-lang") out.mergeLang = false;
     else if (a === "--batch-size") out.batchSize = Number(argv[++i] || out.batchSize);
     else if (a === "--temperature") out.temperature = Number(argv[++i] || out.temperature);
     else if (a === "--max-retry") out.maxRetry = Number(argv[++i] || out.maxRetry);
@@ -82,8 +86,8 @@ function parseArgs(argv) {
     else if (a === "--force") out.force = true;
   }
 
-  if (!["extract", "translate", "apply", "roundtrip"].includes(out.command)) {
-    throw new Error("command must be one of: extract, translate, apply, roundtrip");
+  if (!["extract", "translate", "apply", "roundtrip", "extract-keys", "sync-lang", "rewrite-keys"].includes(out.command)) {
+    throw new Error("command must be one of: extract, translate, apply, roundtrip, extract-keys, sync-lang, rewrite-keys");
   }
   if (!Number.isFinite(out.batchSize) || out.batchSize <= 0) {
     throw new Error("--batch-size must be a positive number");
@@ -101,6 +105,7 @@ function parseArgs(argv) {
   out.payloadPath = path.resolve(provided.payload ? out.payloadPath : path.join(out.workDir, "payload.json"));
   out.translationsPath = path.resolve(provided.translations ? out.translationsPath : path.join(out.workDir, "translations.json"));
   out.reportPath = path.resolve(provided.report ? out.reportPath : path.join(out.workDir, "report.json"));
+  out.langOutputPath = path.resolve(out.langOutputPath);
 
   return out;
 }
@@ -179,23 +184,83 @@ function hasLatinLetters(text) {
   return /[A-Za-z]/.test(String(text));
 }
 
+function looksLikeResourceLocation(text) {
+  return /^[a-z0-9_.-]+:[a-z0-9_./-]+$/i.test(String(text).trim());
+}
+
+function normalizeFileForKey(file) {
+  return String(file)
+    .replace(/\.js$/i, "")
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, ".")
+    .replace(/\.+/g, ".")
+    .replace(/^\.|\.$/g, "");
+}
+
+function makeTranslationKey(file, index) {
+  const normalized = normalizeFileForKey(file);
+  return `kubejs.script.${normalized}.${String(index).padStart(4, "0")}`;
+}
+
 function isStringLiteral(node) {
   return node && node.type === "StringLiteral";
+}
+
+function isStaticTemplateLiteral(node) {
+  return node && node.type === "TemplateLiteral" && Array.isArray(node.expressions) && node.expressions.length === 0 && node.quasis.length === 1;
+}
+
+function getStaticStringNodeValue(node) {
+  if (isStringLiteral(node)) return node.value;
+  if (isStaticTemplateLiteral(node)) return node.quasis[0]?.value?.cooked ?? null;
+  return null;
+}
+
+function extractIdentifierNames(node, out = new Set()) {
+  if (!node || typeof node !== "object") return out;
+  if (node.type === "Identifier") {
+    out.add(node.name);
+    return out;
+  }
+  for (const key of Object.keys(node)) {
+    if (key === "loc") continue;
+    const value = node[key];
+    if (!value) continue;
+    if (Array.isArray(value)) {
+      for (const item of value) extractIdentifierNames(item, out);
+    } else if (typeof value === "object" && value.type) {
+      extractIdentifierNames(value, out);
+    }
+  }
+  return out;
+}
+
+function referencesAnyIdentifier(node, namesSet) {
+  if (!node || !namesSet || namesSet.size === 0) return false;
+  const names = extractIdentifierNames(node);
+  for (const name of names) {
+    if (namesSet.has(name)) return true;
+  }
+  return false;
 }
 
 function shouldTranslateText(value) {
   const text = String(value);
   if (!text.trim()) return false;
+  if (looksLikeResourceLocation(text)) return false;
   return hasLatinLetters(text);
 }
 
-function extractStringEntry({ source, file, lineStarts, start, end, value, kind, sequence }) {
+function extractStringEntry({ source, file, lineStarts, start, end, value, kind, sequence, objectName, propertyKey }) {
   const raw = source.slice(start, end);
   if (!shouldTranslateText(value)) return null;
   const loc = offsetToLineColumn(start, lineStarts);
   const id = `${file}::${loc.line}:${loc.column}::${sequence}`;
+  const key = makeTranslationKey(file, sequence);
+  const quote = raw[0] === "'" || raw[0] === '"' ? raw[0] : '"';
   return {
     id,
+    key,
     file,
     kind,
     start,
@@ -204,7 +269,9 @@ function extractStringEntry({ source, file, lineStarts, start, end, value, kind,
     column: loc.column,
     raw,
     value,
-    quote: raw[0] === "'" || raw[0] === '"' ? raw[0] : '"',
+    quote,
+    objectName: objectName || null,
+    propertyKey: propertyKey || null,
   };
 }
 
@@ -219,20 +286,31 @@ function extractFromFile(filePath, inputDir) {
   const relativeFile = relativePosixPath(inputDir, filePath);
   const entries = [];
   const skipped = [];
+  const rewrites = [];
+  const keyObjectNames = new Set();
+  const seenRewriteSpans = new Set();
   let sequence = 0;
 
-  function pushEntry(node, kind) {
+  function pushEntry(node, kind, metadata = {}) {
+    const value = getStaticStringNodeValue(node);
+    if (value == null) return;
     const entry = extractStringEntry({
       source,
       file: relativeFile,
       lineStarts,
       start: node.start,
       end: node.end,
-      value: node.value,
+      value,
       kind,
       sequence: ++sequence,
+      objectName: metadata.objectName,
+      propertyKey: metadata.propertyKey,
     });
-    if (entry) entries.push(entry);
+    if (entry) {
+      entries.push(entry);
+      return entry;
+    }
+    return null;
   }
 
   function recordSkipped(node, kind, reason) {
@@ -246,32 +324,67 @@ function extractFromFile(filePath, inputDir) {
     });
   }
 
+  function registerTextTranslateRewrite(callNode) {
+    if (!callNode || !callNode.callee) return;
+    const start = callNode.callee.start;
+    const end = callNode.callee.end;
+    if (start == null || end == null || end <= start) return;
+    const raw = source.slice(start, end);
+    if (raw !== "Text.of") return;
+    const key = `${start}:${end}`;
+    if (seenRewriteSpans.has(key)) return;
+    rewrites.push({
+      file: relativeFile,
+      start,
+      end,
+      raw,
+      replaceWith: "Text.translate",
+      kind: "callee.Text.of",
+    });
+    seenRewriteSpans.add(key);
+  }
+
   traverse(ast, {
     CallExpression(pathNode) {
       const callee = getCalleeName(pathNode.node.callee);
       if (callee === "Text.of") {
         const arg = pathNode.node.arguments[0];
-        if (isStringLiteral(arg)) pushEntry(arg, callee);
-        else if (arg) recordSkipped(arg, callee, "unsupported Text.of argument");
+        if (!arg) return;
+        const staticValue = getStaticStringNodeValue(arg);
+        if (staticValue != null) {
+          const entry = pushEntry(arg, callee);
+          if (entry) registerTextTranslateRewrite(pathNode.node);
+        } else if (
+          arg.type === "LogicalExpression" &&
+          referencesAnyIdentifier(arg.left, keyObjectNames) &&
+          getStaticStringNodeValue(arg.right) != null
+        ) {
+          const entry = pushEntry(arg.right, "Text.of.fallback");
+          if (entry) registerTextTranslateRewrite(pathNode.node);
+        } else if (referencesAnyIdentifier(arg, keyObjectNames)) {
+          registerTextTranslateRewrite(pathNode.node);
+        } else {
+          recordSkipped(arg, callee, "unsupported Text.of argument");
+        }
         return;
       }
 
       if (callee === "event.add") {
         const arg = pathNode.node.arguments[1];
-        if (isStringLiteral(arg)) pushEntry(arg, callee);
+        if (getStaticStringNodeValue(arg) != null) pushEntry(arg, callee);
         else if (arg) recordSkipped(arg, callee, "unsupported event.add value");
         return;
       }
 
       if (callee === "event.addItem") {
         const arg = pathNode.node.arguments[1];
-        if (isStringLiteral(arg)) {
+        if (getStaticStringNodeValue(arg) != null) {
           pushEntry(arg, callee);
           return;
         }
         if (arg && arg.type === "ArrayExpression") {
           for (const element of arg.elements) {
-            if (isStringLiteral(element)) pushEntry(element, `${callee}.array`);
+            if (getStaticStringNodeValue(element) != null) pushEntry(element, `${callee}.array`);
           }
           return;
         }
@@ -282,7 +395,7 @@ function extractFromFile(filePath, inputDir) {
       const keyName = getPropertyKeyName(pathNode.node.key);
       if (keyName === "lore") {
         const valueNode = pathNode.node.value;
-        if (isStringLiteral(valueNode)) {
+        if (getStaticStringNodeValue(valueNode) != null) {
           pushEntry(valueNode, "object.lore");
         } else if (valueNode) {
           recordSkipped(valueNode, "object.lore", "unsupported lore value");
@@ -294,18 +407,35 @@ function extractFromFile(filePath, inputDir) {
         const valueNode = pathNode.node.value;
         if (valueNode && valueNode.type === "ArrayExpression") {
           for (const element of valueNode.elements) {
-            if (isStringLiteral(element)) {
+            if (getStaticStringNodeValue(element) != null) {
               pushEntry(element, "object.mechanics");
             }
           }
         } else if (valueNode) {
           recordSkipped(valueNode, "object.mechanics", "unsupported mechanics value");
         }
+        return;
+      }
+
+      const objectExprPath = pathNode.parentPath;
+      const varDeclPath = objectExprPath?.parentPath;
+      if (
+        objectExprPath?.node?.type === "ObjectExpression" &&
+        varDeclPath?.node?.type === "VariableDeclarator" &&
+        varDeclPath?.parentPath?.node?.kind === "const"
+      ) {
+        const valueNode = pathNode.node.value;
+        const objectName = varDeclPath.node.id?.type === "Identifier" ? varDeclPath.node.id.name : null;
+        const propertyKey = getPropertyKeyName(pathNode.node.key);
+        if (getStaticStringNodeValue(valueNode) != null) {
+          const entry = pushEntry(valueNode, "const.object.value", { objectName, propertyKey });
+          if (entry && objectName) keyObjectNames.add(objectName);
+        }
       }
     },
   });
 
-  return { file: relativeFile, entries, skipped };
+  return { file: relativeFile, entries, skipped, rewrites };
 }
 
 function tryParseJsonObject(text) {
@@ -553,6 +683,53 @@ function quoteJsString(value, quoteChar) {
   return `${quoteChar}${escaped}${quoteChar}`;
 }
 
+function sortObjectKeys(obj) {
+  const out = {};
+  for (const key of Object.keys(obj).sort()) {
+    out[key] = obj[key];
+  }
+  return out;
+}
+
+function buildKeyPayload(manifest) {
+  const payload = {};
+  for (const entry of manifest.entries || []) {
+    payload[entry.key] = entry.value;
+  }
+  return sortObjectKeys(payload);
+}
+
+function syncLangFile({ payloadPath, langOutputPath, mergeLang, dryRun }) {
+  const payload = readJson(payloadPath);
+  const incoming = sortObjectKeys(payload);
+  const exists = fs.existsSync(langOutputPath);
+  const previous = exists ? readJson(langOutputPath) : {};
+  const next = mergeLang ? sortObjectKeys({ ...previous, ...incoming }) : incoming;
+
+  let added = 0;
+  let updated = 0;
+  let unchanged = 0;
+
+  for (const [key, value] of Object.entries(incoming)) {
+    if (!(key in previous)) added++;
+    else if (previous[key] !== value) updated++;
+    else unchanged++;
+  }
+
+  if (!dryRun) writeJson(langOutputPath, next);
+  return {
+    langOutputPath,
+    exists,
+    mergeLang,
+    incoming: Object.keys(incoming).length,
+    total: Object.keys(next).length,
+    added,
+    updated,
+    unchanged,
+    dryRun,
+  };
+}
+
 function applyTranslationsToSource(source, fileEntries, translations) {
   const sorted = [...fileEntries].sort((a, b) => b.start - a.start);
   let result = source;
@@ -586,21 +763,23 @@ async function extractStage(inputDir, manifestPath, payloadPath, reportPath) {
     generatedAt: new Date().toISOString(),
     files: [],
     entries: [],
+    rewrites: [],
   };
   const payload = {};
   const report = { files: [], skipped: [] };
 
   for (const filePath of files) {
-    const { file, entries, skipped } = extractFromFile(filePath, inputDir);
-    if (entries.length === 0 && skipped.length === 0) continue;
+    const { file, entries, skipped, rewrites } = extractFromFile(filePath, inputDir);
+    if (entries.length === 0 && skipped.length === 0 && rewrites.length === 0) continue;
 
-    manifest.files.push({ file, entryCount: entries.length, skippedCount: skipped.length });
+    manifest.files.push({ file, entryCount: entries.length, skippedCount: skipped.length, rewriteCount: rewrites.length });
     for (const entry of entries) {
       manifest.entries.push(entry);
       payload[entry.id] = entry.value;
     }
+    for (const rewrite of rewrites) manifest.rewrites.push(rewrite);
     for (const item of skipped) report.skipped.push(item);
-    report.files.push({ file, entryCount: entries.length, skippedCount: skipped.length });
+    report.files.push({ file, entryCount: entries.length, skippedCount: skipped.length, rewriteCount: rewrites.length });
   }
 
   writeJson(manifestPath, manifest);
@@ -613,6 +792,20 @@ async function extractStage(inputDir, manifestPath, payloadPath, reportPath) {
   console.log(`[extract] report=${reportPath}`);
 
   return { manifest, payload, report };
+}
+
+async function extractKeysStage(inputDir, manifestPath, payloadPath, reportPath) {
+  const { manifest, report } = await extractStage(inputDir, manifestPath, path.join(path.dirname(payloadPath), "__legacy_payload.tmp.json"), reportPath);
+
+  const keyPayload = buildKeyPayload(manifest);
+  writeJson(payloadPath, keyPayload);
+
+  const tmpLegacy = path.join(path.dirname(payloadPath), "__legacy_payload.tmp.json");
+  if (fs.existsSync(tmpLegacy)) fs.unlinkSync(tmpLegacy);
+
+  console.log(`[extract-keys] files=${manifest.files.length} entries=${manifest.entries.length} rewrites=${manifest.rewrites.length}`);
+  console.log(`[extract-keys] payload=${payloadPath}`);
+  return { manifest, payload: keyPayload, report };
 }
 
 async function translateStage(manifestPath, payloadPath, translationsPath, reportPath, options) {
@@ -698,11 +891,102 @@ async function applyStage(manifestPath, translationsPath, inputDir, dryRun) {
   return results;
 }
 
+function applyKeyRewritesToSource(source, fileEntries, fileRewrites) {
+  const patches = [];
+
+  for (const entry of fileEntries) {
+    const keyValue = quoteJsString(entry.key, entry.quote || '"');
+    patches.push({
+      start: entry.start,
+      end: entry.end,
+      expected: entry.raw,
+      replaceWith: keyValue,
+      id: entry.id,
+      kind: "entry.key",
+    });
+  }
+
+  for (const rewrite of fileRewrites) {
+    patches.push({
+      start: rewrite.start,
+      end: rewrite.end,
+      expected: rewrite.raw,
+      replaceWith: rewrite.replaceWith,
+      id: `${rewrite.file}:${rewrite.start}:${rewrite.end}`,
+      kind: rewrite.kind || "rewrite",
+    });
+  }
+
+  patches.sort((a, b) => b.start - a.start);
+
+  let result = source;
+  const problems = [];
+  for (const patch of patches) {
+    const current = result.slice(patch.start, patch.end);
+    if (current !== patch.expected) {
+      problems.push({ id: patch.id, kind: patch.kind, reason: "source span changed" });
+      continue;
+    }
+    result = `${result.slice(0, patch.start)}${patch.replaceWith}${result.slice(patch.end)}`;
+  }
+
+  return { result, problems, patchCount: patches.length };
+}
+
+async function rewriteKeysStage(manifestPath, inputDir, dryRun, reportPath) {
+  const manifest = readJson(manifestPath);
+  const byFileEntries = new Map();
+  const byFileRewrites = new Map();
+
+  for (const entry of manifest.entries || []) {
+    if (!byFileEntries.has(entry.file)) byFileEntries.set(entry.file, []);
+    byFileEntries.get(entry.file).push(entry);
+  }
+  for (const rewrite of manifest.rewrites || []) {
+    if (!byFileRewrites.has(rewrite.file)) byFileRewrites.set(rewrite.file, []);
+    byFileRewrites.get(rewrite.file).push(rewrite);
+  }
+
+  const files = new Set([...byFileEntries.keys(), ...byFileRewrites.keys()]);
+  const results = [];
+
+  for (const relativeFile of files) {
+    const filePath = path.join(inputDir, relativeFile);
+    if (!fs.existsSync(filePath)) {
+      results.push({ file: relativeFile, changed: false, problems: [{ reason: "file missing" }], patchCount: 0 });
+      continue;
+    }
+    const source = fs.readFileSync(filePath, "utf8");
+    const { result, problems, patchCount } = applyKeyRewritesToSource(
+      source,
+      byFileEntries.get(relativeFile) || [],
+      byFileRewrites.get(relativeFile) || []
+    );
+
+    const changed = result !== source;
+    if (!dryRun && changed) fs.writeFileSync(filePath, result, "utf8");
+    results.push({ file: relativeFile, changed, problems, patchCount });
+  }
+
+  const summary = {
+    command: "rewrite-keys",
+    changedFiles: results.filter((r) => r.changed).length,
+    totalFiles: results.length,
+    problems: results.reduce((sum, r) => sum + (r.problems?.length || 0), 0),
+    dryRun,
+    files: results,
+  };
+  writeJson(reportPath, summary);
+  console.log(`[rewrite-keys] files=${summary.totalFiles} changed=${summary.changedFiles} problems=${summary.problems}`);
+  console.log(`[rewrite-keys] report=${reportPath}`);
+  return summary;
+}
+
 async function main() {
   loadDotEnv(path.join(__dirname, ".env"));
   const args = parseArgs(process.argv.slice(2));
 
-  if (args.command !== "extract" && !process.env.DEEPSEEK_API_KEY) {
+  if (!["extract", "extract-keys", "sync-lang", "rewrite-keys"].includes(args.command) && !process.env.DEEPSEEK_API_KEY) {
     throw new Error("DEEPSEEK_API_KEY is missing. Set it in deepseek-i18n/.env or shell env.");
   }
 
@@ -710,6 +994,36 @@ async function main() {
 
   if (args.command === "extract") {
     await extractStage(args.inputDir, args.manifestPath, args.payloadPath, args.reportPath);
+    return;
+  }
+
+  if (args.command === "extract-keys") {
+    await extractKeysStage(args.inputDir, args.manifestPath, args.payloadPath, args.reportPath);
+    const stat = syncLangFile({
+      payloadPath: args.payloadPath,
+      langOutputPath: args.langOutputPath,
+      mergeLang: args.mergeLang,
+      dryRun: args.dryRun,
+    });
+    console.log(`[sync-lang] incoming=${stat.incoming} added=${stat.added} updated=${stat.updated} unchanged=${stat.unchanged} total=${stat.total}`);
+    console.log(`[sync-lang] output=${stat.langOutputPath} dryRun=${stat.dryRun}`);
+    return;
+  }
+
+  if (args.command === "sync-lang") {
+    const stat = syncLangFile({
+      payloadPath: args.payloadPath,
+      langOutputPath: args.langOutputPath,
+      mergeLang: args.mergeLang,
+      dryRun: args.dryRun,
+    });
+    console.log(`[sync-lang] incoming=${stat.incoming} added=${stat.added} updated=${stat.updated} unchanged=${stat.unchanged} total=${stat.total}`);
+    console.log(`[sync-lang] output=${stat.langOutputPath} dryRun=${stat.dryRun}`);
+    return;
+  }
+
+  if (args.command === "rewrite-keys") {
+    await rewriteKeysStage(args.manifestPath, args.inputDir, args.dryRun, args.reportPath);
     return;
   }
 
