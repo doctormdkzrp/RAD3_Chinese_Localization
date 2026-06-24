@@ -139,10 +139,10 @@ const HUNGER_CONFIG = {
     shieldModName:       'rad3:wellfed_shield',
 
     // --- persistentData key for tier tracking ---
-    tierKey:            'rad3_hunger_tier',
+    tierKey:            'kubejs.script.server.scripts.custom.hunger.0015',
     // Stores the server tick when the last tier message was sent.
     // Prevents chat spam when saturation oscillates near a threshold.
-    tierMsgCooldownKey: 'rad3_hunger_tier_msg_tick',
+    tierMsgCooldownKey: 'kubejs.script.server.scripts.custom.hunger.0016',
 
     // --- Tier message cooldown ---
     tierMsgCooldown: 2400,	  

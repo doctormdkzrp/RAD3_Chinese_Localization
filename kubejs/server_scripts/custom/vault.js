@@ -17,17 +17,17 @@ const COIN_MAP = {
 
 const COIN_COLORS = {
     'kubejs:copper_coin': '§6',      // Gold/Orange
-    'kubejs:iron_coin': '§f',        // White
-    'kubejs:gold_coin': '§e',        // Yellow
-    'kubejs:diamond_coin': '§b',     // Aqua
+    'kubejs:iron_coin': 'kubejs.script.server.scripts.custom.vault.0015',        // White
+    'kubejs:gold_coin': 'kubejs.script.server.scripts.custom.vault.0016',        // Yellow
+    'kubejs:diamond_coin': 'kubejs.script.server.scripts.custom.vault.0017',     // Aqua
     'kubejs:coin_aether': '§3',      // Dark Aqua
     'kubejs:coin_undergarden': '§2', // Dark Green
-    'kubejs:coin_twilight': '§d',    // Light Purple
+    'kubejs:coin_twilight': 'kubejs.script.server.scripts.custom.vault.0020',    // Light Purple
     'kubejs:coin_bumblezone': '§6',  // Gold
-    'kubejs:coin_icaria': '§e',      // Yellow
+    'kubejs:coin_icaria': 'kubejs.script.server.scripts.custom.vault.0022',      // Yellow
     'kubejs:coin_end': '§5',         // Dark Purple
-    'kubejs:coin_nether': '§c',      // Red
-    'kubejs:coin_task': '§a',        // Green
+    'kubejs:coin_nether': 'kubejs.script.server.scripts.custom.vault.0024',      // Red
+    'kubejs:coin_task': 'kubejs.script.server.scripts.custom.vault.0025',        // Green
     'kubejs:coin_dungeon': '§8'      // Dark Gray
 };
 
@@ -87,7 +87,7 @@ ServerEvents.commandRegistry(event => {
                         
                     let nick = displayName.toLowerCase().replace(' ', '');  
                     let message = Text.of(coinColor + displayName + " COIN" + ":§2 " + amount + " ");
-                    let withdrawBtn = Text.of(" §b• ").hover(Text.of("§8§oUse: /vault withdraw " + nick + " <amount>"));
+                    let withdrawBtn = Text.translate("kubejs.script.server.scripts.custom.vault.0027").hover(Text.of("§8§oUse: /vault withdraw " + nick + " <amount>"));
                     
                     player.tell(withdrawBtn.append(message));
                 }

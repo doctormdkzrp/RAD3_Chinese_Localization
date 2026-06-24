@@ -153,14 +153,14 @@ function getRankData(pts) {
 EntityEvents.spawned('player', event => {
     const { player, level } = event;
     const dimMap = {
-        'minecraft:the_nether': 'milestone_nether',
-        'minecraft:the_end': 'milestone_end',
-        'aether:the_aether': 'milestone_aether',
-        'the_bumblezone:the_bumblezone': 'milestone_bumblezone',
-        'landsoficaria:icaria': 'milestone_icaria',
-        'undergarden:undergarden': 'milestone_undergarden',
-        'dimdungeons:dungeon_dimension': 'milestone_dimdungeons',
-		'lrdynamicdungeon:dungeon_dimension': 'milestone_dungeon'
+        'minecraft:the_nether': 'kubejs.script.server.scripts.custom.roguelite.ring.0001',
+        'minecraft:the_end': 'kubejs.script.server.scripts.custom.roguelite.ring.0002',
+        'aether:the_aether': 'kubejs.script.server.scripts.custom.roguelite.ring.0003',
+        'the_bumblezone:the_bumblezone': 'kubejs.script.server.scripts.custom.roguelite.ring.0004',
+        'landsoficaria:icaria': 'kubejs.script.server.scripts.custom.roguelite.ring.0005',
+        'undergarden:undergarden': 'kubejs.script.server.scripts.custom.roguelite.ring.0006',
+        'dimdungeons:dungeon_dimension': 'kubejs.script.server.scripts.custom.roguelite.ring.0007',
+		'lrdynamicdungeon:dungeon_dimension': 'kubejs.script.server.scripts.custom.roguelite.ring.0008'
     };
 	
 	let dim = level.dimension.toString();
@@ -171,11 +171,11 @@ EntityEvents.spawned('player', event => {
         player.stages.add(mId);
 		
         if (mId === 'milestone_undergarden') {
-            player.tell(Text.of("Your world was blessed with new loot...").gold().italic());
+            player.tell(Text.translate("kubejs.script.server.scripts.custom.roguelite.ring.0009").gold().italic());
         }
 		
-		player.tell(Text.of(`New dimension reached! §b+${mData.p} Progression Points: §r${mData.name}`));
-        player.tell(Text.of(`§bProgression Milestone Unlocked! Type /rank to check your status`));
+		player.tell(Text.translate("kubejs.script.server.scripts.custom.roguelite.ring.0010", mData.p, mData.name));
+        player.tell(Text.translate("kubejs.script.server.scripts.custom.roguelite.ring.0011"));
         updateRingNBT(player);
     }
 });
@@ -186,34 +186,34 @@ EntityEvents.death(event => {
     if (!source.player) return;
     const p = source.player;
     const bossMap = {
-        'minecraft:wither': 'milestone_wither',
-        'cataclysm:ignis': 'milestone_ignis',
-        'cataclysm:netherite_monstrosity': 'milestone_monstrosity',
-        'cataclysm:ender_guardian': 'milestone_ender_guardian',
-        'cataclysm:the_harbinger': 'milestone_the_harbinger',
-        'cataclysm:the_leviathan': 'milestone_the_leviathan',
-        'cataclysm:ancient_remnant': 'milestone_ancient_remnant',
-        'cataclysm:maledictus': 'milestone_maledictus',
-        'cataclysm:scylla': 'milestone_scylla',
-        'bosses_of_mass_destruction:lich': 'milestone_lich',
-        'bosses_of_mass_destruction:obsidilith': 'milestone_obsidilith',
-        'bosses_of_mass_destruction:gauntlet': 'milestone_gauntlet',
-        'bosses_of_mass_destruction:void_blossom': 'milestone_void_blossom',
-        'mowziesmobs:frostmaw': 'milestone_frostmaw',
-		'mowziesmobs:ferrous_wroughtnaut': 'milestone_wroughtnaut',
-		'mowziesmobs:umvuthi': 'milestone_umvuthi',
-        'graveyard:lich': 'milestone_grave_lich',
-        'ars_nouveau:wilden_boss': 'milestone_wilden',
-		'undergarden:forgotten_guardian': 'milestone_forgotten'
+        'minecraft:wither': 'kubejs.script.server.scripts.custom.roguelite.ring.0012',
+        'cataclysm:ignis': 'kubejs.script.server.scripts.custom.roguelite.ring.0013',
+        'cataclysm:netherite_monstrosity': 'kubejs.script.server.scripts.custom.roguelite.ring.0014',
+        'cataclysm:ender_guardian': 'kubejs.script.server.scripts.custom.roguelite.ring.0015',
+        'cataclysm:the_harbinger': 'kubejs.script.server.scripts.custom.roguelite.ring.0016',
+        'cataclysm:the_leviathan': 'kubejs.script.server.scripts.custom.roguelite.ring.0017',
+        'cataclysm:ancient_remnant': 'kubejs.script.server.scripts.custom.roguelite.ring.0018',
+        'cataclysm:maledictus': 'kubejs.script.server.scripts.custom.roguelite.ring.0019',
+        'cataclysm:scylla': 'kubejs.script.server.scripts.custom.roguelite.ring.0020',
+        'bosses_of_mass_destruction:lich': 'kubejs.script.server.scripts.custom.roguelite.ring.0021',
+        'bosses_of_mass_destruction:obsidilith': 'kubejs.script.server.scripts.custom.roguelite.ring.0022',
+        'bosses_of_mass_destruction:gauntlet': 'kubejs.script.server.scripts.custom.roguelite.ring.0023',
+        'bosses_of_mass_destruction:void_blossom': 'kubejs.script.server.scripts.custom.roguelite.ring.0024',
+        'mowziesmobs:frostmaw': 'kubejs.script.server.scripts.custom.roguelite.ring.0025',
+		'mowziesmobs:ferrous_wroughtnaut': 'kubejs.script.server.scripts.custom.roguelite.ring.0026',
+		'mowziesmobs:umvuthi': 'kubejs.script.server.scripts.custom.roguelite.ring.0027',
+        'graveyard:lich': 'kubejs.script.server.scripts.custom.roguelite.ring.0028',
+        'ars_nouveau:wilden_boss': 'kubejs.script.server.scripts.custom.roguelite.ring.0029',
+		'undergarden:forgotten_guardian': 'kubejs.script.server.scripts.custom.roguelite.ring.0030'
     };
     let mId = bossMap[entity.type];
     if (mId && !p.stages.has(mId)) {
         let mData = MILESTONE_DATA.find(m => m.id === mId);
         p.stages.add(mId);
 			if (mId === 'milestone_wither') {
-				p.tell(Text.of("New loot may appear in chests...").gold().italic());
+				p.tell(Text.translate("kubejs.script.server.scripts.custom.roguelite.ring.0031").gold().italic());
 			}
-        p.tell(Text.of(`Legendary creature slained! §b+${mData.p} Progression Points: §r${mData.name}`));
+        p.tell(Text.translate("kubejs.script.server.scripts.custom.roguelite.ring.0032", mData.p, mData.name));
         updateRingNBT(p);
     }
 });
@@ -222,22 +222,22 @@ EntityEvents.death(event => {
 PlayerEvents.inventoryChanged(event => {
     const { player, item } = event;
     const itemMap = {
-        'minecraft:elytra': 'milestone_elytra',
-        'l2hostility:chaos_ingot': 'milestone_chaos_ingot',
-        'l2hostility:miracle_ingot': 'milestone_miracle_ingot',
-        'l2complements:eternium_ingot': 'milestone_eternium_ingot',
-        'bloodmagic:ingot_hellforged': 'milestone_hellforged',
-        'darkerdepths:forsaken_bronze_ingot': 'milestone_bronze',
-        'deep_aether:stratus_ingot': 'milestone_stratus',
-        'embers:dawnstone_ingot': 'milestone_dawnstone',
-        'naturesaura:depth_ingot': 'milestone_depth',
-        'undergarden:forgotten_ingot': 'milestone_forgotten_ingot'
+        'minecraft:elytra': 'kubejs.script.server.scripts.custom.roguelite.ring.0033',
+        'l2hostility:chaos_ingot': 'kubejs.script.server.scripts.custom.roguelite.ring.0034',
+        'l2hostility:miracle_ingot': 'kubejs.script.server.scripts.custom.roguelite.ring.0035',
+        'l2complements:eternium_ingot': 'kubejs.script.server.scripts.custom.roguelite.ring.0036',
+        'bloodmagic:ingot_hellforged': 'kubejs.script.server.scripts.custom.roguelite.ring.0037',
+        'darkerdepths:forsaken_bronze_ingot': 'kubejs.script.server.scripts.custom.roguelite.ring.0038',
+        'deep_aether:stratus_ingot': 'kubejs.script.server.scripts.custom.roguelite.ring.0039',
+        'embers:dawnstone_ingot': 'kubejs.script.server.scripts.custom.roguelite.ring.0040',
+        'naturesaura:depth_ingot': 'kubejs.script.server.scripts.custom.roguelite.ring.0041',
+        'undergarden:forgotten_ingot': 'kubejs.script.server.scripts.custom.roguelite.ring.0042'
     };
     let mId = itemMap[item.id];
     if (mId && !player.stages.has(mId)) {
         let mData = MILESTONE_DATA.find(m => m.id === mId);
         player.stages.add(mId);
-        player.tell(Text.of(`Rare item acquired! §b+${mData.p} Progression Points: §r${mData.name}`));
+        player.tell(Text.translate("kubejs.script.server.scripts.custom.roguelite.ring.0043", mData.p, mData.name));
         updateRingNBT(player);
     }
 });
@@ -249,7 +249,7 @@ FTBQuestsEvents.completed(event => {
 
     if (mData && !player.stages.has(mData.id)) {
         player.stages.add(mData.id);
-        player.tell(Text.of(`§b+${mData.p} Progression Points: §r${mData.name}`));
+        player.tell(Text.translate("kubejs.script.server.scripts.custom.roguelite.ring.0044", mData.p, mData.name));
         updateRingNBT(player);
     }
 });
@@ -259,7 +259,7 @@ BlockEvents.broken(event => {
     const { player } = event;
     if (player.y <= -60 && !player.stages.has('milestone_deep')) {
         player.stages.add('milestone_deep');
-        player.tell(Text.of('§b+5 Progression Points: §rThe Deepest Dark'));
+        player.tell(Text.translate('kubejs.script.server.scripts.custom.roguelite.ring.0045'));
         updateRingNBT(player);
     }
 });
@@ -286,8 +286,8 @@ function updateRingNBT(player) {
             player.server.tell([
                 Text.of("⭐ ").gold(),
                 Text.of(player.username).white(),
-                Text.of(" has unlocked new milestone rank - ").yellow(),
-                Text.of(`${rank.color}${rank.name}`).bold(),
+                Text.translate("kubejs.script.server.scripts.custom.roguelite.ring.0048").yellow(),
+                Text.translate("kubejs.script.server.scripts.custom.roguelite.ring.0049", rank.color, rank.name).bold(),
                 Text.of("!").yellow()
             ]);
 
@@ -395,7 +395,7 @@ EntityEvents.death('player', event => {
             randomKit.forEach(item => { if (typeof item === 'string') player.give(item); });
             player.potionEffects.add('minecraft:slow_falling', 400);
             player.potionEffects.add('minecraft:resistance', 600, 4);
-            player.tell(Text.of(`Rank ${rank.color}${rank.name} §fRebirth: Your journey continues...`).aqua());
+            player.tell(Text.translate("kubejs.script.server.scripts.custom.roguelite.ring.0051", rank.color, rank.name).aqua());
         });
     }
 });
@@ -421,19 +421,19 @@ ServerEvents.commandRegistry(event => {
 		let bar = "§a" + "|".repeat(progress) + "§8" + ".".repeat(barLength - progress);
 
         // Chat output utilizing Text.of()
-        player.tell(Text.of('--- [ Roguelite Status ] ---').gold());
-        player.tell([Text.of('Rank: ').white(), Text.of(`${rankData.color}${rankData.name}`)]);
-		player.tell(Text.of(`Progress: [${bar}§r] §f${pts}§7/§f${nextGoal}`).white().hover(Text.of("§8§oProgress till reaching the next Rank")));
-        player.tell([Text.of('Total Points: ').white(), Text.of(`${pts}`).aqua()]);
-        player.tell([Text.of('Rebirths: ').white().hover(Text.of("§8§oNumber of times respawned with Ring Of Rebirth")), Text.of(`${rebirths}`).lightPurple()]);
-        player.tell([Text.of('Last Death: ').white(), Text.of(`${lastPos}`).gray()]);
+        player.tell(Text.translate('kubejs.script.server.scripts.custom.roguelite.ring.0052').gold());
+        player.tell([Text.translate('kubejs.script.server.scripts.custom.roguelite.ring.0053').white(), Text.translate("kubejs.script.server.scripts.custom.roguelite.ring.0054", rankData.color, rankData.name)]);
+		player.tell(Text.translate("kubejs.script.server.scripts.custom.roguelite.ring.0055", bar, pts, nextGoal).white().hover(Text.translate("kubejs.script.server.scripts.custom.roguelite.ring.0056")));
+        player.tell([Text.translate('kubejs.script.server.scripts.custom.roguelite.ring.0057').white(), Text.translate("kubejs.script.server.scripts.custom.roguelite.ring.0058", pts).aqua()]);
+        player.tell([Text.translate('kubejs.script.server.scripts.custom.roguelite.ring.0059').white().hover(Text.translate("kubejs.script.server.scripts.custom.roguelite.ring.0060")), Text.translate("kubejs.script.server.scripts.custom.roguelite.ring.0061", rebirths).lightPurple()]);
+        player.tell([Text.translate('kubejs.script.server.scripts.custom.roguelite.ring.0062').white(), Text.translate("kubejs.script.server.scripts.custom.roguelite.ring.0063", lastPos).gray()]);
 		player.tell([Text.of(' ')]);
                     
 		if (getUnlockedMilestoneNames(player).length > 0) {
-			player.tell(Text.of('Unlocked Milestones:').yellow());
-			player.tell(Text.of(`§7${getUnlockedMilestoneNames(player).join(', ')}`).italic());
+			player.tell(Text.translate('kubejs.script.server.scripts.custom.roguelite.ring.0065').yellow());
+			player.tell(Text.translate("kubejs.script.server.scripts.custom.roguelite.ring.0066", getUnlockedMilestoneNames(player).join(', ')).italic());
 		} else {
-			player.tell(Text.of('No milestones achieved yet.').red());
+			player.tell(Text.translate('kubejs.script.server.scripts.custom.roguelite.ring.0067').red());
 		}
         player.tell(Text.of('------------------------').gold());
         return 1;

@@ -575,7 +575,7 @@ ItemEvents.rightClicked(event => {
 		item.count--;
 
 		let displayName = lootItem.split(':')[1].replace('glyph_', '').replace('_', ' ');
-		player.setStatusMessage(Text.of(`You deciphered the scroll: `).white().append(Text.of(displayName).lightPurple().italic()));
+		player.setStatusMessage(Text.translate("kubejs.script.server.scripts.rightclicks.0001").white().append(Text.of(displayName).lightPurple().italic()));
 	}
 	
 	if (event.item == 'kubejs:unidentified_glyph_scroll_2') {
@@ -605,7 +605,7 @@ ItemEvents.rightClicked(event => {
     item.count--;
 
     let displayName = lootItem.split(':')[1].replace('glyph_', '').replace('_', ' ');
-    player.setStatusMessage(Text.of(`Deciphered rare scroll: `).gold().append(Text.of(displayName).lightPurple().italic().bold()));
+    player.setStatusMessage(Text.translate("kubejs.script.server.scripts.rightclicks.0002").gold().append(Text.of(displayName).lightPurple().italic().bold()));
 	}
 	
 	if (event.item == 'kubejs:unidentified_glyph_scroll_3') {
@@ -628,6 +628,6 @@ ItemEvents.rightClicked(event => {
     item.count--;
 
     let displayName = lootItem.split(':')[1].replace('glyph_', '').replace('_', ' ');
-	player.setStatusMessage(Text.of(`You deciphered a Master Scroll: `).white().append(Text.of(displayName).lightPurple().italic()));
+	player.setStatusMessage(Text.translate("kubejs.script.server.scripts.rightclicks.0003").white().append(Text.of(displayName).lightPurple().italic()));
 }
 });

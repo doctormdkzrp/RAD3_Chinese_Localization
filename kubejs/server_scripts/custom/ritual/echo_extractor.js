@@ -137,36 +137,36 @@ const TOME_LOOT_POOLS = {
 };
 
 const TOME_MESSAGES = {
-    eldritch: "The text crawls across the page like ink-black insects.",
-    warbound: "The parchment is stained with the soot and blood of battle.",
-    overgrown: "Dried leaves and wild vines spill from the broken seal.",
-    scorched: "Heat radiates from the charred, soot-covered binding.",
-    sunken: "The pages are damp, smelling of salt and ancient depths.",
-    volcanic: "The binding is hot to the touch, smelling of sulfur.",
-    abyssal: "A cold, crushing pressure emanates from the dark ink.",
-    mechanical: "Small brass gears and springs fall from the pages.",
-    celestial: "The paper feels lighter than air, shimmering with starlight.",
-    fungal: "Spores puff out as the seal breaks, smelling of damp earth.",
-	glacial: "A blast of freezing air escapes as the frost-crusted seal snaps.",
-    gilded: "The weight of the book is immense; gold flakes peel from its edges.",
-    electrified: "Static discharge numbs your fingers as you break the binding.",
-    aetheric: "The tome feels as if it wants to float away into the clouds.",
-    cavernous: "Echoes of dripping water and shifting stone emerge from the pages.",
-    bastion: "The scent of ancient piglin forges and pig-iron fills the air.",
-    stronghold: "The ink glows with the sickly green light of an ender eye.",
-    monumental: "Pressure builds in your ears, as if you were miles underwater.",
-    dilapidated: "Dust and cobwebs spill out; the history here is almost forgotten.",
-    industrial: "The rhythmic clicking of tiny invisible gears stops as you open it.",
-    skeletal: "The binding is made of sun-bleached bone, cold and brittle.",
-    insectoid: "Chitinous clicking sounds emanate from within the paper.",
-    reptilian: "The leather cover feels like coarse, cold scales.",
-    ichorous: "A thick, iron-scented fluid stains your hands as the seal breaks.",
-    draconic: "The power within is suffocating; the pages are scorched by dragonfire.",
-    void: "Light seems to get sucked into the open pages, leaving only darkness.",
-    crystalline: "The pages chime like bells as they are turned.",
-    radiant: "Warmth and blinding light pour from the script.",
-    forbidden: "Whispers fill your mind, urging you to close the book immediately.",
-    echoing: "Every movement you make is repeated twice in the silence of the tome."
+    eldritch: "kubejs.script.server.scripts.custom.ritual.echo.extractor.0001",
+    warbound: "kubejs.script.server.scripts.custom.ritual.echo.extractor.0002",
+    overgrown: "kubejs.script.server.scripts.custom.ritual.echo.extractor.0003",
+    scorched: "kubejs.script.server.scripts.custom.ritual.echo.extractor.0004",
+    sunken: "kubejs.script.server.scripts.custom.ritual.echo.extractor.0005",
+    volcanic: "kubejs.script.server.scripts.custom.ritual.echo.extractor.0006",
+    abyssal: "kubejs.script.server.scripts.custom.ritual.echo.extractor.0007",
+    mechanical: "kubejs.script.server.scripts.custom.ritual.echo.extractor.0008",
+    celestial: "kubejs.script.server.scripts.custom.ritual.echo.extractor.0009",
+    fungal: "kubejs.script.server.scripts.custom.ritual.echo.extractor.0010",
+	glacial: "kubejs.script.server.scripts.custom.ritual.echo.extractor.0011",
+    gilded: "kubejs.script.server.scripts.custom.ritual.echo.extractor.0012",
+    electrified: "kubejs.script.server.scripts.custom.ritual.echo.extractor.0013",
+    aetheric: "kubejs.script.server.scripts.custom.ritual.echo.extractor.0014",
+    cavernous: "kubejs.script.server.scripts.custom.ritual.echo.extractor.0015",
+    bastion: "kubejs.script.server.scripts.custom.ritual.echo.extractor.0016",
+    stronghold: "kubejs.script.server.scripts.custom.ritual.echo.extractor.0017",
+    monumental: "kubejs.script.server.scripts.custom.ritual.echo.extractor.0018",
+    dilapidated: "kubejs.script.server.scripts.custom.ritual.echo.extractor.0019",
+    industrial: "kubejs.script.server.scripts.custom.ritual.echo.extractor.0020",
+    skeletal: "kubejs.script.server.scripts.custom.ritual.echo.extractor.0021",
+    insectoid: "kubejs.script.server.scripts.custom.ritual.echo.extractor.0022",
+    reptilian: "kubejs.script.server.scripts.custom.ritual.echo.extractor.0023",
+    ichorous: "kubejs.script.server.scripts.custom.ritual.echo.extractor.0024",
+    draconic: "kubejs.script.server.scripts.custom.ritual.echo.extractor.0025",
+    void: "kubejs.script.server.scripts.custom.ritual.echo.extractor.0026",
+    crystalline: "kubejs.script.server.scripts.custom.ritual.echo.extractor.0027",
+    radiant: "kubejs.script.server.scripts.custom.ritual.echo.extractor.0028",
+    forbidden: "kubejs.script.server.scripts.custom.ritual.echo.extractor.0029",
+    echoing: "kubejs.script.server.scripts.custom.ritual.echo.extractor.0030"
 };
 
 const RESONANCE_MAP = {
@@ -189,27 +189,27 @@ ItemEvents.rightClicked(event => {
             let elapsed = currentTime - player.persistentData.getLong('extractor_cooldown');
             if (elapsed < cooldownTicks) {
                 let remaining = Math.ceil((cooldownTicks - elapsed) / 20);
-                player.setStatusMessage(Text.of(`Extractor is cooling down: ${remaining}s`).red());
+                player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.ritual.echo.extractor.0032", remaining).red());
                 return;
             }
         }
 
         // Busy Check (Combined)
         if (player.persistentData.getBoolean('extractor_busy')) {
-            player.setStatusMessage(Text.of("The Extractor is still condensing echoes...").red());
+            player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.ritual.echo.extractor.0033").red());
             return;
         }
 
         // Resonance Check
         if (!targetBlock || !RESONANCE_MAP[targetBlock.id]) {
-            player.setStatusMessage(Text.of("This object holds no echoes.").gray());
+            player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.ritual.echo.extractor.0034").gray());
             return;
         }
 
         // Fuel Check (Blessed Incense)
         let clearResult = server.runCommandSilent(`clear ${pName} kubejs:blessed_incense 1`);
         if (clearResult <= 0) {
-            player.setStatusMessage(Text.of("Extraction requires incense to stabilize the chronal flow.").italic());
+            player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.ritual.echo.extractor.0035").italic());
             return;
         }
 
@@ -222,7 +222,7 @@ ItemEvents.rightClicked(event => {
 
         // Start Ritual
         player.persistentData.putBoolean('extractor_busy', true);
-        player.tell(Text.of("The Echo Extractor begins to drain the block's essence...").darkPurple());
+        player.tell(Text.translate("kubejs.script.server.scripts.custom.ritual.echo.extractor.0036").darkPurple());
         
         server.runCommandSilent(`effect give ${pName} minecraft:slowness ${castTicks / 20} 10 true`);
         server.runCommandSilent(`playsound minecraft:block.respawn_anchor.charge player ${pName} ${player.x} ${player.y} ${player.z} 1 0.8`);
@@ -247,11 +247,11 @@ ItemEvents.rightClicked(event => {
 				if (isDestroyed) {
 					// CRITICAL FAILURE: Spawner is lost
 					server.runCommandSilent(`setblock ${echoX} ${echoY} ${echoZ} ${replacement}`);
-					player.tell(Text.of("CRITICAL FAILURE: The Echo collapsed!").red().bold());
+					player.tell(Text.translate("kubejs.script.server.scripts.custom.ritual.echo.extractor.0037").red().bold());
 					server.runCommandSilent(`execute at ${pName} run playsound minecraft:entity.generic.explode player @s ~ ~ ~ 1 0.5`);
 				} else {
 					// SOFT FAILURE: Spawner remains, but ritual fails
-					player.tell(Text.of("STABILITY FAILURE: The Echo slipped away...").yellow());
+					player.tell(Text.translate("kubejs.script.server.scripts.custom.ritual.echo.extractor.0038").yellow());
 					
 					// Visual "Fizzle" effect
 					server.runCommandSilent(`execute at ${pName} run particle minecraft:smoke ~ ~1 ~ 0.2 0.2 0.2 0.05 10`);
@@ -271,7 +271,7 @@ ItemEvents.rightClicked(event => {
                 server.runCommandSilent(`execute at ${pName} run tp ${pName} ~ ~0.2 ~`); 
                 server.runCommandSilent(`playsound minecraft:entity.generic.explode player ${pName} ~ ~ ~ 1 0.5`);
                 server.runCommandSilent(`particle minecraft:explosion_emitter ${p.x} ${p.y + 1} ${p.z} 0.5 0.5 0.5 0.1 1`);
-                p.tell(Text.of("The extraction failed! A temporal remnant has escaped!").red().italic());
+                p.tell(Text.translate("kubejs.script.server.scripts.custom.ritual.echo.extractor.0039").red().italic());
 				syncExtractorStats(p);																			 
                 return; 
             }
@@ -290,9 +290,9 @@ ItemEvents.rightClicked(event => {
             let giveCmd = `give ${pName} kubejs:sealed_tome{theme:"${roll.id}",display:{Name:'{"text":"Sealed ${roll.name} Tome","color":"${roll.color}","italic":false}'}} 1`;
             server.runCommandSilent(giveCmd);
 					                       
-			p.tell(Text.of(`Extraction successfull!`).aqua().bold()
+			p.tell(Text.translate("kubejs.script.server.scripts.custom.ritual.echo.extractor.0040").aqua().bold()
 							.append(Text.of(" - ").gray())
-							.append(Text.of(`Sealed ${roll.name} Tome (+1 Extraction Level)`).color(roll.color))
+							.append(Text.translate("kubejs.script.server.scripts.custom.ritual.echo.extractor.0042", roll.name).color(roll.color))
 						);
 
             // Discovery Tracking (The Sticky String Fix)
@@ -302,7 +302,7 @@ ItemEvents.rightClicked(event => {
                 p.persistentData.putString('echo_discoveries', newStr);
                 server.runCommandSilent(`kubejs persistent_data ${pName} merge {echo_discoveries:"${newStr}"}`);
 
-                p.tell(Text.of(`New Theme Discovered: ${roll.name}`).gold().italic());
+                p.tell(Text.translate("kubejs.script.server.scripts.custom.ritual.echo.extractor.0043", roll.name).gold().italic());
                 server.runCommandSilent(`execute at ${pName} run playsound minecraft:ui.toast.challenge_complete player @s 1 1`);
             }
 			syncExtractorStats(player)
@@ -321,16 +321,16 @@ ItemEvents.rightClicked(event => {
         let effectiveCast     = getExtractorCastTicks(mastery);        
 		let remainingSeconds = Math.ceil(Math.max(0, effectiveCooldown - (level.time - lastCooldown)) / 20);
 
-        player.tell(Text.of("-- Chronicle of Echoes --").darkPurple().bold());
-        player.tell(Text.of("Extraction Expertise: ").gray().append(Text.of(mastery.toFixed(1)).yellow()));
+        player.tell(Text.translate("kubejs.script.server.scripts.custom.ritual.echo.extractor.0044").darkPurple().bold());
+        player.tell(Text.translate("kubejs.script.server.scripts.custom.ritual.echo.extractor.0045").gray().append(Text.of(mastery.toFixed(1)).yellow()));
         
         let riskColor = currentRisk > 20 ? "red" : (currentRisk > 10 ? "yellow" : "green");
-        player.tell(Text.of("Backfire Risk: ").gray().append(Text.of(`${currentRisk.toFixed(1)}%`).color(riskColor)));
-        player.tell(Text.of("Extraction Tier: ").gray().append(Text.of(`Tier ${bonusTier}`).aqua()));
-        player.tell(Text.of("Cast Time: ").gray()
-			.append(Text.of(`${(effectiveCast / 20).toFixed(1)}s`).yellow())
-            .append(Text.of("  |  Cooldown: ").gray())
-            .append(Text.of(`${(effectiveCooldown / 20).toFixed(1)}s`).yellow()));																			  
+        player.tell(Text.translate("kubejs.script.server.scripts.custom.ritual.echo.extractor.0046").gray().append(Text.translate("kubejs.script.server.scripts.custom.ritual.echo.extractor.0047", currentRisk.toFixed(1)).color(riskColor)));
+        player.tell(Text.translate("kubejs.script.server.scripts.custom.ritual.echo.extractor.0048").gray().append(Text.translate("kubejs.script.server.scripts.custom.ritual.echo.extractor.0049", bonusTier).aqua()));
+        player.tell(Text.translate("kubejs.script.server.scripts.custom.ritual.echo.extractor.0050").gray()
+			.append(Text.translate("kubejs.script.server.scripts.custom.ritual.echo.extractor.0051", (effectiveCast / 20).toFixed(1)).yellow())
+            .append(Text.translate("kubejs.script.server.scripts.custom.ritual.echo.extractor.0052").gray())
+            .append(Text.translate("kubejs.script.server.scripts.custom.ritual.echo.extractor.0053", (effectiveCooldown / 20).toFixed(1)).yellow()));																			  
 
         // --- DISCOVERY DISPLAY ---
         let themeList = Text.of("");
@@ -346,12 +346,12 @@ ItemEvents.rightClicked(event => {
         });
 
         if (!foundAny) {
-            player.tell(Text.of("Discovered Echoes: ").gray().append(Text.of("None").darkGray().italic()));
+            player.tell(Text.translate("kubejs.script.server.scripts.custom.ritual.echo.extractor.0056").gray().append(Text.translate("kubejs.script.server.scripts.custom.ritual.echo.extractor.0057").darkGray().italic()));
         } else {
-            player.tell(Text.of("Discovered Echoes: ").gray().append(themeList));
+            player.tell(Text.translate("kubejs.script.server.scripts.custom.ritual.echo.extractor.0058").gray().append(themeList));
         }
 
-        player.tell(Text.of("Extractor Status: ").gray().append(remainingSeconds > 0 ? Text.of(`Cooling (${remainingSeconds}s)`).red() : Text.of("Stable / Ready").green().italic()));
+        player.tell(Text.translate("kubejs.script.server.scripts.custom.ritual.echo.extractor.0059").gray().append(remainingSeconds > 0 ? Text.translate("kubejs.script.server.scripts.custom.ritual.echo.extractor.0060", remainingSeconds).red() : Text.translate("kubejs.script.server.scripts.custom.ritual.echo.extractor.0061").green().italic()));
         player.tell(Text.of("-----------------------").darkPurple().bold());
         player.playSound('minecraft:item.book.page_turn');
     }
@@ -411,7 +411,7 @@ ItemEvents.rightClicked(event => {
 		// 4. THE JACKPOT (Tier 50+)
         if (bonusTier >= 50 && Math.random() < 0.01) { // 1% chance at Tier 50
             server.runCommandSilent(`execute at ${pName} run summon minecraft:item ~ ~1.5 ~ {Item:{id:"minecraft:nether_star",Count:1b}}`);
-            player.tell(Text.of("THE TIMELINE FRACTURES! A Chronal Singularity has manifested!").gold().bold());
+            player.tell(Text.translate("kubejs.script.server.scripts.custom.ritual.echo.extractor.0063").gold().bold());
             server.runCommandSilent(`execute at ${pName} run playsound minecraft:ui.toast.challenge_complete player @s ~ ~ ~ 1 0.5`);
         }
 
@@ -462,7 +462,7 @@ ItemEvents.rightClicked(event => {
         }
 
         // 5. Flavor Text (with Theme color)
-		player.tell(Text.of(TOME_MESSAGES[theme] || "The secrets unfold...").italic());
+		player.tell(Text.translate(TOME_MESSAGES[theme] || "kubejs.script.server.scripts.custom.ritual.echo.extractor.0064").italic());
 		
 		console.log(`Tome Opened: Theme=${theme}, Roll=${roll.toFixed(2)}, Tier=${bonusTier}, Item=${itemToGive}`);
     }

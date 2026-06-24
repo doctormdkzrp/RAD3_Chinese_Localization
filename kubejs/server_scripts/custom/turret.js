@@ -33,12 +33,12 @@ ItemEvents.rightClicked('kubejs:turret_item', event => {
             CustomNameVisible: 1
         });
 
-        turret.customName = Text.of('§6Sentry §7(60s)'); //
+        turret.customName = Text.translate('kubejs.script.server.scripts.custom.turret.0001'); //
         turret.spawn();
 
         // Sound syntax
         level.playSound(null, x, y, z, 'minecraft:block.iron_door.open', 'players', 1.0, 1.5);
-        player.displayClientMessage(Text.of('§aTurret Deployed!').green(), true); //
+        player.displayClientMessage(Text.translate('kubejs.script.server.scripts.custom.turret.0002').green(), true); //
 
         if (!player.isCreative()) {
             item.damageValue++;
@@ -72,7 +72,7 @@ LevelEvents.tick(event => {
 
             if (age % 20 === 0) {
                 let secs = Math.floor((TURRET_LIFE - age) / 20);
-                turret.customName = Text.of(`§6Sentry §7(${secs}s)`);
+                turret.customName = Text.translate("kubejs.script.server.scripts.custom.turret.0003", secs);
             }
 
             // SHOOT_EVERY=4 here since we only run every 10th tick (4 × 10 = 40 real ticks)

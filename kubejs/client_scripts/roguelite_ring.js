@@ -17,30 +17,30 @@ ItemEvents.tooltip(event => {
         let percent = Math.floor((milestones.length / 16) * 100);
 
         // Build Tooltip (Safe Append Only)
-        text.add(Text.of("A heavy burden for a second chance...").gray().italic());
+        text.add(Text.translate("kubejs.script.client.scripts.roguelite.ring.0001").gray().italic());
 
         if (!event.shift) {
-            text.add(Text.of("Hold [Shift] for mechanics.").yellow());
+            text.add(Text.translate("kubejs.script.client.scripts.roguelite.ring.0002").yellow());
         } else {
-            text.add(Text.of("Clears your inventory and spawn you in random location on death").white());
-            text.add(Text.of("Gives different loot based on unlocked milestones").white());
+            text.add(Text.translate("kubejs.script.client.scripts.roguelite.ring.0003").white());
+            text.add(Text.translate("kubejs.script.client.scripts.roguelite.ring.0004").white());
 
             // Use the data from NBT
-            text.add(Text.of(` 1. §6Rank:§r ${rankColor}${rankName}§r (§f${pts} Pts§r)`));
-            text.add(Text.of(` 2. §bProgress:§r §a${percent}%§7 of Milestones Completed`));
-            text.add(Text.of(` 3. §eRebirths:§r §f${rebirths}§r`));
-            text.add(Text.of(` 4. §bLast Death:§r §7${lastPos}§r`));
+            text.add(Text.translate("kubejs.script.client.scripts.roguelite.ring.0005", rankColor, rankName, pts));
+            text.add(Text.translate("kubejs.script.client.scripts.roguelite.ring.0006", percent));
+            text.add(Text.translate("kubejs.script.client.scripts.roguelite.ring.0007", rebirths));
+            text.add(Text.translate("kubejs.script.client.scripts.roguelite.ring.0008", lastPos));
 
             if (milestones.length > 0) {
-                text.add(Text.of(` 5. §bUnlocked Milestones:§r`));
+                text.add(Text.translate("kubejs.script.client.scripts.roguelite.ring.0009"));
                 let itemsPerLine = 2; 
                 for (let i = 0; i < milestones.length; i += itemsPerLine) {
                     let chunk = milestones.slice(i, i + itemsPerLine).join(', ');
                     if (i + itemsPerLine < milestones.length) chunk += ',';
-                    text.add(Text.of(`    §7${chunk}§r`));
+                    text.add(Text.translate("kubejs.script.client.scripts.roguelite.ring.0010", chunk));
                 }
             } else {
-                text.add(Text.of(` 5. §bMilestones:§r §7None§r`));
+                text.add(Text.translate("kubejs.script.client.scripts.roguelite.ring.0011"));
             }
         }
     });

@@ -9,7 +9,7 @@ EntityEvents.spawned('minecraft:bee', event => {
         
         if (player) {
             // Using § for formatting
-            player.tell(Text.of("§b[Post-Bee]§r §7§oBzzzt! New mail has arrived in your §b§nMailbox§r§7§o!§r"))
+            player.tell(Text.translate("kubejs.script.server.scripts.custom.courier.bee.module.0001"))
             server.runCommandSilent(`playsound minecraft:entity.bee.loop_aggressive ambient ${player.username} ${entity.x} ${entity.y} ${entity.z} 1 1.5`)
         }
     }

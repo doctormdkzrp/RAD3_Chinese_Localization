@@ -11,7 +11,7 @@ ServerEvents.commandRegistry(event => {
                             let target = Args.PLAYER.getResult(c, 'target');
                             let val = Args.INTEGER.getResult(c, 'value');
                             target.persistentData.putInt('ritual_mastery', val);
-                            c.source.sendSuccess(Text.of(`Set ${target.username}'s Mastery to ${val}`), true);
+                            c.source.sendSuccess(Text.translate("kubejs.script.server.scripts.custom.ritual.mastery.commands.0001", target.username, val), true);
                             return 1;
                         })
                     )
@@ -22,7 +22,7 @@ ServerEvents.commandRegistry(event => {
                     .executes(c => {
                         let target = Args.PLAYER.getResult(c, 'target');
                         target.persistentData.putInt('ritual_mastery', 0);
-                        c.source.sendSuccess(Text.of(`Reset ${target.username}'s Mastery to 0`), true);
+                        c.source.sendSuccess(Text.translate("kubejs.script.server.scripts.custom.ritual.mastery.commands.0002", target.username), true);
                         return 1;
                     })
                 )

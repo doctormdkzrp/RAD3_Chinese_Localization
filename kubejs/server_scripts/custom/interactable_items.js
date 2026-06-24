@@ -76,7 +76,7 @@ ItemEvents.rightClicked(event => {
             // Create the official-looking paper
             let customPaper = Item.of('minecraft:paper')
                 .withName(Text.of(randomMsg).italic(false))
-                .withLore([Text.of("§7[Decrypted Data Segment]").italic(true)]);
+                .withLore([Text.translate("kubejs.script.server.scripts.custom.interactable.items.0001").italic(true)]);
             
 			player.swing()
             player.give(customPaper);
@@ -238,7 +238,7 @@ if (item.id == 'kubejs:echo_locator') {
         // 3. Feedback and Durability Logic
         if (found) {
 			level.playSound(null, player.blockX, player.blockY, player.blockZ, 'minecraft:block.beacon.activate', 'players', 1.0, 1.0);
-            player.setStatusMessage(Text.of("§b[Scanner]: §rInitializing sonar sweep..."));
+            player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.interactable.items.0002"));
             
             let newDamage = item.damageValue + 1;
             if (newDamage >= item.maxDamage) {
@@ -263,7 +263,7 @@ if (item.id == 'kubejs:echo_locator') {
 
         if (currentTime - lastUsed < cooldownTicks) {
             let remaining = Math.ceil((cooldownTicks - (currentTime - lastUsed)) / 20);
-            player.setStatusMessage(Text.of(`§c[System]: §7Recharging... (${remaining}s)`));
+            player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.interactable.items.0003", remaining));
             level.playSound(null, player.blockX, player.blockY, player.blockZ, 'minecraft:block.iron_trapdoor.close', 'players', 0.5, 2.0);
             event.cancel();
             return; // Stop the script here
@@ -283,7 +283,7 @@ if (item.id == 'kubejs:echo_locator') {
         player.potionEffects.add('minecraft:slow_falling', 20, 0, false, false);
         
         level.playSound(null, player.blockX, player.blockY, player.blockZ, 'minecraft:block.conduit.deactivate', 'players', 1.0, 1.5);
-        player.setStatusMessage(Text.of("§b[System]: §fBuffer Engaged"));
+        player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.interactable.items.0004"));
 
         // Visual Feedback Loop
         for (let t = 0; t <= 20; t += 2) {
@@ -332,7 +332,7 @@ if (item.id == 'kubejs:echo_locator') {
         let cooldownTicks = 20; 
 
         if (currentTime - lastUsed < cooldownTicks) {
-            player.setStatusMessage(Text.of("§c[System]: §7Coil Overheated..."));
+            player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.interactable.items.0005"));
             level.playSound(null, player.blockX, player.blockY, player.blockZ, 'minecraft:block.iron_trapdoor.close', 'players', 0.5, 2.0);
             event.cancel();
             return;

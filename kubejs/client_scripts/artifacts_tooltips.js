@@ -1,246 +1,246 @@
 ItemEvents.tooltip(event => {
     // 1. Original Living Branch
     event.addAdvanced('kubejs:living_branch', (item, advanced, text) => {
-		text.add(1, Text.of('Pulses with the heartbeat of the forest.').green().italic())
+		text.add(1, Text.translate('kubejs.script.client.scripts.artifacts.tooltips.0001').green().italic())
         if (!event.isShift()) {
-            text.add(2, [Text.of('Hold ').gray(), Text.of('[Shift] ').gold(), Text.of('for mechanics.').gray()])
+            text.add(2, [Text.translate('kubejs.script.client.scripts.artifacts.tooltips.0002').gray(), Text.translate('kubejs.script.client.scripts.artifacts.tooltips.0003').gold(), Text.translate('kubejs.script.client.scripts.artifacts.tooltips.0004').gray()])
         } else {
-            text.add(2, Text.of('§6Mechanics:'))
-            text.add(3, Text.of(' • §eTransmutation:§f Works on Wood, Dirt, Cobblestone and Stone Bricks').white())
-            text.add(4, Text.of(' • §2Fuel:§f Consumes §fBone Meal§f from inventory.').white())
+            text.add(2, Text.translate('kubejs.script.client.scripts.artifacts.tooltips.0005'))
+            text.add(3, Text.translate('kubejs.script.client.scripts.artifacts.tooltips.0006').white())
+            text.add(4, Text.translate('kubejs.script.client.scripts.artifacts.tooltips.0007').white())
         }
     })
 
     // 2. Branch of Bridging
     event.addAdvanced('kubejs:living_branch_bridging', (item, advanced, text) => {
-        text.add(1, Text.of('The air thickens where this branch is pointed.').gray().italic())
+        text.add(1, Text.translate('kubejs.script.client.scripts.artifacts.tooltips.0008').gray().italic())
         if (!event.isShift()) {
-            text.add(2, [Text.of('Hold ').gray(), Text.of('[Shift] ').gold(), Text.of('for mechanics.').gray()])
+            text.add(2, [Text.translate('kubejs.script.client.scripts.artifacts.tooltips.0009').gray(), Text.translate('kubejs.script.client.scripts.artifacts.tooltips.0010').gold(), Text.translate('kubejs.script.client.scripts.artifacts.tooltips.0011').gray()])
         } else {
-            text.add(2, Text.of('§6Mechanics:'))
-            text.add(3, Text.of(' • §eSky-Walking:§f Places 5 horizontal persistent leaves.').white())
-            text.add(4, Text.of(' • §bPrecision:§f Stops automatically if it hits a solid block.').white())
-            text.add(5, Text.of(' • §2Fuel:§f Consumes §f1 Bone Meal§f per 5-block burst.').white())
+            text.add(2, Text.translate('kubejs.script.client.scripts.artifacts.tooltips.0012'))
+            text.add(3, Text.translate('kubejs.script.client.scripts.artifacts.tooltips.0013').white())
+            text.add(4, Text.translate('kubejs.script.client.scripts.artifacts.tooltips.0014').white())
+            text.add(5, Text.translate('kubejs.script.client.scripts.artifacts.tooltips.0015').white())
         }
     })
 
     // 3. Buzzing Branch
     event.addAdvanced('kubejs:buzzing_living_branch', (item, advanced, text) => {
-        text.add(1, Text.of('You can hear a faint humming vibrating from the wood.').gray().italic())
+        text.add(1, Text.translate('kubejs.script.client.scripts.artifacts.tooltips.0016').gray().italic())
         if (!event.isShift()) {
-            text.add(2, [Text.of('Hold ').gray(), Text.of('[Shift] ').gold(), Text.of('for mechanics.').gray()])
+            text.add(2, [Text.translate('kubejs.script.client.scripts.artifacts.tooltips.0017').gray(), Text.translate('kubejs.script.client.scripts.artifacts.tooltips.0018').gold(), Text.translate('kubejs.script.client.scripts.artifacts.tooltips.0019').gray()])
         } else {
-            text.add(2, Text.of('§6Mechanics:'))
-            text.add(3, Text.of(' • §eSwarm:§f Summons 3 Guardian Bees to defend the user.').white())
-            text.add(4, Text.of(' • §bLoyalty:§f Bees teleport to stay within range.').white())
-            text.add(5, Text.of(' • §dLifespan:§f Bees vanish after 60 seconds').white())
-            text.add(6, Text.of(' • §2Fuel:§f Consumes §fBone Meal§f from inventory').white())
+            text.add(2, Text.translate('kubejs.script.client.scripts.artifacts.tooltips.0020'))
+            text.add(3, Text.translate('kubejs.script.client.scripts.artifacts.tooltips.0021').white())
+            text.add(4, Text.translate('kubejs.script.client.scripts.artifacts.tooltips.0022').white())
+            text.add(5, Text.translate('kubejs.script.client.scripts.artifacts.tooltips.0023').white())
+            text.add(6, Text.translate('kubejs.script.client.scripts.artifacts.tooltips.0024').white())
         }
     })
 	
 	event.addAdvanced('kubejs:gamble_coin', (item, advanced, text) => {
 				
-			text.add(1, Text.of('§71. Hold this coin in your §fmainhand').white()),
-			text.add(2, Text.of('§72. §6Gold Ingot §7and a bit of §4EXP §7required to spin').white()),
-			text.add(3, Text.of('§73. §fRight-click §7to spin').white()),
+			text.add(1, Text.translate('kubejs.script.client.scripts.artifacts.tooltips.0025').white()),
+			text.add(2, Text.translate('kubejs.script.client.scripts.artifacts.tooltips.0026').white()),
+			text.add(3, Text.translate('kubejs.script.client.scripts.artifacts.tooltips.0027').white()),
 			text.add(4, Text.of('').white()),
-			text.add(5, Text.of('§8• Cooldown: 5s between spins.').white()),
-			text.add(6, Text.of('§8• Spin limit resets periodically').white())
+			text.add(5, Text.translate('kubejs.script.client.scripts.artifacts.tooltips.0029').white()),
+			text.add(6, Text.translate('kubejs.script.client.scripts.artifacts.tooltips.0030').white())
 	})
 	
 	
 	event.addAdvanced('lrdynamicdungeon:dungeon_pass', (item, advanced, text) => {
 			text.add(Text.of(''));
-			text.add(Text.of('§7Single-use entry to the dungeon'));
-			text.add(Text.of('§7Can be found as loot or bought for Dungeon or Raid Coin'));
+			text.add(Text.translate('kubejs.script.client.scripts.artifacts.tooltips.0032'));
+			text.add(Text.translate('kubejs.script.client.scripts.artifacts.tooltips.0033'));
 			text.add(Text.of(''));
-			text.add(Text.of('§8Use §7/raidstats §8to view your rank & stats'));
-			text.add(Text.of('§8Use §7/raidhelp §8for system info'));
+			text.add(Text.translate('kubejs.script.client.scripts.artifacts.tooltips.0035'));
+			text.add(Text.translate('kubejs.script.client.scripts.artifacts.tooltips.0036'));
     });
 	
 	event.addAdvanced('kubejs:entropic_cent', (item, advanced, text) => {
-        text.add(1, Text.of('Weighty, gold-plated, and unpredictable.').yellow().italic())
+        text.add(1, Text.translate('kubejs.script.client.scripts.artifacts.tooltips.0037').yellow().italic())
         if (!event.isShift()) {
-            text.add(2, Text.of('Hold [Shift] for details').gold())
+            text.add(2, Text.translate('kubejs.script.client.scripts.artifacts.tooltips.0038').gold())
         } else {
-            text.add(2, Text.of(' • Right-Click: Flip for massive Luck or Bad Luck.').white())
-            text.add(3, Text.of(' • Consumes 1 Gold Block per flip.').gray())
+            text.add(2, Text.translate('kubejs.script.client.scripts.artifacts.tooltips.0039').white())
+            text.add(3, Text.translate('kubejs.script.client.scripts.artifacts.tooltips.0040').gray())
         }
     })
 	
 		const tooltipData = [
         {
             id: 'kubejs:rusty_key',
-            lore: 'An old key covered in thick, orange rust',
+            lore: 'kubejs.script.client.scripts.artifacts.tooltips.0041',
             mechanics: [
-                '§6• Can be used to force open iron doors',
-                '§2• The key is fragile and will break after one use'
+                'kubejs.script.client.scripts.artifacts.tooltips.0042',
+                'kubejs.script.client.scripts.artifacts.tooltips.0043'
             ]
         },
         {
             id: 'kubejs:unstable_battery',
-            lore: 'It hums with a dangerous, flickering orange light',
+            lore: 'kubejs.script.client.scripts.artifacts.tooltips.0044',
             mechanics: [
-                '§b• Grants massive Speed and Haste for 30 seconds',
-                '§2• Causes extreme exhaustion (Hunger) after the surge',
-                '§6• Right-click to consume and activate'
+                'kubejs.script.client.scripts.artifacts.tooltips.0045',
+                'kubejs.script.client.scripts.artifacts.tooltips.0046',
+                'kubejs.script.client.scripts.artifacts.tooltips.0047'
             ]
         },
         {
             id: 'kubejs:emergency_flare',
-            lore: 'Standard issue for underground exploration',
+            lore: 'kubejs.script.client.scripts.artifacts.tooltips.0048',
             mechanics: [
-                '§6• Ignites a bright light at your location',
-                '§b• Reveals nearby hidden entities through walls',
-                '§d• Burns out after 60 seconds'
+                'kubejs.script.client.scripts.artifacts.tooltips.0049',
+                'kubejs.script.client.scripts.artifacts.tooltips.0050',
+                'kubejs.script.client.scripts.artifacts.tooltips.0051'
             ]
         },
         {
             id: 'kubejs:bee_jar',
-            lore: 'You can hear an angry buzzing inside',
+            lore: 'kubejs.script.client.scripts.artifacts.tooltips.0052',
             mechanics: [
-                '§b• Releases 3-4 aggressive bees on impact.',
-                '§d• Bees use a specialized lifespan and will despawn.',
-                '§6• Perfect for creating a quick distraction.'
+                'kubejs.script.client.scripts.artifacts.tooltips.0053',
+                'kubejs.script.client.scripts.artifacts.tooltips.0054',
+                'kubejs.script.client.scripts.artifacts.tooltips.0055'
             ]
         },
         {
             id: 'kubejs:data_slate',
-            lore: 'Some data is readable',
+            lore: 'kubejs.script.client.scripts.artifacts.tooltips.0056',
             mechanics: [
-                '§6• Attempt to decrypt by right-clicking',
-                '§2• Has a 40% chance to fail and wipe the data',
-                '§b• May reveal secret coordinates or XP'
+                'kubejs.script.client.scripts.artifacts.tooltips.0057',
+                'kubejs.script.client.scripts.artifacts.tooltips.0058',
+                'kubejs.script.client.scripts.artifacts.tooltips.0059'
             ]
         },
 		{
             id: 'kubejs:sentry_remote',
-            lore: 'A cracked screen showing "Protocol: FREEZE"',
+            lore: 'kubejs.script.client.scripts.artifacts.tooltips.0060',
             mechanics: [
-                '§b• Emits a pulse that freezes hostile movements',
-                '§6• Affects all monsters in a 10-block radius',
-                '§d• Powered by Aetheric cloud energy'
+                'kubejs.script.client.scripts.artifacts.tooltips.0061',
+                'kubejs.script.client.scripts.artifacts.tooltips.0062',
+                'kubejs.script.client.scripts.artifacts.tooltips.0063'
             ]
         },
         {
             id: 'kubejs:bioscan_syringe',
-            lore: 'Used to extract samples from biological anomalies',
+            lore: 'kubejs.script.client.scripts.artifacts.tooltips.0064',
             mechanics: [
-                '§2• Right-click a Glowing Bee to harvest energy',
-                '§6• Yields a Charged Stinger upon success',
-                '§d• The host is consumed during extraction'
+                'kubejs.script.client.scripts.artifacts.tooltips.0065',
+                'kubejs.script.client.scripts.artifacts.tooltips.0066',
+                'kubejs.script.client.scripts.artifacts.tooltips.0067'
             ]
         },
         {
             id: 'kubejs:magnetic_grapple',
-            lore: 'An industrial winch modified for urban climbing.',
+            lore: 'kubejs.script.client.scripts.artifacts.tooltips.0068',
             mechanics: [
-                '§6• Pulls the user toward the targeted block',
-                '§2• High risk of mechanical failure (Durability)',
-                '§b• Maximum effective range: 20 blocks'
+                'kubejs.script.client.scripts.artifacts.tooltips.0069',
+                'kubejs.script.client.scripts.artifacts.tooltips.0070',
+                'kubejs.script.client.scripts.artifacts.tooltips.0071'
             ]
         },
         {
             id: 'kubejs:thermal_paste',
-            lore: 'Highly corrosive chemical compound',
+            lore: 'kubejs.script.client.scripts.artifacts.tooltips.0072',
             mechanics: [
-                '§2• Instantly dissolves Iron Bars and Trapdoors',
-                '§6• Consumed on contact with metal',
-                '§b• Warning: Do not apply to skin'
+                'kubejs.script.client.scripts.artifacts.tooltips.0073',
+                'kubejs.script.client.scripts.artifacts.tooltips.0074',
+                'kubejs.script.client.scripts.artifacts.tooltips.0075'
             ]
         },
         {
             id: 'kubejs:echo_locator',
-            lore: '"I can hear the loot breathing..."',
+            lore: 'kubejs.script.client.scripts.artifacts.tooltips.0076',
             mechanics: [
-                '§b• Pings the location of nearby storage containers',
-                '§6• Effective through solid walls and floors'
+                'kubejs.script.client.scripts.artifacts.tooltips.0077',
+                'kubejs.script.client.scripts.artifacts.tooltips.0078'
             ]
         },
         {
             id: 'kubejs:kinetic_dampener',
-            lore: 'Laws of physics? More like suggestions',
+            lore: 'kubejs.script.client.scripts.artifacts.tooltips.0079',
             mechanics: [
-                '§b• Instantly halts all vertical and horizontal velocity',
-                '§6• Resets fall distance to prevent impact damage',
-                '§2• High energy drain per use'
+                'kubejs.script.client.scripts.artifacts.tooltips.0080',
+                'kubejs.script.client.scripts.artifacts.tooltips.0081',
+                'kubejs.script.client.scripts.artifacts.tooltips.0082'
             ]
         },
         {
             id: 'kubejs:scavenger_magnet',
-            lore: 'Because bending down is too much work',
+            lore: 'kubejs.script.client.scripts.artifacts.tooltips.0083',
             mechanics: [
-                '§b• Pulsates to pull nearby loose items toward you',
-                '§6• 12-block effective radius',
-                '§2• Uses magnetic resonance to attract loot'
+                'kubejs.script.client.scripts.artifacts.tooltips.0084',
+                'kubejs.script.client.scripts.artifacts.tooltips.0085',
+                'kubejs.script.client.scripts.artifacts.tooltips.0086'
             ]
         },
         {
             id: 'kubejs:translocation_coil',
-            lore: "I'd rather be there, and you'd rather be here",
+            lore: "kubejs.script.client.scripts.artifacts.tooltips.0087",
             mechanics: [
-                '§d• Swaps positions with a targeted living entity',
-                '§b• Maximum range: 25 blocks',
-                '§c• Warning: Extremely high durability cost'
+                'kubejs.script.client.scripts.artifacts.tooltips.0088',
+                'kubejs.script.client.scripts.artifacts.tooltips.0089',
+                'kubejs.script.client.scripts.artifacts.tooltips.0090'
             ]
         },
 		{
             id: 'kubejs:berserk_draught',
-            lore: "A violent tonic that numbs pain and fuels rage",
+            lore: "kubejs.script.client.scripts.artifacts.tooltips.0091",
             mechanics: [
-                '§F• Grants §bSpeed§f and §eStrength§f buffs',
-                '§b• High §cHunger§f loss after 20 seconds'
+                'kubejs.script.client.scripts.artifacts.tooltips.0092',
+                'kubejs.script.client.scripts.artifacts.tooltips.0093'
             ]
         },
 		{
             id: 'kubejs:bottled_ice',
-            lore: "A glass flask containing a shard of true-ice",
+            lore: "kubejs.script.client.scripts.artifacts.tooltips.0094",
             mechanics: [
-                '§f• Effective against liquids or entities',
-                '§b• Must be thrown directly at a liquid'
+                'kubejs.script.client.scripts.artifacts.tooltips.0095',
+                'kubejs.script.client.scripts.artifacts.tooltips.0096'
             ]
         },
 		{
             id: 'kubejs:dungeon_recall',
-            lore: "A pulsating artifact that remembers where you started",
+            lore: "kubejs.script.client.scripts.artifacts.tooltips.0097",
             mechanics: [
-                '§f• Teleports user to the dungeon entry coordinates',
-                '§2• Consumable (1 use)',
-                '§8• Only functions within the Raid dimension'
+                'kubejs.script.client.scripts.artifacts.tooltips.0098',
+                'kubejs.script.client.scripts.artifacts.tooltips.0099',
+                'kubejs.script.client.scripts.artifacts.tooltips.0100'
             ]
         },
 		{
             id: 'kubejs:ice_shard',
-            lore: "The frozen shard from an ancient ice elemental",
+            lore: "kubejs.script.client.scripts.artifacts.tooltips.0101",
             mechanics: [
-                '§6• Immobilizes all nearby enemies',
-                '§e• 8 blocks radius',
-                '§d• Effect lasts 3 seconds',
-                '§2• Consumable (1 use)',
-                '§8• Only functions within the Raid dimension'
+                'kubejs.script.client.scripts.artifacts.tooltips.0102',
+                'kubejs.script.client.scripts.artifacts.tooltips.0103',
+                'kubejs.script.client.scripts.artifacts.tooltips.0104',
+                'kubejs.script.client.scripts.artifacts.tooltips.0105',
+                'kubejs.script.client.scripts.artifacts.tooltips.0106'
             ]
         },
 		{
             id: 'kubejs:kill_multiplier',
-            lore: "Time is a suggestion, and the Void suggests you hurry",
+            lore: "kubejs.script.client.scripts.artifacts.tooltips.0107",
             mechanics: [
-                '§6• Only functions within the Raid dimension',
-                '§e• Multiplies all kill scores',
-                '§d• Effect lasts for 45 seconds',
-                '§2• Does not affect chest loot scores',
-                '§8• Consumable (1 use)'
+                'kubejs.script.client.scripts.artifacts.tooltips.0108',
+                'kubejs.script.client.scripts.artifacts.tooltips.0109',
+                'kubejs.script.client.scripts.artifacts.tooltips.0110',
+                'kubejs.script.client.scripts.artifacts.tooltips.0111',
+                'kubejs.script.client.scripts.artifacts.tooltips.0112'
             ]
         },
 		{
 			id: 'kubejs:void_core',
-			lore: "It pulses with a gravity that feels like a question you can't answer.",
+			lore: "kubejs.script.client.scripts.artifacts.tooltips.0113",
 			mechanics: [
-				'§6• §fEmits a powerful §eGlowing§f aura upon use.',
-				'§b• §fWhile glowing, §dStone§f, §dSands§f, and §dEarth§f are erased',
-				'§2• Crouch [Shift] to stabilize the core and prevent destruction',
-				'§e• Does not affect player-made structures or precious materials',
-				'§d• The aura dissipates after 30 seconds.',
-				'§8• ! Handle with extreme caution !'
+				'kubejs.script.client.scripts.artifacts.tooltips.0114',
+				'kubejs.script.client.scripts.artifacts.tooltips.0115',
+				'kubejs.script.client.scripts.artifacts.tooltips.0116',
+				'kubejs.script.client.scripts.artifacts.tooltips.0117',
+				'kubejs.script.client.scripts.artifacts.tooltips.0118',
+				'kubejs.script.client.scripts.artifacts.tooltips.0119'
 			]
 		}
     ];
@@ -251,7 +251,7 @@ ItemEvents.tooltip(event => {
             text.add(1, Text.of(item.lore).italic().gray());
 
             if (!event.shift) {
-                text.add(2, Text.of("Hold [Shift] to see more info").yellow());
+                text.add(2, Text.translate("kubejs.script.client.scripts.artifacts.tooltips.0120").yellow());
             } else {
                 item.mechanics.forEach((m, index) => {
                     // Start adding from line 3 onwards
@@ -262,10 +262,10 @@ ItemEvents.tooltip(event => {
     });
 	
 	const dice = [
-        { id: 'kubejs:d6', lore: 'A simple wooden cube with carved pips.', faces: 6 },
-        { id: 'kubejs:d10', lore: 'A sharp, double-pyramid favored by fate-seekers.', faces: 10 },
-        { id: 'kubejs:d12', lore: 'A complex geometric shape humming with energy.', faces: 12 },
-        { id: 'kubejs:d20', lore: 'The ultimate arbiter of fate.', faces: 20 }
+        { id: 'kubejs:d6', lore: 'kubejs.script.client.scripts.artifacts.tooltips.0121', faces: 6 },
+        { id: 'kubejs:d10', lore: 'kubejs.script.client.scripts.artifacts.tooltips.0122', faces: 10 },
+        { id: 'kubejs:d12', lore: 'kubejs.script.client.scripts.artifacts.tooltips.0123', faces: 12 },
+        { id: 'kubejs:d20', lore: 'kubejs.script.client.scripts.artifacts.tooltips.0124', faces: 20 }
     ]
 
     dice.forEach(die => {

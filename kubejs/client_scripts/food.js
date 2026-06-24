@@ -6,9 +6,9 @@
 
 const TOOLTIP_CONFIG = {
     colorHeader: '§6',
-    colorEffect: '§b',
-    colorXP:     '§a',
-    colorRandom: '§d',
+    colorEffect: 'kubejs.script.client.scripts.food.0002',
+    colorXP:     'kubejs.script.client.scripts.food.0003',
+    colorRandom: 'kubejs.script.client.scripts.food.0004',
     colorDim:    '§7',
     indent:      '  ',
     xpMin: 3,

@@ -14,10 +14,10 @@ NetworkEvents.dataReceived('sync_recycler_stats', event => {
 ItemEvents.tooltip(event => {
     event.addAdvanced(['kubejs:item_recycler'], (item, advanced, text) => {
         // Line 1: Lore (Always First)
-        text.add(Text.of('Designed to deconstruct physical matter into raw essence').gray().italic());
+        text.add(Text.translate('kubejs.script.client.scripts.item.recycler.0001').gray().italic());
 		
         // --- SECTION 1: PERSONAL MASTERY (Always Visible) ---
-        text.add(Text.of('Your Mastery Stats:').white());
+        text.add(Text.translate('kubejs.script.client.scripts.item.recycler.0002').white());
 
         // Safety check for global data
         let stats = global.recyclerData || { count: 0, xp: 0 };
@@ -25,7 +25,7 @@ ItemEvents.tooltip(event => {
         let totalXP = stats.xp;
 
         if (total === 0 && totalXP === 0) {
-            text.add(Text.of('§7No data recorded. Start recycling!').italic());
+            text.add(Text.translate('kubejs.script.client.scripts.item.recycler.0003').italic());
         } else {
             // Rank Logic
             let tier = "§fNovice"; let fail = "10%"; let jack = "1%"; let nextGoal = 1000;
@@ -42,7 +42,7 @@ ItemEvents.tooltip(event => {
             else if (total >= 3000)  { tier = "§9Craftsman"; fail = "8%"; jack = "1.5%"; nextGoal = 5000; }
             else if (total >= 1000)  { tier = "§bJourneyman"; fail = "9%"; jack = "1.2%"; nextGoal = 3000; }
 
-            text.add([Text.of('§7Rank: '), Text.of(tier)]);
+            text.add([Text.translate('kubejs.script.client.scripts.item.recycler.0004'), Text.of(tier)]);
 
             // --- PROGRESS BAR LOGIC ---
             if (nextGoal > 0) {
@@ -58,25 +58,25 @@ ItemEvents.tooltip(event => {
                 for (let i = 0; i < 10; i++) {
                     bar += (i < progress) ? `${barColor}|` : "§8.";
                 }
-                text.add([Text.of('§7Next Rank: '), Text.of(`§8[${bar}§8] §f${total}/${nextGoal}`)]);
+                text.add([Text.translate('kubejs.script.client.scripts.item.recycler.0005'), Text.translate("kubejs.script.client.scripts.item.recycler.0006", bar, total, nextGoal)]);
             } else {
-                text.add(Text.of('§d§lMAX RANK REACHED').italic());
+                text.add(Text.translate('kubejs.script.client.scripts.item.recycler.0007').italic());
             }
 
-            text.add([Text.of('§7Lifetime XP: '), Text.of(`§a${totalXP.toLocaleString()} XP`)]);
-            text.add([Text.of('§7Efficiency: '), Text.of(`§c${fail} Jam `), Text.of('§8| '), Text.of(`§d${jack} Jackpot`)]);
+            text.add([Text.translate('kubejs.script.client.scripts.item.recycler.0008'), Text.translate("kubejs.script.client.scripts.item.recycler.0009", totalXP.toLocaleString())]);
+            text.add([Text.translate('kubejs.script.client.scripts.item.recycler.0010'), Text.translate("kubejs.script.client.scripts.item.recycler.0011", fail), Text.of('§8| '), Text.translate("kubejs.script.client.scripts.item.recycler.0013", jack)]);
         }	
 		
         // --- SECTION 2: MECHANICS (Hidden behind Shift) ---
         if (!event.isShift()) {
-            text.add(Text.of('Hold [Shift] for mechanics').gray());
+            text.add(Text.translate('kubejs.script.client.scripts.item.recycler.0014').gray());
         } else {
             text.add(Text.of(' ')); // Spacer
-            text.add(Text.of('• §6Right-Click to process the item stack in your §eOffhand§f'));
-            text.add(Text.of('• §2Consumes the offhand stack. Extraction is self-powering'));
-            text.add(Text.of('• §dCalculates success for every item in the stack individually'));
-            text.add(Text.of('• §cHigh-tier materials have a chance to yield rare Gems'));
-            text.add(Text.of('• §bInstabilities cause a 10s machine lockout'));
+            text.add(Text.translate('kubejs.script.client.scripts.item.recycler.0016'));
+            text.add(Text.translate('kubejs.script.client.scripts.item.recycler.0017'));
+            text.add(Text.translate('kubejs.script.client.scripts.item.recycler.0018'));
+            text.add(Text.translate('kubejs.script.client.scripts.item.recycler.0019'));
+            text.add(Text.translate('kubejs.script.client.scripts.item.recycler.0020'));
         }
     });
 });

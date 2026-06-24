@@ -168,7 +168,7 @@ ItemEvents.rightClicked(event => {
         // Check player is holding matching key in off-hand
         let offhand = player.offHandItem;
         if (String(offhand.id) !== tier.key) {
-            player.tell(Text.of(`§cYou need a ${tier.color}${tier.label} Key §cin your off-hand to open this.`));
+            player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.lootboxes.0001", tier.color, tier.label));
             return;
         }
 
@@ -186,8 +186,8 @@ ItemEvents.rightClicked(event => {
         }
 
         // Announce
-        player.tell(Text.of(`${tier.color}✦ §l${tier.label} LOOTBOX§r ${tier.color}opened!`).bold());
-        results.forEach(r => player.tell(Text.of(`  §8» ${r}`)));
+        player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.lootboxes.0002", tier.color, tier.label, tier.color).bold());
+        results.forEach(r => player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.lootboxes.0003", r)));
         level.playSound(null, player.blockX, player.blockY, player.blockZ,
             'minecraft:entity.player.levelup', 'players', 1.0, 1.0);
         level.playSound(null, player.blockX, player.blockY, player.blockZ,

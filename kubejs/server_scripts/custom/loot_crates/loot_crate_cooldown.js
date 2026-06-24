@@ -22,7 +22,7 @@ global.setCrateCooldown = (player, server) => {
     server.scheduleInTicks(100, (callback) => {
         if (player.isAlive()) {
             // Tell the player they are ready
-            player.displayClientMessage(Text.of("§a✔ Crate Energy Stabilized").bold(), true);
+            player.displayClientMessage(Text.translate("kubejs.script.server.scripts.custom.loot.crates.loot.crate.cooldown.0001").bold(), true);
             
             // Play a subtle "recharge" sound (Experience Orbs/Chime)
             player.playSound('minecraft:block.amethyst_block.chime', 0.5, 1.5);
