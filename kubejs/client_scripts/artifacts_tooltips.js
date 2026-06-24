@@ -248,14 +248,14 @@ ItemEvents.tooltip(event => {
     tooltipData.forEach(item => {
         event.addAdvanced(item.id, (stack, advanced, text) => {
             // Line 0 is the Item Name. Line 1 is our Italicized Lore.
-            text.add(1, Text.of(item.lore).italic().gray());
+            text.add(1, Text.translate(item.lore).italic().gray());
 
             if (!event.shift) {
                 text.add(2, Text.translate("kubejs.script.client.scripts.artifacts.tooltips.0120").yellow());
             } else {
                 item.mechanics.forEach((m, index) => {
                     // Start adding from line 3 onwards
-                    text.add(2 + index, Text.of(m).white());
+                    text.add(2 + index, Text.translate(m).white());
                 });
             }
         });
