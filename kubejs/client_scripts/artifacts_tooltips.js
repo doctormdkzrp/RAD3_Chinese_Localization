@@ -270,7 +270,7 @@ ItemEvents.tooltip(event => {
 
     dice.forEach(die => {
         event.addAdvanced(die.id, (item, advanced, text) => {
-            text.add(1, Text.gray(die.lore).italic())
+            text.add(1, Text.translate(die.lore).gray().italic())
             if (!event.shift) {
                 text.add(2, Text.white('Hold [Shift] for mechanics.'))
             } else {
