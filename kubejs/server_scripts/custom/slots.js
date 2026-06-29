@@ -376,9 +376,9 @@ function recordWin(player, server, type) {
 
 function getDimName(dimId) {
     const names = {
-        "minecraft:overworld":  "kubejs.script.server.scripts.custom.slots.0012",
-        "minecraft:the_nether": "kubejs.script.server.scripts.custom.slots.0013",
-        "minecraft:the_end":    "kubejs.script.server.scripts.custom.slots.0014",
+        "minecraft:overworld":  "kubejs.script.server.scripts.custom.slots.0004",
+        "minecraft:the_nether": "kubejs.script.server.scripts.custom.slots.0005",
+        "minecraft:the_end":    "kubejs.script.server.scripts.custom.slots.0006",
     };
     return names[dimId] || dimId.split(":").pop().replace(/_/g, " ");
 }

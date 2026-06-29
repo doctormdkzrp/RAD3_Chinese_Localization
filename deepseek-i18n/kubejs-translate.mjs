@@ -438,6 +438,25 @@ function extractFromFile(filePath, inputDir) {
         return;
       }
 
+      // Handle .displayName("text") and .tooltip("text") on chained calls (e.g., event.create chains)
+      if (
+        pathNode.node.callee.type === "MemberExpression" &&
+        !pathNode.node.callee.computed &&
+        pathNode.node.callee.property.type === "Identifier"
+      ) {
+        const methodName = pathNode.node.callee.property.name;
+        if (methodName === "displayName" || methodName === "tooltip") {
+          const arg = pathNode.node.arguments[0];
+          if (getStaticStringNodeValue(arg) != null) {
+            const entry = pushEntry(arg, methodName);
+            if (entry) entry.isEventCreateMethod = true;
+          } else if (arg) {
+            recordSkipped(arg, methodName, `unsupported ${methodName} argument`);
+          }
+          return;
+        }
+      }
+
       if (callee === "event.addItem") {
         const arg = pathNode.node.arguments[1];
         if (getStaticStringNodeValue(arg) != null) {
@@ -958,14 +977,16 @@ function applyKeyRewritesToSource(source, fileEntries, fileRewrites) {
 
   for (const entry of fileEntries) {
     if (entry.skipLiteralRewrite) continue;
-    const keyValue = quoteJsString(entry.key, entry.quote || '"');
+    const value = entry.isEventCreateMethod
+      ? `Text.translate(${quoteJsString(entry.key, entry.quote || '"')})`
+      : quoteJsString(entry.key, entry.quote || '"');
     patches.push({
       start: entry.start,
       end: entry.end,
       expected: entry.raw,
-      replaceWith: keyValue,
+      replaceWith: value,
       id: entry.id,
-      kind: "entry.key",
+      kind: entry.isEventCreateMethod ? "entry.key.textTranslate" : "entry.key",
     });
   }
 

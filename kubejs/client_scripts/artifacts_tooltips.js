@@ -71,176 +71,176 @@ ItemEvents.tooltip(event => {
 		const tooltipData = [
         {
             id: 'kubejs:rusty_key',
-            lore: 'kubejs.script.client.scripts.artifacts.tooltips.0041',
+            lore: 'kubejs.script.client.scripts.artifacts.tooltips.0004',
             mechanics: [
-                'kubejs.script.client.scripts.artifacts.tooltips.0042',
-                'kubejs.script.client.scripts.artifacts.tooltips.0043'
+                'kubejs.script.client.scripts.artifacts.tooltips.0005',
+                'kubejs.script.client.scripts.artifacts.tooltips.0006'
             ]
         },
         {
             id: 'kubejs:unstable_battery',
-            lore: 'kubejs.script.client.scripts.artifacts.tooltips.0044',
+            lore: 'kubejs.script.client.scripts.artifacts.tooltips.0007',
             mechanics: [
-                'kubejs.script.client.scripts.artifacts.tooltips.0045',
-                'kubejs.script.client.scripts.artifacts.tooltips.0046',
-                'kubejs.script.client.scripts.artifacts.tooltips.0047'
+                'kubejs.script.client.scripts.artifacts.tooltips.0008',
+                'kubejs.script.client.scripts.artifacts.tooltips.0009',
+                'kubejs.script.client.scripts.artifacts.tooltips.0010'
             ]
         },
         {
             id: 'kubejs:emergency_flare',
-            lore: 'kubejs.script.client.scripts.artifacts.tooltips.0048',
+            lore: 'kubejs.script.client.scripts.artifacts.tooltips.0011',
             mechanics: [
-                'kubejs.script.client.scripts.artifacts.tooltips.0049',
-                'kubejs.script.client.scripts.artifacts.tooltips.0050',
-                'kubejs.script.client.scripts.artifacts.tooltips.0051'
+                'kubejs.script.client.scripts.artifacts.tooltips.0012',
+                'kubejs.script.client.scripts.artifacts.tooltips.0013',
+                'kubejs.script.client.scripts.artifacts.tooltips.0014'
             ]
         },
         {
             id: 'kubejs:bee_jar',
-            lore: 'kubejs.script.client.scripts.artifacts.tooltips.0052',
+            lore: 'kubejs.script.client.scripts.artifacts.tooltips.0015',
             mechanics: [
-                'kubejs.script.client.scripts.artifacts.tooltips.0053',
-                'kubejs.script.client.scripts.artifacts.tooltips.0054',
-                'kubejs.script.client.scripts.artifacts.tooltips.0055'
+                'kubejs.script.client.scripts.artifacts.tooltips.0016',
+                'kubejs.script.client.scripts.artifacts.tooltips.0017',
+                'kubejs.script.client.scripts.artifacts.tooltips.0018'
             ]
         },
         {
             id: 'kubejs:data_slate',
-            lore: 'kubejs.script.client.scripts.artifacts.tooltips.0056',
+            lore: 'kubejs.script.client.scripts.artifacts.tooltips.0019',
             mechanics: [
-                'kubejs.script.client.scripts.artifacts.tooltips.0057',
+                'kubejs.script.client.scripts.artifacts.tooltips.0020',
+                'kubejs.script.client.scripts.artifacts.tooltips.0021',
+                'kubejs.script.client.scripts.artifacts.tooltips.0022'
+            ]
+        },
+		{
+            id: 'kubejs:sentry_remote',
+            lore: 'kubejs.script.client.scripts.artifacts.tooltips.0023',
+            mechanics: [
+                'kubejs.script.client.scripts.artifacts.tooltips.0024',
+                'kubejs.script.client.scripts.artifacts.tooltips.0025',
+                'kubejs.script.client.scripts.artifacts.tooltips.0026'
+            ]
+        },
+        {
+            id: 'kubejs:bioscan_syringe',
+            lore: 'kubejs.script.client.scripts.artifacts.tooltips.0027',
+            mechanics: [
+                'kubejs.script.client.scripts.artifacts.tooltips.0028',
+                'kubejs.script.client.scripts.artifacts.tooltips.0029',
+                'kubejs.script.client.scripts.artifacts.tooltips.0030'
+            ]
+        },
+        {
+            id: 'kubejs:magnetic_grapple',
+            lore: 'kubejs.script.client.scripts.artifacts.tooltips.0031',
+            mechanics: [
+                'kubejs.script.client.scripts.artifacts.tooltips.0032',
+                'kubejs.script.client.scripts.artifacts.tooltips.0033',
+                'kubejs.script.client.scripts.artifacts.tooltips.0034'
+            ]
+        },
+        {
+            id: 'kubejs:thermal_paste',
+            lore: 'kubejs.script.client.scripts.artifacts.tooltips.0035',
+            mechanics: [
+                'kubejs.script.client.scripts.artifacts.tooltips.0036',
+                'kubejs.script.client.scripts.artifacts.tooltips.0037',
+                'kubejs.script.client.scripts.artifacts.tooltips.0038'
+            ]
+        },
+        {
+            id: 'kubejs:echo_locator',
+            lore: 'kubejs.script.client.scripts.artifacts.tooltips.0039',
+            mechanics: [
+                'kubejs.script.client.scripts.artifacts.tooltips.0040',
+                'kubejs.script.client.scripts.artifacts.tooltips.0041'
+            ]
+        },
+        {
+            id: 'kubejs:kinetic_dampener',
+            lore: 'kubejs.script.client.scripts.artifacts.tooltips.0042',
+            mechanics: [
+                'kubejs.script.client.scripts.artifacts.tooltips.0043',
+                'kubejs.script.client.scripts.artifacts.tooltips.0044',
+                'kubejs.script.client.scripts.artifacts.tooltips.0045'
+            ]
+        },
+        {
+            id: 'kubejs:scavenger_magnet',
+            lore: 'kubejs.script.client.scripts.artifacts.tooltips.0046',
+            mechanics: [
+                'kubejs.script.client.scripts.artifacts.tooltips.0047',
+                'kubejs.script.client.scripts.artifacts.tooltips.0048',
+                'kubejs.script.client.scripts.artifacts.tooltips.0049'
+            ]
+        },
+        {
+            id: 'kubejs:translocation_coil',
+            lore: "kubejs.script.client.scripts.artifacts.tooltips.0050",
+            mechanics: [
+                'kubejs.script.client.scripts.artifacts.tooltips.0051',
+                'kubejs.script.client.scripts.artifacts.tooltips.0052',
+                'kubejs.script.client.scripts.artifacts.tooltips.0053'
+            ]
+        },
+		{
+            id: 'kubejs:berserk_draught',
+            lore: "kubejs.script.client.scripts.artifacts.tooltips.0054",
+            mechanics: [
+                'kubejs.script.client.scripts.artifacts.tooltips.0055',
+                'kubejs.script.client.scripts.artifacts.tooltips.0056'
+            ]
+        },
+		{
+            id: 'kubejs:bottled_ice',
+            lore: "kubejs.script.client.scripts.artifacts.tooltips.0057",
+            mechanics: [
                 'kubejs.script.client.scripts.artifacts.tooltips.0058',
                 'kubejs.script.client.scripts.artifacts.tooltips.0059'
             ]
         },
 		{
-            id: 'kubejs:sentry_remote',
-            lore: 'kubejs.script.client.scripts.artifacts.tooltips.0060',
+            id: 'kubejs:dungeon_recall',
+            lore: "kubejs.script.client.scripts.artifacts.tooltips.0060",
             mechanics: [
                 'kubejs.script.client.scripts.artifacts.tooltips.0061',
                 'kubejs.script.client.scripts.artifacts.tooltips.0062',
                 'kubejs.script.client.scripts.artifacts.tooltips.0063'
             ]
         },
-        {
-            id: 'kubejs:bioscan_syringe',
-            lore: 'kubejs.script.client.scripts.artifacts.tooltips.0064',
+		{
+            id: 'kubejs:ice_shard',
+            lore: "kubejs.script.client.scripts.artifacts.tooltips.0064",
             mechanics: [
                 'kubejs.script.client.scripts.artifacts.tooltips.0065',
                 'kubejs.script.client.scripts.artifacts.tooltips.0066',
-                'kubejs.script.client.scripts.artifacts.tooltips.0067'
+                'kubejs.script.client.scripts.artifacts.tooltips.0067',
+                'kubejs.script.client.scripts.artifacts.tooltips.0068',
+                'kubejs.script.client.scripts.artifacts.tooltips.0069'
             ]
         },
-        {
-            id: 'kubejs:magnetic_grapple',
-            lore: 'kubejs.script.client.scripts.artifacts.tooltips.0068',
+		{
+            id: 'kubejs:kill_multiplier',
+            lore: "kubejs.script.client.scripts.artifacts.tooltips.0070",
             mechanics: [
-                'kubejs.script.client.scripts.artifacts.tooltips.0069',
-                'kubejs.script.client.scripts.artifacts.tooltips.0070',
-                'kubejs.script.client.scripts.artifacts.tooltips.0071'
-            ]
-        },
-        {
-            id: 'kubejs:thermal_paste',
-            lore: 'kubejs.script.client.scripts.artifacts.tooltips.0072',
-            mechanics: [
+                'kubejs.script.client.scripts.artifacts.tooltips.0071',
+                'kubejs.script.client.scripts.artifacts.tooltips.0072',
                 'kubejs.script.client.scripts.artifacts.tooltips.0073',
                 'kubejs.script.client.scripts.artifacts.tooltips.0074',
                 'kubejs.script.client.scripts.artifacts.tooltips.0075'
             ]
         },
-        {
-            id: 'kubejs:echo_locator',
-            lore: 'kubejs.script.client.scripts.artifacts.tooltips.0076',
-            mechanics: [
-                'kubejs.script.client.scripts.artifacts.tooltips.0077',
-                'kubejs.script.client.scripts.artifacts.tooltips.0078'
-            ]
-        },
-        {
-            id: 'kubejs:kinetic_dampener',
-            lore: 'kubejs.script.client.scripts.artifacts.tooltips.0079',
-            mechanics: [
-                'kubejs.script.client.scripts.artifacts.tooltips.0080',
-                'kubejs.script.client.scripts.artifacts.tooltips.0081',
-                'kubejs.script.client.scripts.artifacts.tooltips.0082'
-            ]
-        },
-        {
-            id: 'kubejs:scavenger_magnet',
-            lore: 'kubejs.script.client.scripts.artifacts.tooltips.0083',
-            mechanics: [
-                'kubejs.script.client.scripts.artifacts.tooltips.0084',
-                'kubejs.script.client.scripts.artifacts.tooltips.0085',
-                'kubejs.script.client.scripts.artifacts.tooltips.0086'
-            ]
-        },
-        {
-            id: 'kubejs:translocation_coil',
-            lore: "kubejs.script.client.scripts.artifacts.tooltips.0087",
-            mechanics: [
-                'kubejs.script.client.scripts.artifacts.tooltips.0088',
-                'kubejs.script.client.scripts.artifacts.tooltips.0089',
-                'kubejs.script.client.scripts.artifacts.tooltips.0090'
-            ]
-        },
-		{
-            id: 'kubejs:berserk_draught',
-            lore: "kubejs.script.client.scripts.artifacts.tooltips.0091",
-            mechanics: [
-                'kubejs.script.client.scripts.artifacts.tooltips.0092',
-                'kubejs.script.client.scripts.artifacts.tooltips.0093'
-            ]
-        },
-		{
-            id: 'kubejs:bottled_ice',
-            lore: "kubejs.script.client.scripts.artifacts.tooltips.0094",
-            mechanics: [
-                'kubejs.script.client.scripts.artifacts.tooltips.0095',
-                'kubejs.script.client.scripts.artifacts.tooltips.0096'
-            ]
-        },
-		{
-            id: 'kubejs:dungeon_recall',
-            lore: "kubejs.script.client.scripts.artifacts.tooltips.0097",
-            mechanics: [
-                'kubejs.script.client.scripts.artifacts.tooltips.0098',
-                'kubejs.script.client.scripts.artifacts.tooltips.0099',
-                'kubejs.script.client.scripts.artifacts.tooltips.0100'
-            ]
-        },
-		{
-            id: 'kubejs:ice_shard',
-            lore: "kubejs.script.client.scripts.artifacts.tooltips.0101",
-            mechanics: [
-                'kubejs.script.client.scripts.artifacts.tooltips.0102',
-                'kubejs.script.client.scripts.artifacts.tooltips.0103',
-                'kubejs.script.client.scripts.artifacts.tooltips.0104',
-                'kubejs.script.client.scripts.artifacts.tooltips.0105',
-                'kubejs.script.client.scripts.artifacts.tooltips.0106'
-            ]
-        },
-		{
-            id: 'kubejs:kill_multiplier',
-            lore: "kubejs.script.client.scripts.artifacts.tooltips.0107",
-            mechanics: [
-                'kubejs.script.client.scripts.artifacts.tooltips.0108',
-                'kubejs.script.client.scripts.artifacts.tooltips.0109',
-                'kubejs.script.client.scripts.artifacts.tooltips.0110',
-                'kubejs.script.client.scripts.artifacts.tooltips.0111',
-                'kubejs.script.client.scripts.artifacts.tooltips.0112'
-            ]
-        },
 		{
 			id: 'kubejs:void_core',
-			lore: "kubejs.script.client.scripts.artifacts.tooltips.0113",
+			lore: "kubejs.script.client.scripts.artifacts.tooltips.0076",
 			mechanics: [
-				'kubejs.script.client.scripts.artifacts.tooltips.0114',
-				'kubejs.script.client.scripts.artifacts.tooltips.0115',
-				'kubejs.script.client.scripts.artifacts.tooltips.0116',
-				'kubejs.script.client.scripts.artifacts.tooltips.0117',
-				'kubejs.script.client.scripts.artifacts.tooltips.0118',
-				'kubejs.script.client.scripts.artifacts.tooltips.0119'
+				'kubejs.script.client.scripts.artifacts.tooltips.0077',
+				'kubejs.script.client.scripts.artifacts.tooltips.0078',
+				'kubejs.script.client.scripts.artifacts.tooltips.0079',
+				'kubejs.script.client.scripts.artifacts.tooltips.0080',
+				'kubejs.script.client.scripts.artifacts.tooltips.0081',
+				'kubejs.script.client.scripts.artifacts.tooltips.0082'
 			]
 		}
     ];
@@ -262,10 +262,10 @@ ItemEvents.tooltip(event => {
     });
 	
 	const dice = [
-        { id: 'kubejs:d6', lore: 'kubejs.script.client.scripts.artifacts.tooltips.0121', faces: 6 },
-        { id: 'kubejs:d10', lore: 'kubejs.script.client.scripts.artifacts.tooltips.0122', faces: 10 },
-        { id: 'kubejs:d12', lore: 'kubejs.script.client.scripts.artifacts.tooltips.0123', faces: 12 },
-        { id: 'kubejs:d20', lore: 'kubejs.script.client.scripts.artifacts.tooltips.0124', faces: 20 }
+        { id: 'kubejs:d6', lore: 'kubejs.script.client.scripts.artifacts.tooltips.0083', faces: 6 },
+        { id: 'kubejs:d10', lore: 'kubejs.script.client.scripts.artifacts.tooltips.0084', faces: 10 },
+        { id: 'kubejs:d12', lore: 'kubejs.script.client.scripts.artifacts.tooltips.0085', faces: 12 },
+        { id: 'kubejs:d20', lore: 'kubejs.script.client.scripts.artifacts.tooltips.0086', faces: 20 }
     ]
 
     dice.forEach(die => {

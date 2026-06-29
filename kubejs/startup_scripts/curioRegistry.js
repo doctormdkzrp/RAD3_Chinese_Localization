@@ -85,7 +85,7 @@ StartupEvents.registry('item', event => {
 	    .maxStackSize(1)
 		.tag('curios:belt')
 		.tag('rad3:artifacts')
-		.displayName('My Custom Curio').color('red')
+		.displayName(Text.translate('kubejs.script.startup.scripts.curioregistry.0001')).color('red')
 		.rarity('Uncommon')
         .texture('kubejs:item/magnifier')
         .attachCuriosCapability(
@@ -102,7 +102,7 @@ StartupEvents.registry('item', event => {
 	    .maxStackSize(1)
 		.tag('curios:ring')
 		.tag('rad3:artifacts')
-		.displayName('Ring of Rebirth')
+		.displayName(Text.translate('kubejs.script.startup.scripts.curioregistry.0002'))
 		.rarity('Rare')
         .texture('kubejs:item/roguelite_ring')
         .attachCuriosCapability(

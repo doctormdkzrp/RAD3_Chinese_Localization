@@ -48,21 +48,21 @@ MoreJSEvents.villagerTrades(event => {
 	//We also can use TradeItem if we want to have a random range for the costs.
     //This will randomly pick the cost between 24 and 48
 
-    const trade_catacombs = VillagerUtils.createStructureMapTrade(Item.of("kubejs:map_fragment", 5), "betterarcheology:catacombs").displayName("Nearest Catacombs")
+    const trade_catacombs = VillagerUtils.createStructureMapTrade(Item.of("kubejs:map_fragment", 5), "betterarcheology:catacombs").displayName(Text.translate("kubejs.script.server.scripts.trades.0001"))
     event.addTrade("minecraft:cartographer", 2, trade_catacombs)
 		 .transform((offer, entity, random) => {
             offer.maxUses = 2
 			offer.villagerExperience = 25
         })
 	
-	const trade_archeologist_camp = VillagerUtils.createStructureMapTrade(Item.of("kubejs:map_fragment", 5), "betterarcheology:archeologist_camp_grassy").displayName("Nearest Archeologist Camp")
+	const trade_archeologist_camp = VillagerUtils.createStructureMapTrade(Item.of("kubejs:map_fragment", 5), "betterarcheology:archeologist_camp_grassy").displayName(Text.translate("kubejs.script.server.scripts.trades.0002"))
     event.addTrade("minecraft:cartographer", 2, trade_archeologist_camp)
 		 .transform((offer, entity, random) => {
             offer.maxUses = 2
 			offer.villagerExperience = 25
         })
 	
-	const trade_small_dungeon = VillagerUtils.createStructureMapTrade(Item.of("kubejs:map_fragment", 3), "betterdungeons:small_dungeon").displayName("Nearest Small Dungeon")
+	const trade_small_dungeon = VillagerUtils.createStructureMapTrade(Item.of("kubejs:map_fragment", 3), "betterdungeons:small_dungeon").displayName(Text.translate("kubejs.script.server.scripts.trades.0003"))
     event.addTrade("minecraft:cartographer", 2, trade_small_dungeon)
 		 .transform((offer, entity, random) => {
             offer.maxUses = 5
@@ -80,7 +80,7 @@ MoreJSEvents.villagerTrades(event => {
 	//When creating a map trade we can further modify it. You can find possible map markers here
 	
 	const trade_desert = VillagerUtils.createBiomeMapTrade("kubejs:map_fragment", "minecraft:desert")
-        .displayName("Desert")
+        .displayName(Text.translate("kubejs.script.server.scripts.trades.0004"))
         .marker("banner_yellow")
         .noPreview()
         .scale(4)
@@ -92,21 +92,21 @@ MoreJSEvents.villagerTrades(event => {
 					
 
     const trade_ati_underground = VillagerUtils.createBiomeMapTrade(Item.of("kubejs:map_fragment", 7), "#ati_underground")
-        .displayName("Nearest Underground Point of Interest")
+        .displayName(Text.translate("kubejs.script.server.scripts.trades.0005"))
         .marker("banner_blue")
         .noPreview()
         .scale(4)
     event.addTrade("minecraft:cartographer", 2, trade_ati_underground)
 		
     const trade_ati_small = VillagerUtils.createBiomeMapTrade(Item.of("kubejs:map_fragment", 5), "#ati_small")
-        .displayName("Nearest Point of Interest")
+        .displayName(Text.translate("kubejs.script.server.scripts.trades.0006"))
         .marker("banner_blue")
         .noPreview()
         .scale(4)
     event.addTrade("minecraft:cartographer", 2, trade_ati_small)
 		
     const trade_town = VillagerUtils.createBiomeMapTrade(Item.of("kubejs:map_fragment", 8), "#towns_and_towers:town")
-        .displayName("Nearest Town")
+        .displayName(Text.translate("kubejs.script.server.scripts.trades.0007"))
         .marker("banner_brown")
         .noPreview()
         .scale(4)
@@ -117,14 +117,14 @@ MoreJSEvents.villagerTrades(event => {
 /////////////////////
 		
     const trade_ati_medium = VillagerUtils.createBiomeMapTrade(Item.of("kubejs:map_fragment", 5), "#ati_medium")
-        .displayName("Nearest Point of Interest")
+        .displayName(Text.translate("kubejs.script.server.scripts.trades.0008"))
         .marker("banner_cyan")
         .noPreview()
         .scale(4)
     event.addTrade("minecraft:cartographer", 3, trade_ati_medium)
 		
     const trade_desert_pyramid = VillagerUtils.createBiomeMapTrade("kubejs:map_scroll_structure", "#minecraft:desert_pyramid")
-        .displayName("Desert Pyramid")
+        .displayName(Text.translate("kubejs.script.server.scripts.trades.0009"))
         .marker("banner_orange")
         .noPreview()
         .scale(4)
@@ -135,7 +135,7 @@ MoreJSEvents.villagerTrades(event => {
         })
 			
 	const trade_ancient_city = VillagerUtils.createBiomeMapTrade("kubejs:map_scroll_structure", "#minecraft:ancient_city")
-        .displayName("Nearest Ancinet City")
+        .displayName(Text.translate("kubejs.script.server.scripts.trades.0010"))
         .marker("banner_black")
         .noPreview()
         .scale(4)
@@ -146,7 +146,7 @@ MoreJSEvents.villagerTrades(event => {
         })
 		
     const trade_village = VillagerUtils.createBiomeMapTrade(Item.of("kubejs:map_fragment", 5), "#minecraft:village")
-        .displayName("Nearest Village")
+        .displayName(Text.translate("kubejs.script.server.scripts.trades.0011"))
         .marker("banner_blue")
         .noPreview()
         .scale(4)
@@ -161,7 +161,7 @@ MoreJSEvents.villagerTrades(event => {
         })
 			
 	const trade_jungle = VillagerUtils.createBiomeMapTrade(Item.of("kubejs:map_fragment", 5), "minecraft:jungle")
-        .displayName("Jungle")
+        .displayName(Text.translate("kubejs.script.server.scripts.trades.0012"))
         .marker("banner_green")
         .noPreview()
         .scale(4)
@@ -172,7 +172,7 @@ MoreJSEvents.villagerTrades(event => {
         })
 			
 	const trade_dark_forest = VillagerUtils.createBiomeMapTrade(Item.of("kubejs:map_fragment", 5), "minecraft:dark_forest")
-        .displayName("Dark Forest")
+        .displayName(Text.translate("kubejs.script.server.scripts.trades.0013"))
         .marker("banner_green")
         .noPreview()
         .scale(4)

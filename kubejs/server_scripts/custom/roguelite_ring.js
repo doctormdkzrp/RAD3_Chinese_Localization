@@ -186,25 +186,25 @@ EntityEvents.death(event => {
     if (!source.player) return;
     const p = source.player;
     const bossMap = {
-        'minecraft:wither': 'kubejs.script.server.scripts.custom.roguelite.ring.0012',
-        'cataclysm:ignis': 'kubejs.script.server.scripts.custom.roguelite.ring.0013',
-        'cataclysm:netherite_monstrosity': 'kubejs.script.server.scripts.custom.roguelite.ring.0014',
-        'cataclysm:ender_guardian': 'kubejs.script.server.scripts.custom.roguelite.ring.0015',
-        'cataclysm:the_harbinger': 'kubejs.script.server.scripts.custom.roguelite.ring.0016',
-        'cataclysm:the_leviathan': 'kubejs.script.server.scripts.custom.roguelite.ring.0017',
-        'cataclysm:ancient_remnant': 'kubejs.script.server.scripts.custom.roguelite.ring.0018',
-        'cataclysm:maledictus': 'kubejs.script.server.scripts.custom.roguelite.ring.0019',
-        'cataclysm:scylla': 'kubejs.script.server.scripts.custom.roguelite.ring.0020',
-        'bosses_of_mass_destruction:lich': 'kubejs.script.server.scripts.custom.roguelite.ring.0021',
-        'bosses_of_mass_destruction:obsidilith': 'kubejs.script.server.scripts.custom.roguelite.ring.0022',
-        'bosses_of_mass_destruction:gauntlet': 'kubejs.script.server.scripts.custom.roguelite.ring.0023',
-        'bosses_of_mass_destruction:void_blossom': 'kubejs.script.server.scripts.custom.roguelite.ring.0024',
-        'mowziesmobs:frostmaw': 'kubejs.script.server.scripts.custom.roguelite.ring.0025',
-		'mowziesmobs:ferrous_wroughtnaut': 'kubejs.script.server.scripts.custom.roguelite.ring.0026',
-		'mowziesmobs:umvuthi': 'kubejs.script.server.scripts.custom.roguelite.ring.0027',
-        'graveyard:lich': 'kubejs.script.server.scripts.custom.roguelite.ring.0028',
-        'ars_nouveau:wilden_boss': 'kubejs.script.server.scripts.custom.roguelite.ring.0029',
-		'undergarden:forgotten_guardian': 'kubejs.script.server.scripts.custom.roguelite.ring.0030'
+        'minecraft:wither': 'kubejs.script.server.scripts.custom.roguelite.ring.0009',
+        'cataclysm:ignis': 'kubejs.script.server.scripts.custom.roguelite.ring.0010',
+        'cataclysm:netherite_monstrosity': 'kubejs.script.server.scripts.custom.roguelite.ring.0011',
+        'cataclysm:ender_guardian': 'kubejs.script.server.scripts.custom.roguelite.ring.0012',
+        'cataclysm:the_harbinger': 'kubejs.script.server.scripts.custom.roguelite.ring.0013',
+        'cataclysm:the_leviathan': 'kubejs.script.server.scripts.custom.roguelite.ring.0014',
+        'cataclysm:ancient_remnant': 'kubejs.script.server.scripts.custom.roguelite.ring.0015',
+        'cataclysm:maledictus': 'kubejs.script.server.scripts.custom.roguelite.ring.0016',
+        'cataclysm:scylla': 'kubejs.script.server.scripts.custom.roguelite.ring.0017',
+        'bosses_of_mass_destruction:lich': 'kubejs.script.server.scripts.custom.roguelite.ring.0018',
+        'bosses_of_mass_destruction:obsidilith': 'kubejs.script.server.scripts.custom.roguelite.ring.0019',
+        'bosses_of_mass_destruction:gauntlet': 'kubejs.script.server.scripts.custom.roguelite.ring.0020',
+        'bosses_of_mass_destruction:void_blossom': 'kubejs.script.server.scripts.custom.roguelite.ring.0021',
+        'mowziesmobs:frostmaw': 'kubejs.script.server.scripts.custom.roguelite.ring.0022',
+		'mowziesmobs:ferrous_wroughtnaut': 'kubejs.script.server.scripts.custom.roguelite.ring.0023',
+		'mowziesmobs:umvuthi': 'kubejs.script.server.scripts.custom.roguelite.ring.0024',
+        'graveyard:lich': 'kubejs.script.server.scripts.custom.roguelite.ring.0025',
+        'ars_nouveau:wilden_boss': 'kubejs.script.server.scripts.custom.roguelite.ring.0026',
+		'undergarden:forgotten_guardian': 'kubejs.script.server.scripts.custom.roguelite.ring.0027'
     };
     let mId = bossMap[entity.type];
     if (mId && !p.stages.has(mId)) {
@@ -222,16 +222,16 @@ EntityEvents.death(event => {
 PlayerEvents.inventoryChanged(event => {
     const { player, item } = event;
     const itemMap = {
-        'minecraft:elytra': 'kubejs.script.server.scripts.custom.roguelite.ring.0033',
-        'l2hostility:chaos_ingot': 'kubejs.script.server.scripts.custom.roguelite.ring.0034',
-        'l2hostility:miracle_ingot': 'kubejs.script.server.scripts.custom.roguelite.ring.0035',
-        'l2complements:eternium_ingot': 'kubejs.script.server.scripts.custom.roguelite.ring.0036',
-        'bloodmagic:ingot_hellforged': 'kubejs.script.server.scripts.custom.roguelite.ring.0037',
-        'darkerdepths:forsaken_bronze_ingot': 'kubejs.script.server.scripts.custom.roguelite.ring.0038',
-        'deep_aether:stratus_ingot': 'kubejs.script.server.scripts.custom.roguelite.ring.0039',
-        'embers:dawnstone_ingot': 'kubejs.script.server.scripts.custom.roguelite.ring.0040',
-        'naturesaura:depth_ingot': 'kubejs.script.server.scripts.custom.roguelite.ring.0041',
-        'undergarden:forgotten_ingot': 'kubejs.script.server.scripts.custom.roguelite.ring.0042'
+        'minecraft:elytra': 'kubejs.script.server.scripts.custom.roguelite.ring.0028',
+        'l2hostility:chaos_ingot': 'kubejs.script.server.scripts.custom.roguelite.ring.0029',
+        'l2hostility:miracle_ingot': 'kubejs.script.server.scripts.custom.roguelite.ring.0030',
+        'l2complements:eternium_ingot': 'kubejs.script.server.scripts.custom.roguelite.ring.0031',
+        'bloodmagic:ingot_hellforged': 'kubejs.script.server.scripts.custom.roguelite.ring.0032',
+        'darkerdepths:forsaken_bronze_ingot': 'kubejs.script.server.scripts.custom.roguelite.ring.0033',
+        'deep_aether:stratus_ingot': 'kubejs.script.server.scripts.custom.roguelite.ring.0034',
+        'embers:dawnstone_ingot': 'kubejs.script.server.scripts.custom.roguelite.ring.0035',
+        'naturesaura:depth_ingot': 'kubejs.script.server.scripts.custom.roguelite.ring.0036',
+        'undergarden:forgotten_ingot': 'kubejs.script.server.scripts.custom.roguelite.ring.0037'
     };
     let mId = itemMap[item.id];
     if (mId && !player.stages.has(mId)) {
