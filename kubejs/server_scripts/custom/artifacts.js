@@ -15,7 +15,7 @@ ItemEvents.rightClicked(event => {
         });
 
         if (!consumed) {
-            player.setStatusMessage("§6Needs a Gold Block!");
+            player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.artifacts.0001"));
             return;
         }
 
@@ -25,15 +25,15 @@ ItemEvents.rightClicked(event => {
 
         server.scheduleInTicks(10, callback => {
             if (Math.random() < 0.01) {
-                player.setStatusMessage("§b§l!!! JACKPOT !!!");
+                player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.artifacts.0002"));
                 player.potionEffects.add('minecraft:luck', 600, 2);
                 player.playSound('minecraft:ui.toast.challenge_complete', 1.0, 1.0);
             } else if (Math.random() < 0.5) {
-                player.setStatusMessage("§6§lHEADS!");
+                player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.artifacts.0003"));
                 player.potionEffects.add('minecraft:luck', 300, 1);
                 level.spawnParticles('minecraft:wax_off', true, player.x, player.y + 1.2, player.z, 0.4, 0.4, 0.4, 15, 0.1);
             } else {
-                player.setStatusMessage("§0§lTAILS...");
+                player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.artifacts.0004"));
                 player.potionEffects.add('minecraft:unluck', 600, 1);
                 level.spawnParticles('minecraft:smoke', true, player.x, player.y + 1.2, player.z, 0.4, 0.4, 0.4, 15, 0.05);
             }
@@ -65,7 +65,7 @@ ItemEvents.rightClicked(event => {
     // --- 1. ORIGINAL LIVING BRANCH (Transmutation) ---
 	if (item.id == 'kubejs:living_branch') {
         if (!target || !target.block || player.cooldowns.isOnCooldown(item)) return;
-        if (!consumeFuel()) { player.setStatusMessage("§2Needs Bone Meal!"); return; }
+        if (!consumeFuel()) { player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.artifacts.0005")); return; }
 
         player.cooldowns.addCooldown(item, 5);
         let block = target.block;
@@ -88,7 +88,7 @@ ItemEvents.rightClicked(event => {
             if (nbt.Damage >= 64) {
                 item.count--;
                 player.playSound('minecraft:entity.item.break', 1.0, 1.0); 
-				player.setStatusMessage("§cThe branch has withered away.");
+				player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.artifacts.0006"));
             }
         }
     }
@@ -120,7 +120,7 @@ ItemEvents.rightClicked(event => {
             if (level.getBlock(nx, ny, nz).id == 'minecraft:air') {
                 if (!fuelConsumed) {
                     if (!consumeFuel()) { 
-                        player.setStatusMessage("§2Needs Bone Meal!"); 
+                        player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.artifacts.0007")); 
                         break; 
                     }
                     fuelConsumed = true;
@@ -131,7 +131,7 @@ ItemEvents.rightClicked(event => {
                 level.spawnParticles('minecraft:happy_villager', true, nx + 0.5, ny + 0.5, nz + 0.5, 0.2, 0.2, 0.2, 3, 0.05);
                 blocksPlaced++;
             } else {
-                if (i == 1) player.setStatusMessage("§cPath blocked!");
+                if (i == 1) player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.artifacts.0008"));
                 break; 
             }
         }
@@ -142,7 +142,7 @@ ItemEvents.rightClicked(event => {
             if (item.damageValue >= item.maxDamage) {
                 item.count--;
                 player.playSound('minecraft:entity.item.break', 1.0, 1.0);
-				player.setStatusMessage("§cThe Bridging Branch has shattered!");
+				player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.artifacts.0009"));
             }
         }
     }
@@ -150,7 +150,7 @@ ItemEvents.rightClicked(event => {
 // --- 3. BUZZING BRANCH  ---
     if (item.id == 'kubejs:buzzing_living_branch') {
         if (player.cooldowns.isOnCooldown(item)) return;
-        if (!consumeFuel()) { player.setStatusMessage("§6Needs Bone Meal!"); return; }
+        if (!consumeFuel()) { player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.artifacts.0010")); return; }
 
         player.cooldowns.addCooldown(item, 200);
         
@@ -170,7 +170,7 @@ ItemEvents.rightClicked(event => {
             bee.spawn();
         }
         
-		player.setStatusMessage("§6The Swarm protects you for 1 minute!");
+		player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.artifacts.0011"));
         player.playSound('minecraft:block.beehive.exit', 1.0, 1.0);
         
         item.setDamageValue(item.getDamageValue() + 1);
@@ -178,7 +178,7 @@ ItemEvents.rightClicked(event => {
         if (item.getDamageValue() >= item.getMaxDamage()) {
             item.setCount(0);
             player.playSound('minecraft:entity.item.break', 1.0, 1.0);
-            player.setStatusMessage("§cThe Buzzing Branch has shattered!");
+            player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.artifacts.0012"));
         }
     }
 // end	

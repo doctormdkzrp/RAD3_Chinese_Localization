@@ -398,35 +398,74 @@ function extractFromFile(filePath, inputDir) {
     });
   }
 
+  function registerTextStyleTemplateRewrite(argNode, entry) {
+    if (!argNode || !entry) return;
+    if (argNode.type !== "TemplateLiteral" || !Array.isArray(argNode.expressions) || argNode.expressions.length === 0) return;
+    const exprSources = argNode.expressions
+      .map((expr) => source.slice(expr.start, expr.end).trim())
+      .filter((s) => s.length > 0);
+    const keyLiteral = quoteJsString(entry.key, entry.quote || '"');
+    const replaceWith = `Text.translate(${keyLiteral}${exprSources.length > 0 ? ", " + exprSources.join(", ") : ""})`;
+    rewrites.push({
+      file: relativeFile,
+      start: argNode.start,
+      end: argNode.end,
+      raw: source.slice(argNode.start, argNode.end),
+      replaceWith,
+      kind: "Text.style.template",
+    });
+  }
+
   traverse(ast, {
     CallExpression(pathNode) {
       const callee = getCalleeName(pathNode.node.callee);
-      if (callee === "Text.of") {
+
+      // Handle ALL Text.xxx('str') calls (except Text.translate which is already a key)
+      if (callee && callee.startsWith("Text.") && callee !== "Text.translate") {
         const arg = pathNode.node.arguments[0];
         if (!arg) return;
-        const staticValue = getStaticStringNodeValue(arg);
-        if (staticValue != null) {
-          const entry = pushEntry(arg, callee);
-          if (entry) registerTextTranslateRewrite(pathNode.node);
-        } else if (arg.type === "TemplateLiteral" && Array.isArray(arg.expressions) && arg.expressions.length > 0) {
-          const entry = pushTemplateEntry(arg, "Text.of.template");
-          if (entry) {
+
+        if (callee === "Text.of") {
+          // ── Text.of (keep existing behaviour: rewrite callee → Text.translate) ──
+          const staticValue = getStaticStringNodeValue(arg);
+          if (staticValue != null) {
+            const entry = pushEntry(arg, callee);
+            if (entry) registerTextTranslateRewrite(pathNode.node);
+          } else if (arg.type === "TemplateLiteral" && Array.isArray(arg.expressions) && arg.expressions.length > 0) {
+            const entry = pushTemplateEntry(arg, "Text.of.template");
+            if (entry) {
+              registerTextTranslateRewrite(pathNode.node);
+              registerTemplateArgRewrite(pathNode.node, arg, entry);
+            } else {
+              recordSkipped(arg, "Text.of.template", "template had no translatable text");
+            }
+          } else if (
+            arg.type === "LogicalExpression" &&
+            referencesAnyIdentifier(arg.left, keyObjectNames) &&
+            getStaticStringNodeValue(arg.right) != null
+          ) {
+            const entry = pushEntry(arg.right, "Text.of.fallback");
+            if (entry) registerTextTranslateRewrite(pathNode.node);
+          } else if (referencesAnyIdentifier(arg, keyObjectNames)) {
             registerTextTranslateRewrite(pathNode.node);
-            registerTemplateArgRewrite(pathNode.node, arg, entry);
           } else {
-            recordSkipped(arg, "Text.of.template", "template had no translatable text");
+            recordSkipped(arg, callee, "unsupported Text.of argument");
           }
-        } else if (
-          arg.type === "LogicalExpression" &&
-          referencesAnyIdentifier(arg.left, keyObjectNames) &&
-          getStaticStringNodeValue(arg.right) != null
-        ) {
-          const entry = pushEntry(arg.right, "Text.of.fallback");
-          if (entry) registerTextTranslateRewrite(pathNode.node);
-        } else if (referencesAnyIdentifier(arg, keyObjectNames)) {
-          registerTextTranslateRewrite(pathNode.node);
         } else {
-          recordSkipped(arg, callee, "unsupported Text.of argument");
+          // ── Text.darkRed / Text.gray / Text.gold / Text.aqua / Text.white … ──
+          const staticValue = getStaticStringNodeValue(arg);
+          if (staticValue != null) {
+            const entry = pushEntry(arg, callee);
+            if (entry) entry.wrapWithTextTranslate = true;
+          } else if (arg.type === "TemplateLiteral" && Array.isArray(arg.expressions) && arg.expressions.length > 0) {
+            const entry = pushTemplateEntry(arg, callee);
+            if (entry) {
+              entry.skipLiteralRewrite = true;
+              registerTextStyleTemplateRewrite(arg, entry);
+            }
+          } else {
+            recordSkipped(arg, callee, `unsupported ${callee} argument`);
+          }
         }
         return;
       }
@@ -454,6 +493,26 @@ function extractFromFile(filePath, inputDir) {
             recordSkipped(arg, methodName, `unsupported ${methodName} argument`);
           }
           return;
+        }
+
+        // Handle player.setStatusMessage("str") / player.tell("str")
+        if (methodName === "setStatusMessage" || methodName === "tell") {
+          const arg = pathNode.node.arguments[0];
+          if (!arg) return;
+          const staticValue = getStaticStringNodeValue(arg);
+          if (staticValue != null) {
+            const entry = pushEntry(arg, methodName);
+            if (entry) entry.wrapWithTextTranslate = true;
+            return;
+          }
+          if (arg.type === "TemplateLiteral" && Array.isArray(arg.expressions) && arg.expressions.length > 0) {
+            const entry = pushTemplateEntry(arg, methodName);
+            if (entry) {
+              entry.skipLiteralRewrite = true;
+              registerTextStyleTemplateRewrite(arg, entry);
+            }
+            return;
+          }
         }
       }
 
@@ -511,6 +570,17 @@ function extractFromFile(filePath, inputDir) {
         if (getStaticStringNodeValue(valueNode) != null) {
           const entry = pushEntry(valueNode, "const.object.value", { objectName, propertyKey });
           if (entry && objectName) keyObjectNames.add(objectName);
+        }
+      }
+    },
+    ReturnStatement(pathNode) {
+      const arg = pathNode.node.argument;
+      if (!arg || arg.type !== "ArrayExpression") return;
+      for (const element of arg.elements) {
+        if (!element) continue;
+        if (getStaticStringNodeValue(element) != null) {
+          const entry = pushEntry(element, "return.array");
+          if (entry) entry.wrapWithTextTranslate = true;
         }
       }
     },
@@ -977,7 +1047,8 @@ function applyKeyRewritesToSource(source, fileEntries, fileRewrites) {
 
   for (const entry of fileEntries) {
     if (entry.skipLiteralRewrite) continue;
-    const value = entry.isEventCreateMethod
+    const needsWrap = entry.isEventCreateMethod || entry.wrapWithTextTranslate;
+    const value = needsWrap
       ? `Text.translate(${quoteJsString(entry.key, entry.quote || '"')})`
       : quoteJsString(entry.key, entry.quote || '"');
     patches.push({
@@ -986,7 +1057,7 @@ function applyKeyRewritesToSource(source, fileEntries, fileRewrites) {
       expected: entry.raw,
       replaceWith: value,
       id: entry.id,
-      kind: entry.isEventCreateMethod ? "entry.key.textTranslate" : "entry.key",
+      kind: needsWrap ? "entry.key.textTranslate" : "entry.key",
     });
   }
 

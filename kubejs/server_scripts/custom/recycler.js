@@ -106,7 +106,7 @@ ItemEvents.rightClicked('kubejs:item_recycler', event => {
 
     let offhandItem = player.offHandItem
     if (offhandItem.empty) {
-        player.tell('§cNothing in offhand to recycle!')
+        player.tell(Text.translate('kubejs.script.server.scripts.custom.recycler.0001'))
         return
     }
 
@@ -189,26 +189,26 @@ ItemEvents.rightClicked('kubejs:item_recycler', event => {
     if (totalXPGained > 0) {
         player.giveExperiencePoints(totalXPGained)
         player.persistentData.totalRecycledXP += totalXPGained
-        player.setStatusMessage(Text.green(`+${totalXPGained} XP extracted from stack`))
+        player.setStatusMessage(Text.green(Text.translate("kubejs.script.server.scripts.custom.recycler.0002", totalXPGained)))
     }
 
     // Process Valuable jackpot rewards
     if (valuableRewardsGained.length > 0) {
         valuableRewardsGained.forEach(id => player.give(Item.of(id)))
-        player.tell(`§d§lJACKPOT! §fExtracted §e${valuableRewardsGained.length}x §fbonus material from the residue!`)
+        player.tell(Text.translate("kubejs.script.server.scripts.custom.recycler.0003", valuableRewardsGained.length))
         player.playSound('minecraft:ui.toast.challenge_complete', 0.5, 2.0)
     }
 
     // Process Uncommon bonus rewards
     if (uncommonRewardsGained.length > 0) {
         uncommonRewardsGained.forEach(id => player.give(Item.of(id)))
-        player.tell(`§6[+] §fRecovered §e${uncommonRewardsGained.length}x §fresidual material.`)
+        player.tell(Text.translate("kubejs.script.server.scripts.custom.recycler.0004", uncommonRewardsGained.length))
     }
 
     // --- 7. MACHINE JAM / COOLDOWN LOGIC ---
     if (jamCount > 0) {
         player.addItemCooldown('kubejs:item_recycler', RECYCLER_CONFIG.cooldownJam)
-        player.tell(`§4[!] The machine jammed §l${jamCount}§r§4 times! Clearing gears... (10s)`)
+        player.tell(Text.translate("kubejs.script.server.scripts.custom.recycler.0005", jamCount))
         player.playSound('minecraft:entity.zombie.break_wooden_door', 0.5, 0.5)
         player.playSound('minecraft:block.anvil.land', 0.5, 0.5)
     } else {
@@ -237,10 +237,10 @@ ItemEvents.rightClicked('kubejs:item_recycler', event => {
 
     thresholds.forEach(t => {
         if (countBefore < t.limit && countAfter >= t.limit) {
-            player.tell("§b---------------------------------")
-            player.tell(`§d§lCONGRATULATIONS! §fYou have reached the rank of ${t.name}§f!`)
-            player.tell("§7Your efficiency has improved and your jackpot potential is higher")
-            player.tell("§b---------------------------------")
+            player.tell(Text.translate("kubejs.script.server.scripts.custom.recycler.0006"))
+            player.tell(Text.translate("kubejs.script.server.scripts.custom.recycler.0007", t.name))
+            player.tell(Text.translate("kubejs.script.server.scripts.custom.recycler.0008"))
+            player.tell(Text.translate("kubejs.script.server.scripts.custom.recycler.0009"))
             player.playSound('minecraft:ui.toast.challenge_complete', 1.0, 1.0)
             player.playSound('minecraft:entity.player.levelup', 1.0, 0.5)
             level.spawnParticles('minecraft:totem_of_undying', true, player.x, player.y + 1, player.z, 1, 1, 1, 50, 0.1)

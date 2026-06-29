@@ -34,6 +34,6 @@ PlayerEvents.tick(event => {
 
     if (dimension == 'minecraft:the_end' && (currentPos.x > 250 || currentPos.x < -250 || currentPos.z > 250 || currentPos.z < -250) && !(server.persistentData.contains('dragonkilled'))) {
         player.teleportTo("minecraft:the_end", 0, 66, 0, 0, 0);
-        player.tell("§5§l§oThe lingering powers of the ender dragon tether you to the island, killing it or its shadow will release it's grasp.");
+        player.tell(Text.translate("kubejs.script.server.scripts.endlock.0001"));
     }
 });

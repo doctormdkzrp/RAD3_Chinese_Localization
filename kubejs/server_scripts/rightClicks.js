@@ -197,7 +197,7 @@ ItemEvents.rightClicked( event => {
     item.count--;
     
     // Play sound and show a quick message
-    player.setStatusMessage(`You found ${finalAmount}x ${lootItem.split(':')[1]}!`);
+    player.setStatusMessage(Text.translate("kubejs.script.server.scripts.rightclicks.0001", finalAmount, lootItem.split(':')[1]));
 	}
 
 })	
@@ -250,7 +250,7 @@ ItemEvents.rightClicked( event => {
     
     // Formats the message to be more readable (e.g., "iron_ore" becomes "iron ore")
     let itemName = lootItem.split(':')[1].replace('_', ' ');
-    player.setStatusMessage(`You found ${finalAmount}x ${itemName}!`);
+    player.setStatusMessage(Text.translate("kubejs.script.server.scripts.rightclicks.0002", finalAmount, itemName));
 	
 	item.count--;
 }	
@@ -301,7 +301,7 @@ ItemEvents.rightClicked(event => {
         player.give(lootStack);
 
 		let itemName = lootItem.split(':')[1].replace('_', ' ');
-		player.setStatusMessage(Text.red(`You found ${finalAmount}x ${itemName}!`));
+		player.setStatusMessage(Text.red(Text.translate("kubejs.script.server.scripts.rightclicks.0003", finalAmount, itemName)));
         
         player.swing();
         level.playSound(null, player.blockX, player.blockY, player.blockZ, 'minecraft:item.bundle.drop_contents', 'players', 1.0, 0.8);
@@ -369,7 +369,7 @@ const { player, item, level } = event;
         // Formats "minecraft:sculk_vein" to "sculk vein" for the message
         let displayID = lootItem.includes(':') ? lootItem.split(':')[1] : lootItem;
         let cleanName = displayID.replace(/_/g, ' ');
-        player.setStatusMessage(Text.red(`You found ${finalAmount}x ${cleanName}!`));
+        player.setStatusMessage(Text.red(Text.translate("kubejs.script.server.scripts.rightclicks.0004", finalAmount, cleanName)));
         
         // --- VISUALS ---
         player.swing();
@@ -466,7 +466,7 @@ ItemEvents.rightClicked(event => {
         let lootStack = dungeonGems[Math.floor(Math.random() * dungeonGems.length)];
         player.give(lootStack);
 
-        player.setStatusMessage(Text.aqua("A rare gem has been extracted."));
+        player.setStatusMessage(Text.aqua(Text.translate("kubejs.script.server.scripts.rightclicks.0005")));
         player.swing();
         level.playSound(null, player.blockX, player.blockY, player.blockZ, 'minecraft:item.bundle.drop_contents', 'players', 1.0, 1.2);
         level.spawnParticles('minecraft:enchanted_hit', true, player.x, player.y + 1, player.z, 0.5, 0.5, 0.5, 12, 0.1);
@@ -535,7 +535,7 @@ ItemEvents.rightClicked(event => {
 
         let lootStack = greaterGems[Math.floor(Math.random() * greaterGems.length)];
         player.give(lootStack);
-        player.setStatusMessage(Text.lightPurple("An elite gem has been extracted."));
+        player.setStatusMessage(Text.lightPurple(Text.translate("kubejs.script.server.scripts.rightclicks.0006")));
         player.swing();
         level.playSound(null, player.blockX, player.blockY, player.blockZ, 'minecraft:block.amethyst_block.break', 'players', 1.0, 0.8);
 

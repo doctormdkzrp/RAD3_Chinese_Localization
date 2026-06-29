@@ -14,7 +14,7 @@ function giveTieredLoot(player, server) {
         let pool = ['minecraft:netherite_ingot', 'minecraft:nether_star', 'minecraft:totem_of_undying'];
         item = pool[Utils.random.nextInt(0, pool.length)];
         // GLOBAL BROADCAST: Let everyone know a player found top-tier loot.
-        server.tell([Text.green(player.name), ' found ', Text.lightPurple('LEGENDARY LOOT'), '!']);
+        server.tell([Text.green(player.name), ' found ', Text.lightPurple(Text.translate('kubejs.script.server.scripts.custom.loot.crates.loot.crate.chaos.0001')), '!']);
 		for (let i = 0; i < 10; i++) {
             level.spawnParticles('minecraft:totem_of_undying', true, player.x, player.y + (i * 0.5), player.z, 0.2, 0.1, 0.2, 10, 0.1);
             level.spawnParticles('minecraft:enchanted_hit', true, player.x, player.y + (i * 0.5), player.z, 0.1, 0.1, 0.1, 5, 0.05);
@@ -34,7 +34,7 @@ function giveTieredLoot(player, server) {
 
     // Deliver the items and show a status message above the hotbar.
     player.give(Item.of(item, count));
-    player.setStatusMessage(`§a[${rarity}§a] Found ${count}x ${item.split(':')[1]}`);
+    player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.loot.crates.loot.crate.chaos.0002", rarity, count, item.split(':')[1]));
 }
 
 // ==========================================================================
@@ -69,7 +69,7 @@ ItemEvents.rightClicked(event => {
     player.persistentData.chaosKillsNeeded = 3;
     player.persistentData.chaosLoot = theme.loot; 
 
-    player.displayClientMessage(Text.darkRed(`CHAOS UNLEASHED: Slay the 3 ${theme.name} Guardians!`), true);
+    player.displayClientMessage(Text.darkRed(Text.translate("kubejs.script.server.scripts.custom.loot.crates.loot.crate.chaos.0003", theme.name)), true);
     
     for(let i=0; i<3; i++) {
         let m = level.createEntity(theme.mob);
@@ -114,11 +114,11 @@ EntityEvents.death(event => {
                 player.persistentData.totalCratesOpened++;
                 
                 // 4. Cleanup and Feedback
-                player.tell(Text.gold("§6Challenge Complete! All Guardians defeated."));
+                player.tell(Text.gold(Text.translate("kubejs.script.server.scripts.custom.loot.crates.loot.crate.chaos.0004")));
                 player.persistentData.activeChaosId = null;
                 level.playSound(null, player.blockX, player.blockY, player.blockZ, 'minecraft:ui.toast.challenge_complete', 'players', 1.0, 1.0);
             } else {
-                player.setStatusMessage(`§eGuardians remaining: ${player.persistentData.chaosKillsNeeded}`);
+                player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.loot.crates.loot.crate.chaos.0005", player.persistentData.chaosKillsNeeded));
             }
         }
     }

@@ -34,7 +34,7 @@ ServerEvents.commandRegistry(event => {
             .executes(ctx => {
                 let player = ctx.source.player;
                 player.persistentData.remove('astrolabe_busy');
-                player.tell("Astrolabe state has been reset.");
+                player.tell(Text.translate("kubejs.script.server.scripts.custom.ritual.mastery.commands.0001"));
                 return 1;
             })
     );

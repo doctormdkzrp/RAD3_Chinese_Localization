@@ -63,11 +63,11 @@ ItemEvents.rightClicked(event => {
         let slateChance = Math.random();
 
         if (slateChance < 0.3) {
-            player.setStatusMessage(Text.red("Decryption Failed: Data Corrupted"));
+            player.setStatusMessage(Text.red(Text.translate("kubejs.script.server.scripts.custom.interactable.items.0001")));
             level.playSound(null, player.blockX, player.blockY, player.blockZ, 'minecraft:block.iron_trapdoor.close', 'players', 1.0, 2.0);
         } else if (slateChance < 0.9) {
             player.giveExperiencePoints(50);
-            player.setStatusMessage(Text.aqua("Decryption Success: Experience Extracted"));
+            player.setStatusMessage(Text.aqua(Text.translate("kubejs.script.server.scripts.custom.interactable.items.0002")));
 			level.playSound(null, player.blockX, player.blockY, player.blockZ, 'minecraft:entity.experience_orb.pickup', 'players', 1.0, 1.0);
         } else {
             // Pick random message
@@ -80,7 +80,7 @@ ItemEvents.rightClicked(event => {
             
 			player.swing()
             player.give(customPaper);
-            player.setStatusMessage(Text.green("Decryption Success: Secure Coordinates Found"));
+            player.setStatusMessage(Text.green(Text.translate("kubejs.script.server.scripts.custom.interactable.items.0003")));
 			level.playSound(null, player.blockX, player.blockY, player.blockZ, 'minecraft:block.enchantment_table.use', 'players', 1.0, 1.0);
         }
     }
@@ -132,14 +132,14 @@ ItemEvents.rightClicked(event => {
                 if (newDamage >= item.maxDamage) {
                     item.count--; // Remove the item
 					level.playSound(null, player.blockX, player.blockY, player.blockZ, 'minecraft:entity.item.break', 'players', 1.0, 1.0);
-                    player.setStatusMessage(Text.red("Grapple cable snapped!"));
+                    player.setStatusMessage(Text.red(Text.translate("kubejs.script.server.scripts.custom.interactable.items.0004")));
                 } else {
                     item.damageValue = newDamage;
                 }
             }
             event.cancel();
         } else {
-            player.setStatusMessage(Text.red("Out of range! (Max 20 blocks)"));
+            player.setStatusMessage(Text.red(Text.translate("kubejs.script.server.scripts.custom.interactable.items.0005")));
         }
     }
 	
@@ -249,7 +249,7 @@ if (item.id == 'kubejs:echo_locator') {
             }
         } else {
 			level.playSound(null, player.blockX, player.blockY, player.blockZ, 'minecraft:block.note_block.didgeridoo', 'players', 1.0, 0.8);
-            player.setStatusMessage(Text.gray("Scanning... No signals found."));
+            player.setStatusMessage(Text.gray(Text.translate("kubejs.script.server.scripts.custom.interactable.items.0006")));
         }
         event.cancel();
     }
@@ -381,7 +381,7 @@ if (item.id == 'kubejs:echo_locator') {
 			}
 
         } else {
-            player.setStatusMessage(Text.red("No target locked or too far"));
+            player.setStatusMessage(Text.red(Text.translate("kubejs.script.server.scripts.custom.interactable.items.0007")));
         }
 		
 

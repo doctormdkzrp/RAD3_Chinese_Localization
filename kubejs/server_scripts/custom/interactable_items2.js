@@ -90,7 +90,7 @@ ItemEvents.rightClicked(event => {
         player.potionEffects.add('minecraft:strength', 400, 1);
         player.potionEffects.add('minecraft:hunger', 600, 1);
         
-        player.setStatusMessage(Text.aqua("Berserker's Draught: You feel a surge of primal power."));
+        player.setStatusMessage(Text.aqua(Text.translate("kubejs.script.server.scripts.custom.interactable.items2.0001")));
         player.swing();
         level.spawnParticles('minecraft:flame', true, player.x, player.y + 1, player.z, 0.3, 0.3, 0.3, 8, 0.05);
         level.playSound(null, player.blockX, player.blockY, player.blockZ, 'minecraft:entity.player.attack.knockback', 'players', 1.0, 0.5);
@@ -110,7 +110,7 @@ ItemEvents.rightClicked(event => {
             // Apply Slowness IV 
             targetEntity.potionEffects.add('minecraft:slowness', 40, 3);
             
-            player.setStatusMessage(Text.aqua("Bottled Ice: The creature is flash-frozen!"));
+            player.setStatusMessage(Text.aqua(Text.translate("kubejs.script.server.scripts.custom.interactable.items2.0002")));
             player.swing();
             
             // Visuals at the entity's position
@@ -135,7 +135,7 @@ ItemEvents.rightClicked(event => {
                 }
             }
             
-            player.setStatusMessage(Text.aqua("Bottled Ice: A massive frost surge spreads!"));
+            player.setStatusMessage(Text.aqua(Text.translate("kubejs.script.server.scripts.custom.interactable.items2.0003")));
             player.swing();
             
             level.spawnParticles('minecraft:snowflake', true, targetBlock.x, targetBlock.y + 0.5, targetBlock.z, 2.0, 0.2, 2.0, 45, 0.05);
@@ -164,7 +164,7 @@ ItemEvents.rightClicked(event => {
         player.potionEffects.add('minecraft:glowing', 600, 0, false, false);
 		player.potionEffects.add('minecraft:night_vision', 600, 0, false, false);
 
-        player.setStatusMessage(Text.aqua("Void Core: Reality begins to crumble around you..."));
+        player.setStatusMessage(Text.aqua(Text.translate("kubejs.script.server.scripts.custom.interactable.items2.0004")));
         player.swing();
         level.playSound(null, player.blockX, player.blockY, player.blockZ,
             'minecraft:entity.warden.heartbeat', 'players', 1.0, 0.5);
@@ -187,7 +187,7 @@ PlayerEvents.tick(event => {
     if (level.time >= data.getLong('void_core_expires')) {
         data.remove('void_core_active');
         data.remove('void_core_expires');
-        player.setStatusMessage(Text.gray("Void Core: Effect has faded."));
+        player.setStatusMessage(Text.gray(Text.translate("kubejs.script.server.scripts.custom.interactable.items2.0005")));
         return;
     }
 

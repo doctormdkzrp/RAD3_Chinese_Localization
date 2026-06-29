@@ -62,11 +62,11 @@ ServerEvents.commandRegistry(event => {
             let hasBalance = false;
             let totalNetWorth = 0;
 
-            player.tell("§b§l╔════════════╗");
-            player.tell("      §6§lVAULT ACCOUNT          ");
-            player.tell("§b§l╠════════════╣");
-            player.tell("  §6Status: §2Active"); 
-            player.tell("  §7Type: §fStandard Vault");
+            player.tell(Text.translate("kubejs.script.server.scripts.custom.vault.0027"));
+            player.tell(Text.translate("kubejs.script.server.scripts.custom.vault.0028"));
+            player.tell(Text.translate("kubejs.script.server.scripts.custom.vault.0029"));
+            player.tell(Text.translate("kubejs.script.server.scripts.custom.vault.0030")); 
+            player.tell(Text.translate("kubejs.script.server.scripts.custom.vault.0031"));
             player.tell(" "); 
 
             COIN_IDS.forEach(coinId => {
@@ -94,18 +94,18 @@ ServerEvents.commandRegistry(event => {
             });
             
             if (!hasBalance) {
-                player.tell("  §8§oYour vault is currently empty...§r");
+                player.tell(Text.translate("kubejs.script.server.scripts.custom.vault.0033"));
             } else {
                 player.tell(" ");
                 player.tell("  §6Total Net Worth: §f" + totalNetWorth + " §7(Gold Value)");
             }
 
-            player.tell("§b§l╚════════════╝§r");
+            player.tell(Text.translate("kubejs.script.server.scripts.custom.vault.0035"));
             player.tell(" "); 
-            player.tell("§8» To §6withdraw §8use §7§o/vault withdraw <coin_name> <amount>"); 
-			player.tell("§8» To §9withdraw all §8use §7§o/vault withdraw all (500 coins limit)");
-            player.tell("§8» To §2deposit §8use §7§o/vault deposit §8while holding");
-			player.tell("§8» To §adeposit all §8use §7§o/vault deposit all");			
+            player.tell(Text.translate("kubejs.script.server.scripts.custom.vault.0037")); 
+			player.tell(Text.translate("kubejs.script.server.scripts.custom.vault.0038"));
+            player.tell(Text.translate("kubejs.script.server.scripts.custom.vault.0039"));
+			player.tell(Text.translate("kubejs.script.server.scripts.custom.vault.0040"));			
             
             return 1;
         }))
@@ -138,7 +138,7 @@ ServerEvents.commandRegistry(event => {
                     item.setCount(0);
                     return 1;
                 }
-                player.tell(Text.red('You are not holding a valid coin!'));
+                player.tell(Text.red(Text.translate('kubejs.script.server.scripts.custom.vault.0041')));
                 return 0;
             })
 			
@@ -177,7 +177,7 @@ ServerEvents.commandRegistry(event => {
                     return 1;
                 }
                 
-                player.tell("§cNo coins found in inventory.");
+                player.tell(Text.translate("kubejs.script.server.scripts.custom.vault.0042"));
                 return 0;
             }))
 			
@@ -235,9 +235,9 @@ ServerEvents.commandRegistry(event => {
 
                 // 2. Safety Check
                 if (totalCountInVault > 500) {
-                    player.tell("§c§lERROR: §7The vault is too full to withdraw all at once!");
+                    player.tell(Text.translate("kubejs.script.server.scripts.custom.vault.0043"));
                     player.tell("§8» §7Total: §f" + totalCountInVault + " §8/ 500 max.");
-                    player.tell("§8» §6Please withdraw specific coins individually.");
+                    player.tell(Text.translate("kubejs.script.server.scripts.custom.vault.0044"));
                     player.runCommandSilent('playsound minecraft:entity.villager.no player @s ~ ~ ~ 3 1.5');
                     return 0;
                 }
@@ -257,7 +257,7 @@ ServerEvents.commandRegistry(event => {
                     player.persistentData.put('cloudVault', vault);
                     player.persistentData.dirty = true;
 
-                    player.tell("§b§lVAULT: §7Withdrawal complete.");
+                    player.tell(Text.translate("kubejs.script.server.scripts.custom.vault.0045"));
                     player.tell("§8» §7Items: " + details.join('§7, '));
                     player.tell("§8» §6§lTOTAL COINS: §f" + totalCountInVault);
                     
@@ -265,7 +265,7 @@ ServerEvents.commandRegistry(event => {
                     return 1;
                 }
                 
-                player.tell("§cYour vault is already empty!");
+                player.tell(Text.translate("kubejs.script.server.scripts.custom.vault.0046"));
                 return 0;
             }))	
 		

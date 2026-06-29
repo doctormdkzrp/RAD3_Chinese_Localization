@@ -272,13 +272,13 @@ ItemEvents.tooltip(event => {
         event.addAdvanced(die.id, (item, advanced, text) => {
             text.add(1, Text.translate(die.lore).gray().italic())
             if (!event.shift) {
-                text.add(2, Text.white('Hold [Shift] for mechanics.'))
+                text.add(2, Text.white(Text.translate('kubejs.script.client.scripts.artifacts.tooltips.0087')))
             } else {
-                text.add(2, Text.gold('Mechanics:'))
-                text.add(3, Text.of(' • ').white().append(Text.gold(`Chaos Roll: `).append(Text.white(`Rolls 1-${die.faces}.`))))
-                text.add(4, Text.of(' • ').white().append(Text.aqua('Outcome: ').append(Text.white('Triggers a random effect based on the result.'))))
-                text.add(5, Text.of(' • ').white().append(Text.lightPurple('Lifespan: ').append(Text.white('1 Durability per use.'))))
-                text.add(6, Text.of(' • ').white().append(Text.darkGreen('Cost: ').append(Text.white('5 Experience Levels.'))))
+                text.add(2, Text.gold(Text.translate('kubejs.script.client.scripts.artifacts.tooltips.0088')))
+                text.add(3, Text.of(' • ').white().append(Text.gold(Text.translate("kubejs.script.client.scripts.artifacts.tooltips.0090")).append(Text.white(Text.translate("kubejs.script.client.scripts.artifacts.tooltips.0091", die.faces)))))
+                text.add(4, Text.of(' • ').white().append(Text.aqua(Text.translate('kubejs.script.client.scripts.artifacts.tooltips.0093')).append(Text.white(Text.translate('kubejs.script.client.scripts.artifacts.tooltips.0094')))))
+                text.add(5, Text.of(' • ').white().append(Text.lightPurple(Text.translate('kubejs.script.client.scripts.artifacts.tooltips.0096')).append(Text.white(Text.translate('kubejs.script.client.scripts.artifacts.tooltips.0097')))))
+                text.add(6, Text.of(' • ').white().append(Text.darkGreen(Text.translate('kubejs.script.client.scripts.artifacts.tooltips.0099')).append(Text.white(Text.translate('kubejs.script.client.scripts.artifacts.tooltips.0100')))))
             }
         })
     })

@@ -256,19 +256,19 @@ const TIERS = {
 
 function getTierMessages(tier) {
     if (tier === TIERS.ZERO) return [
-        '§c✖ Eat something! §7Stamina recovery halted, actions cost more.',
-        '§c✖ Hunger gnaws at you — §7stamina drains faster. Eat something!',
+        Text.translate('kubejs.script.server.scripts.custom.hunger.0017'),
+        Text.translate('kubejs.script.server.scripts.custom.hunger.0018'),
     ];
     if (tier === TIERS.LOW) return [
-        '§e● Fed. §7No bonuses active — cook a proper meal for stamina benefits.',
+        Text.translate('kubejs.script.server.scripts.custom.hunger.0019'),
     ];
     if (tier === TIERS.MID) return [
-        '§a✦ Well-Fed! §7Combat stamina improved — §a+1 heart, faster rolls§7.',
-        '§a✦ Nourished! §7You feel stronger — §astamina and health boosted§7.',
+        Text.translate('kubejs.script.server.scripts.custom.hunger.0020'),
+        Text.translate('kubejs.script.server.scripts.custom.hunger.0021'),
     ];
     if (tier === TIERS.HIGH) return [
-        '§6★ Peak Nourishment! §7All stamina bonuses active — §6shield, speed, recovery§7.',
-        '§6★ A feast worthy of an adventurer! §7You are at your absolute peak.',
+        Text.translate('kubejs.script.server.scripts.custom.hunger.0022'),
+        Text.translate('kubejs.script.server.scripts.custom.hunger.0023'),
     ];
     return null;
 }
@@ -414,19 +414,19 @@ LevelEvents.tick(event => {
 
             if (currentTier === TIERS.ZERO) {
                 player.setStatusMessage(
-                    `${hungerStr} ${tierLabel} §8| §7Regen:§c${attrVal(player, HUNGER_CONFIG.idleRegenAttr)} Sprint:§c${attrVal(player, HUNGER_CONFIG.sprintDrainAttr)} Melee:§c${attrVal(player, HUNGER_CONFIG.meleeDrainAttr)}`
+                    Text.translate("kubejs.script.server.scripts.custom.hunger.0024", hungerStr, tierLabel, attrVal(player, HUNGER_CONFIG.idleRegenAttr), attrVal(player, HUNGER_CONFIG.sprintDrainAttr), attrVal(player, HUNGER_CONFIG.meleeDrainAttr))
                 );
             } else if (currentTier === TIERS.LOW) {
                 player.setStatusMessage(
-                    `${hungerStr} ${tierLabel} §8| §7Roll:§e${attrVal(player, HUNGER_CONFIG.rollAttr)}`
+                    Text.translate("kubejs.script.server.scripts.custom.hunger.0025", hungerStr, tierLabel, attrVal(player, HUNGER_CONFIG.rollAttr))
                 );
             } else if (currentTier === TIERS.MID) {
                 player.setStatusMessage(
-                    `${hungerStr} ${tierLabel} §8| §7Regen:§a${attrVal(player, HUNGER_CONFIG.idleRegenAttr)} HP:§a${attrVal(player, HUNGER_CONFIG.HPAttr)} Roll:§a${attrVal(player, HUNGER_CONFIG.rollAttr)}`
+                    Text.translate("kubejs.script.server.scripts.custom.hunger.0026", hungerStr, tierLabel, attrVal(player, HUNGER_CONFIG.idleRegenAttr), attrVal(player, HUNGER_CONFIG.HPAttr), attrVal(player, HUNGER_CONFIG.rollAttr))
                 );
             } else {
                 player.setStatusMessage(
-                    `${hungerStr} ${tierLabel} §8| §7Regen:§6${attrVal(player, HUNGER_CONFIG.idleRegenAttr)} Sprint:§6${attrVal(player, HUNGER_CONFIG.sprintDrainAttr)} Shield:§6${attrVal(player, HUNGER_CONFIG.shieldAttr)} §7Roll:§e${attrVal(player, HUNGER_CONFIG.rollAttr)} HP:§a${attrVal(player, HUNGER_CONFIG.HPAttr)}`
+                    Text.translate("kubejs.script.server.scripts.custom.hunger.0027", hungerStr, tierLabel, attrVal(player, HUNGER_CONFIG.idleRegenAttr), attrVal(player, HUNGER_CONFIG.sprintDrainAttr), attrVal(player, HUNGER_CONFIG.shieldAttr), attrVal(player, HUNGER_CONFIG.rollAttr), attrVal(player, HUNGER_CONFIG.HPAttr))
                 );
             }
         }
@@ -453,7 +453,7 @@ ItemEvents.foodEaten(event => {
     let xp = randomInt(HUNGER_CONFIG.xpMin, HUNGER_CONFIG.xpMax);
     player.giveExperiencePoints(xp);
     if (HUNGER_CONFIG.showXPMessage) {
-        player.setStatusMessage(`§7+§a${xp} XP §7from a quality meal`);
+        player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.hunger.0028", xp));
     }
 
     // 3. Random bonus effect
@@ -463,7 +463,7 @@ ItemEvents.foodEaten(event => {
             player.potionEffects.add(rolled.effect, rolled.duration, rolled.amplifier, true, true);
             if (HUNGER_CONFIG.showRandomMessage) {
                 player.setStatusMessage(
-                    `§d✦ Inspired! §7You feel §d${effectDisplayName(rolled.effect)}§7...`
+                    Text.translate("kubejs.script.server.scripts.custom.hunger.0029", effectDisplayName(rolled.effect))
                 );
             }
         }

@@ -60,22 +60,22 @@ ItemEvents.tooltip(event =>{
 		
 	event.addAdvanced('bountiful:bountyboard', (stack, advanced, text) => {      
         if (!event.shift) {
-            text.add(1, Text.translate('kubejs.script.client.scripts.tooltips.0021').gray().append(Text.gold('[Shift] ')).append(Text.gray('for mechanics.')))
+            text.add(1, Text.translate('kubejs.script.client.scripts.tooltips.0021').gray().append(Text.gold(Text.translate('kubejs.script.client.scripts.tooltips.0001'))).append(Text.gray(Text.translate('kubejs.script.client.scripts.tooltips.0002'))))
         } else {
-            text.add(2, Text.of(' 1. ').append(Text.gold('Bounty Board: ')).append(Text.white('Right-click to view and accept active contracts')))
-            text.add(3, Text.of(' 2. ').append(Text.yellow('Rarity Tiers: ')).append(Text.white('Higher tiers offer significantly better rewards')))
-            text.add(4, Text.of(' 3. ').append(Text.aqua('Turn-in: ')).append(Text.white('Right-click the board with a finished quest to claim loot')))
+            text.add(2, Text.of(' 1. ').append(Text.gold(Text.translate('kubejs.script.client.scripts.tooltips.0004'))).append(Text.white(Text.translate('kubejs.script.client.scripts.tooltips.0005'))))
+            text.add(3, Text.of(' 2. ').append(Text.yellow(Text.translate('kubejs.script.client.scripts.tooltips.0007'))).append(Text.white(Text.translate('kubejs.script.client.scripts.tooltips.0008'))))
+            text.add(4, Text.of(' 3. ').append(Text.aqua(Text.translate('kubejs.script.client.scripts.tooltips.0010'))).append(Text.white(Text.translate('kubejs.script.client.scripts.tooltips.0011'))))
         }
     })
 
     event.addAdvanced('bountiful:decree', (stack, advanced, text) => {      
         if (!event.shift) {
-            text.add(1, Text.translate('kubejs.script.client.scripts.tooltips.0025').gray().append(Text.gold('[Shift] ')).append(Text.gray('for mechanics.')))
+            text.add(1, Text.translate('kubejs.script.client.scripts.tooltips.0025').gray().append(Text.gold(Text.translate('kubejs.script.client.scripts.tooltips.0012'))).append(Text.gray(Text.translate('kubejs.script.client.scripts.tooltips.0013'))))
         } else {
-            text.add(2, Text.of(' 1. ').append(Text.gold('Application: ')).append(Text.white('Apply to a Bounty Board to set the theme of bounties')))
-            text.add(3, Text.of(' 2. ').append(Text.yellow('Specialization: ')).append(Text.white('Forces the board to only generate specific task types')))
-            text.add(4, Text.of(' 3. ').append(Text.aqua('Reset: ')).append(Text.white('Replaces all unclaimed bounties upon application')))
-            text.add(5, Text.of(' 4. ').append(Text.lightPurple('Longevity: ')).append(Text.white('The decree stays active until a different one is applied')))
+            text.add(2, Text.of(' 1. ').append(Text.gold(Text.translate('kubejs.script.client.scripts.tooltips.0015'))).append(Text.white(Text.translate('kubejs.script.client.scripts.tooltips.0016'))))
+            text.add(3, Text.of(' 2. ').append(Text.yellow(Text.translate('kubejs.script.client.scripts.tooltips.0018'))).append(Text.white(Text.translate('kubejs.script.client.scripts.tooltips.0019'))))
+            text.add(4, Text.of(' 3. ').append(Text.aqua(Text.translate('kubejs.script.client.scripts.tooltips.0021'))).append(Text.white(Text.translate('kubejs.script.client.scripts.tooltips.0022'))))
+            text.add(5, Text.of(' 4. ').append(Text.lightPurple(Text.translate('kubejs.script.client.scripts.tooltips.0024'))).append(Text.white(Text.translate('kubejs.script.client.scripts.tooltips.0025'))))
         }
     })
 	
@@ -111,17 +111,17 @@ ItemEvents.tooltip(event =>{
             failChance += (10 * enchLevel)
         }
 
-		text.add(1, Text.darkRed('Arcane Instability').bold())
-        text.add(2, Text.gray('Has a slight chance to fail to cast any spell'))
-		text.add(3, Text.gray('Risk increases significantly with ')
-            .append(Text.aqua('Multishot'))
-            .append(Text.gray(' or '))
-            .append(Text.aqua('Crescendo'))
-            .append(Text.gray(' enchantments'))
+		text.add(1, Text.darkRed(Text.translate('kubejs.script.client.scripts.tooltips.0026')).bold())
+        text.add(2, Text.gray(Text.translate('kubejs.script.client.scripts.tooltips.0027')))
+		text.add(3, Text.gray(Text.translate('kubejs.script.client.scripts.tooltips.0028'))
+            .append(Text.aqua(Text.translate('kubejs.script.client.scripts.tooltips.0029')))
+            .append(Text.gray(Text.translate('kubejs.script.client.scripts.tooltips.0030')))
+            .append(Text.aqua(Text.translate('kubejs.script.client.scripts.tooltips.0031')))
+            .append(Text.gray(Text.translate('kubejs.script.client.scripts.tooltips.0032')))
         )
         
         let color = failChance >= 70 ? Text.red : Text.yellow
-        text.add(4, Text.gold('Current misfire Chance: ').append(color(`${failChance}%`)))
+        text.add(4, Text.gold(Text.translate('kubejs.script.client.scripts.tooltips.0033')).append(color(`${failChance}%`)))
 
     })
 	

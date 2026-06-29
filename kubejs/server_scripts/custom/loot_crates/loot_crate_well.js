@@ -48,14 +48,14 @@ ItemEvents.rightClicked('kubejs:wishing_crate', event => {
             level.playSound(null, player.blockX, player.blockY, player.blockZ, 'minecraft:block.amethyst_block.chime', 'players', 1.0, 0.8);
             
             // Use getString() to ensure it displays correctly in the status bar
-            player.setStatusMessage(`§bThe Well granted your wish: ${rewardName.getString()}`);
+            player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.loot.crates.loot.crate.well.0001", rewardName.getString()));
             
         } else {
-            player.displayClientMessage(Text.gray("The Well remains silent and takes your offering..."), true);
+            player.displayClientMessage(Text.gray(Text.translate("kubejs.script.server.scripts.custom.loot.crates.loot.crate.well.0002")), true);
             level.spawnParticles('minecraft:large_smoke', true, player.x, player.y + 1, player.z, 0.3, 0.3, 0.3, 20, 0.05);
         }
     } else {
-        player.setStatusMessage("§bThe Well demands a Diamond, Emerald, or Netherite.");
+        player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.loot.crates.loot.crate.well.0003"));
     }
 });
 

@@ -442,7 +442,7 @@ ServerEvents.commandRegistry(event => {
     event.register(Commands.literal('ring').then(Commands.literal('update').executes(ctx => {
         const player = ctx.source.player;
         updateRingNBT(player);
-        player.tell(Text.green("Ring NBT Synchronized."));
+        player.tell(Text.green(Text.translate("kubejs.script.server.scripts.custom.roguelite.ring.0043")));
         return 1;
     })));
 });

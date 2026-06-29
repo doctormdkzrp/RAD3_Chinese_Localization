@@ -20,7 +20,7 @@ ItemEvents.rightClicked('kubejs:botanical_crate', event => {
             
             // --- 2. LUSH CLEARING EVENT (5% Chance on successful growth) ---
             if (Utils.random.nextDouble() < 0.05) {
-                player.displayClientMessage(Text.green("The crate's energy overflows into the earth!"), true);
+                player.displayClientMessage(Text.green(Text.translate("kubejs.script.server.scripts.custom.loot.crates.loot.crate.botanical.0001")), true);
                 
                 // Scan a 3x3 area under the player
                 for (let x = -2; x <= 2; x++) {
@@ -39,10 +39,10 @@ ItemEvents.rightClicked('kubejs:botanical_crate', event => {
             }
 
             if (stage < 3) {
-                player.setStatusMessage(`§2The vines tighten... (Stage ${stage}/3)`);
+                player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.loot.crates.loot.crate.botanical.0002", stage));
             }
         } else {
-            player.setStatusMessage("§6The vines resist the fertilizer...");
+            player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.loot.crates.loot.crate.botanical.0003"));
             level.spawnParticles('minecraft:smoke', true, player.x, player.y + 1, player.z, 0.2, 0.2, 0.2, 5, 0.02);
         }
 
@@ -50,7 +50,7 @@ ItemEvents.rightClicked('kubejs:botanical_crate', event => {
         if (stage >= 3) {
 			global.setCrateCooldown(player, server);
             item.count--;
-            player.setStatusMessage("§aThe Crate has fully bloomed!");
+            player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.loot.crates.loot.crate.botanical.0004"));
             level.playSound(null, player.blockX, player.blockY, player.blockZ, 'minecraft:block.flowering_azalea.break', 'players', 1.0, 0.8);
             
             let rewards = ['minecraft:spore_blossom', 'minecraft:enchanted_golden_apple', 'minecraft:moss_block', 'minecraft:cherry_sapling', 'minecraft:mangrove_propagule', 'minecraft:heart_of_the_sea'];
@@ -58,6 +58,6 @@ ItemEvents.rightClicked('kubejs:botanical_crate', event => {
         }
         
     } else {
-        player.setStatusMessage("§eNeeds Bone Meal in Off-Hand to fertilize.");
+        player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.loot.crates.loot.crate.botanical.0005"));
     }
 });

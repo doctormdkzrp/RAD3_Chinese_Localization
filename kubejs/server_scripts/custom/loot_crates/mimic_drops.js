@@ -18,7 +18,7 @@ EntityEvents.death(event => {
 
         // 4. Feedback
         if (source.actual && source.actual.player) {
-            source.actual.setStatusMessage("6The Mimic's heart shatters the curse!");
+            source.actual.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.loot.crates.mimic.drops.0001"));
         }
     }
 	

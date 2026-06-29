@@ -148,7 +148,7 @@ ItemEvents.rightClicked(event => {
 
     // Cap check
     if (getActiveSummons(level, def, player.uuid).length >= def.maxCount) {
-        player.setStatusMessage(`§c${def.name} §7— max active (${def.maxCount}) already out!`);
+        player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.summon.0001", def.name, def.maxCount));
         return;
     }
 
@@ -177,7 +177,7 @@ ItemEvents.rightClicked(event => {
 
     player.cooldowns.addCooldown(item, SUMMON_CONFIG.cooldown);
     player.setStatusMessage(
-        `${def.nameColor}${def.name} §asummoned! §7(HP §f${stats.health} §7ATK §f${stats.attack}§7)`
+        Text.translate("kubejs.script.server.scripts.custom.summon.0002", def.nameColor, def.name, stats.health, stats.attack)
     );
     level.playSound(null, player.blockX, player.blockY, player.blockZ, def.sound, 'players', 1.0, 1.0);
     item.count--;

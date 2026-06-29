@@ -20,7 +20,7 @@ ItemEvents.rightClicked('ars_nouveau:spell_crossbow', event => {
     }
 
     if (Math.random() < failChance) {
-        player.setStatusMessage(Text.yellow('Crossbow malfunction, shot failed'))
+        player.setStatusMessage(Text.yellow(Text.translate('kubejs.script.server.scripts.ars.nerfs.0001')))
 		level.playSound(null, player.blockX, player.blockY, player.blockZ, 'minecraft:entity.item.break', 'players', 1.0, 1.0);
         
 		item.nbt.Charged = 0

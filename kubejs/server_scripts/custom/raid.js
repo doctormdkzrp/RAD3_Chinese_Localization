@@ -386,7 +386,7 @@ CommonAddedEvents.playerChangeDimension(event => {
 				player.tell(Text.of(''));
 				player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0004", evt.name).bold());
 				player.tell(Text.of(evt.desc).italic());
-				player.setStatusMessage(`${evt.name} §7is active!`);
+				player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.raid.0003", evt.name));
 				level.playSound(null, player.blockX, player.blockY, player.blockZ,
 					'minecraft:ambient.cave', 'players', 1.0, 0.5);
 				
@@ -409,7 +409,7 @@ CommonAddedEvents.playerChangeDimension(event => {
 		// Loading Sequence   
         let startMessages = DUNGEON_START_MESSAGES.sort(() => 0.5 - Math.random()).slice(0, 3);
         player.tell(Text.of("-----------------------").bold());
-        player.tell("§6🚀 Preparing your dungeon...");
+        player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0005"));
         
         startMessages.forEach((msg, i) => {
             server.scheduleInTicks((i + 1) * 15, () => {
@@ -773,7 +773,7 @@ BlockEvents.rightClicked(event => {
         player.potionEffects.add(debuff.id, RAID_CONFIG.cursedDebuffDuration, debuff.amp, false, true);
         player.tell(Text.of(''));
         player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0030", debuff.name).bold());
-        player.setStatusMessage(`§5☠ Cursed! §c${debuff.name} §7`);
+        player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.raid.0011", debuff.name));
         level.playSound(null, block.x, block.y, block.z,
             'minecraft:entity.wither.ambient', 'players', 0.8, 1.4);
     } else {
@@ -968,12 +968,12 @@ ItemEvents.rightClicked(event => {
         let halfSecs  = Math.floor(durationSecs / 2);
         server.scheduleInTicks(halfTicks, () => {
             if (player.persistentData.killMultiplierActive) {
-                player.setStatusMessage(`§6⚡ Kill Multiplier: §f${halfSecs}s remaining`);
+                player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.raid.0012", halfSecs));
             }
         });
         server.scheduleInTicks(RAID_CONFIG.killMultiplierDuration - 200, () => {
             if (player.persistentData.killMultiplierActive) {
-                player.setStatusMessage('§6⚡ Kill Multiplier: §c10s remaining!');
+                player.setStatusMessage(Text.translate('kubejs.script.server.scripts.custom.raid.0013'));
             }
         });
 
@@ -997,7 +997,7 @@ ItemEvents.rightClicked(event => {
     );
 
     if (hasGuard) {
-        player.setStatusMessage('§cYou already have an active guard!');
+        player.setStatusMessage(Text.translate('kubejs.script.server.scripts.custom.raid.0014'));
         return;
     }
 
@@ -1018,7 +1018,7 @@ ItemEvents.rightClicked(event => {
     guard.setCustomNameVisible(true);
     guard.spawn();
 
-    player.setStatusMessage('§aYour guard has arrived! §8(1 minute lifespan)');
+    player.setStatusMessage(Text.translate('kubejs.script.server.scripts.custom.raid.0015'));
     level.playSound(null, player.blockX, player.blockY, player.blockZ,
         'minecraft:entity.villager.yes', 'players', 1.0, 1.2);
 
@@ -1121,7 +1121,7 @@ ServerEvents.commandRegistry(event => {
                 let mult    = getRankTokenMultiplier(rank);
 
                 player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0052").bold());
-                player.tell(`§7Name:        §f${player.username}`); 
+                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0016", player.username)); 
                 player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0053", rank));
                 player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0054", totalXP, toNext, rank + 1));
 

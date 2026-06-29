@@ -16,7 +16,7 @@ function giveTieredLoot(player, server) {
         let pool = ['minecraft:netherite_ingot', 'minecraft:nether_star', 'minecraft:totem_of_undying'];
         item = pool[Utils.random.nextInt(0, pool.length)];
 		// GLOBAL BROADCAST: Let everyone know a player found top-tier loot.
-        server.tell([Text.gold('[Ritual] '), Text.green(player.name), ' found ', Text.lightPurple('LEGENDARY LOOT'), '!']);
+        server.tell([Text.gold(Text.translate('kubejs.script.server.scripts.custom.loot.crates.loot.crate.ritual.0001')), Text.green(player.name), ' found ', Text.lightPurple(Text.translate('kubejs.script.server.scripts.custom.loot.crates.loot.crate.ritual.0002')), '!']);
     } else if (roll > 0.75) {
         rarity = '§bRARE';
         let pool = ['minecraft:diamond', 'minecraft:emerald', 'minecraft:golden_apple'];
@@ -29,7 +29,7 @@ function giveTieredLoot(player, server) {
         count = Utils.random.nextInt(2, 5);
     }
     player.give(Item.of(item, count));
-    player.setStatusMessage(`§a[${rarity}§a] Found ${count}x ${item.split(':')[1]}`);
+    player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.loot.crates.loot.crate.ritual.0003", rarity, count, item.split(':')[1]));
 }
 
 // ==========================================================================
@@ -66,10 +66,10 @@ ItemEvents.rightClicked('kubejs:ritual_crate', event => {
             ghost.addTag('ritual_ghost');
             ghost.spawn();
             
-            player.setStatusMessage("§7A restless spirit was disturbed...");
+            player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.loot.crates.loot.crate.ritual.0004"));
             level.playSound(null, player.blockX, player.blockY, player.blockZ, 'minecraft:entity.vex.charge', 'hostile', 1.0, 0.5);
         } else {
-            player.setStatusMessage("§cThe ritual fails here. Find §bDeep Water§c or §eHigh Peaks§c.");
+            player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.loot.crates.loot.crate.ritual.0005"));
         }
     }
 });

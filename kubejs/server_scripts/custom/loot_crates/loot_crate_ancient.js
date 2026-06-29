@@ -46,7 +46,7 @@ ItemEvents.rightClicked('kubejs:ancient_crate', event => {
             // Math.ceil rounds up to show a clean number of seconds left.
             let remain = Math.ceil((100 - timePassed) / 20); 
             // Display a yellow warning above the hotbar.
-            player.setStatusMessage(`§eWait ${remain}s or use a Skeleton Key!`); 
+            player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.loot.crates.loot.crate.ancient.0001", remain)); 
             return; // Cancel the opening process.
         }
     }
@@ -91,7 +91,7 @@ ItemEvents.rightClicked('kubejs:ancient_crate', event => {
         mimic.mergeNbt({Attributes:[{Name:"minecraft:generic.movement_speed", Base:0.4}]});
         mimic.spawn(); 
 
-        player.setStatusMessage("§4THE CRATE WAS A TRAP!");
+        player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.loot.crates.loot.crate.ancient.0002"));
         // Update cooldown timestamp even if they were trapped.
         if (!hasKey) player.persistentData.lastCrateOpen = currentTime; 
         item.count--; // Remove the crate item used.
@@ -104,7 +104,7 @@ ItemEvents.rightClicked('kubejs:ancient_crate', event => {
         player.give(Item.of('kubejs:loot_crate', 2)); // Add 2 more crates to inventory.
         // Amethyst chime sound for a magical feel.
         level.playSound(null, player.blockX, player.blockY, player.blockZ, 'minecraft:block.amethyst_block.chime', 'players', 1.0, 1.5);
-        player.displayClientMessage(Text.gold("✨ LUCKY STREAK: 2 Free Crates! ✨"), true);
+        player.displayClientMessage(Text.gold(Text.translate("kubejs.script.server.scripts.custom.loot.crates.loot.crate.ancient.0003")), true);
     }
 
     // --- STEP 7: LOOT POOL DEFINITIONS ---
@@ -151,7 +151,7 @@ ItemEvents.rightClicked('kubejs:ancient_crate', event => {
     // --- STEP 8: FEEDBACK (VISUALS & SOUNDS) ---
     if (rarity === 'legendary') {
         // Global server broadcast for legendary items.
-        server.tell([Text.green(player.name), ' found ', Text.gold('LEGENDARY LOOT'), ' in an Ancient Crate!']);
+        server.tell([Text.green(player.name), ' found ', Text.gold(Text.translate('kubejs.script.server.scripts.custom.loot.crates.loot.crate.ancient.0004')), ' in an Ancient Crate!']);
         // Create the Loot Beam (10 layers of vertical particles).
         for (let i = 0; i < 10; i++) {
             level.spawnParticles('minecraft:totem_of_undying', true, player.x, player.y + (i * 0.5), player.z, 0.2, 0.1, 0.2, 10, 0.1);
@@ -171,14 +171,14 @@ ItemEvents.rightClicked('kubejs:ancient_crate', event => {
     // Physically add the item to the player's inventory.
     player.give(Item.of(selectedId, amount));
     // Display the item name found in the Status Bar (split(':') removes 'minecraft:').
-    player.setStatusMessage(`§aFound ${amount}x ${selectedId.split(':')[1]}!`);
+    player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.loot.crates.loot.crate.ancient.0005", amount, selectedId.split(':')[1]));
     
     // Final check for the Skeleton Key to handle consumption or cooldown start.
     if (!hasKey) {
         player.persistentData.lastCrateOpen = currentTime; 
     } else {
         offhandItem.count--; // Reduce Skeleton Key count by 1.
-        player.displayClientMessage(Text.aqua("Skeleton Key used! Cooldown bypassed."), true);
+        player.displayClientMessage(Text.aqua(Text.translate("kubejs.script.server.scripts.custom.loot.crates.loot.crate.ancient.0006")), true);
     }
     
     // Reduce the count of the Loot Crate stack in the main hand.

@@ -6,7 +6,7 @@ global.checkCrateCooldown = (player, cooldownMillis) => {
     if (now - lastOpen < cooldownMillis) {
         let secondsLeft = Math.ceil((cooldownMillis - (now - lastOpen)) / 1000);
         // Action bar message so it doesn't clutter chat
-        player.setStatusMessage(`§cStabilizing: ${secondsLeft}s...`);
+        player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.loot.crates.loot.crate.cooldown.0001", secondsLeft));
         return false; 
     }
 

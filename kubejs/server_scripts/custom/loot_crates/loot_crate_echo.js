@@ -40,12 +40,12 @@ ItemEvents.rightClicked('kubejs:echo_crate', event => {
             target.attack(2.0); // Small 1-heart "concussion" damage
         });
         
-        player.displayClientMessage(Text.darkAqua("⚡ SONIC PULSE RELEASED ⚡"), true);
+        player.displayClientMessage(Text.darkAqua(Text.translate("kubejs.script.server.scripts.custom.loot.crates.loot.crate.echo.0001")), true);
     }
 
     // --- 4. LOGIC GATES ---
     if (nearbyMobs.length > 0 && !isHarmonized) {
-        player.setStatusMessage("§3The vibrations are too chaotic to open...");
+        player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.loot.crates.loot.crate.echo.0002"));
         level.playSound(null, player.blockX, player.blockY, player.blockZ, 'minecraft:entity.warden.tendril_clicks', 'players', 1.0, 1.0);
         level.spawnParticles('minecraft:sculk_soul', true, player.x, player.y + 1, player.z, 0.5, 0.5, 0.5, 10, 0.05);
         return;
@@ -67,7 +67,7 @@ ItemEvents.rightClicked('kubejs:echo_crate', event => {
 		let simpleLoot = ['minecraft:amethyst_shard', 'minecraft:quartz', 'minecraft:glowstone_dust'];
         let picked = simpleLoot[Utils.random.nextInt(0, simpleLoot.length)];
 		player.give(Item.of(picked, Utils.random.nextInt(2, 5)));
-        player.setStatusMessage("§7Quiet Opening: Found Minerals");
+        player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.loot.crates.loot.crate.echo.0003"));
         level.playSound(null, player.blockX, player.blockY, player.blockZ, 'minecraft:block.amethyst_block.chime', 'players', 1.0, 1.2);
     }
 });
