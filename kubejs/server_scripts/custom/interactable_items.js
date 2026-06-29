@@ -76,11 +76,11 @@ ItemEvents.rightClicked(event => {
             // Create the official-looking paper
             let customPaper = Item.of('minecraft:paper')
                 .withName(Text.of(randomMsg).italic(false))
-                .withLore([Text.translate("kubejs.script.server.scripts.custom.interactable.items.0001").italic(true)]);
+                .withLore([Text.translate("kubejs.script.server.scripts.custom.interactable.items.0003").italic(true)]);
             
 			player.swing()
             player.give(customPaper);
-            player.setStatusMessage(Text.green(Text.translate("kubejs.script.server.scripts.custom.interactable.items.0003")));
+            player.setStatusMessage(Text.green(Text.translate("kubejs.script.server.scripts.custom.interactable.items.0004")));
 			level.playSound(null, player.blockX, player.blockY, player.blockZ, 'minecraft:block.enchantment_table.use', 'players', 1.0, 1.0);
         }
     }
@@ -132,14 +132,14 @@ ItemEvents.rightClicked(event => {
                 if (newDamage >= item.maxDamage) {
                     item.count--; // Remove the item
 					level.playSound(null, player.blockX, player.blockY, player.blockZ, 'minecraft:entity.item.break', 'players', 1.0, 1.0);
-                    player.setStatusMessage(Text.red(Text.translate("kubejs.script.server.scripts.custom.interactable.items.0004")));
+                    player.setStatusMessage(Text.red(Text.translate("kubejs.script.server.scripts.custom.interactable.items.0005")));
                 } else {
                     item.damageValue = newDamage;
                 }
             }
             event.cancel();
         } else {
-            player.setStatusMessage(Text.red(Text.translate("kubejs.script.server.scripts.custom.interactable.items.0005")));
+            player.setStatusMessage(Text.red(Text.translate("kubejs.script.server.scripts.custom.interactable.items.0006")));
         }
     }
 	
@@ -238,7 +238,7 @@ if (item.id == 'kubejs:echo_locator') {
         // 3. Feedback and Durability Logic
         if (found) {
 			level.playSound(null, player.blockX, player.blockY, player.blockZ, 'minecraft:block.beacon.activate', 'players', 1.0, 1.0);
-            player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.interactable.items.0002"));
+            player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.interactable.items.0007"));
             
             let newDamage = item.damageValue + 1;
             if (newDamage >= item.maxDamage) {
@@ -249,7 +249,7 @@ if (item.id == 'kubejs:echo_locator') {
             }
         } else {
 			level.playSound(null, player.blockX, player.blockY, player.blockZ, 'minecraft:block.note_block.didgeridoo', 'players', 1.0, 0.8);
-            player.setStatusMessage(Text.gray(Text.translate("kubejs.script.server.scripts.custom.interactable.items.0006")));
+            player.setStatusMessage(Text.gray(Text.translate("kubejs.script.server.scripts.custom.interactable.items.0008")));
         }
         event.cancel();
     }
@@ -263,7 +263,7 @@ if (item.id == 'kubejs:echo_locator') {
 
         if (currentTime - lastUsed < cooldownTicks) {
             let remaining = Math.ceil((cooldownTicks - (currentTime - lastUsed)) / 20);
-            player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.interactable.items.0003", remaining));
+            player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.interactable.items.0009", remaining));
             level.playSound(null, player.blockX, player.blockY, player.blockZ, 'minecraft:block.iron_trapdoor.close', 'players', 0.5, 2.0);
             event.cancel();
             return; // Stop the script here
@@ -283,7 +283,7 @@ if (item.id == 'kubejs:echo_locator') {
         player.potionEffects.add('minecraft:slow_falling', 20, 0, false, false);
         
         level.playSound(null, player.blockX, player.blockY, player.blockZ, 'minecraft:block.conduit.deactivate', 'players', 1.0, 1.5);
-        player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.interactable.items.0004"));
+        player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.interactable.items.0010"));
 
         // Visual Feedback Loop
         for (let t = 0; t <= 20; t += 2) {
@@ -332,7 +332,7 @@ if (item.id == 'kubejs:echo_locator') {
         let cooldownTicks = 20; 
 
         if (currentTime - lastUsed < cooldownTicks) {
-            player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.interactable.items.0005"));
+            player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.interactable.items.0011"));
             level.playSound(null, player.blockX, player.blockY, player.blockZ, 'minecraft:block.iron_trapdoor.close', 'players', 0.5, 2.0);
             event.cancel();
             return;
@@ -381,7 +381,7 @@ if (item.id == 'kubejs:echo_locator') {
 			}
 
         } else {
-            player.setStatusMessage(Text.red(Text.translate("kubejs.script.server.scripts.custom.interactable.items.0007")));
+            player.setStatusMessage(Text.red(Text.translate("kubejs.script.server.scripts.custom.interactable.items.0012")));
         }
 		
 

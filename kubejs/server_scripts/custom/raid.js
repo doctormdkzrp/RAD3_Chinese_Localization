@@ -386,7 +386,7 @@ CommonAddedEvents.playerChangeDimension(event => {
 				player.tell(Text.of(''));
 				player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0004", evt.name).bold());
 				player.tell(Text.of(evt.desc).italic());
-				player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.raid.0003", evt.name));
+				player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.raid.0005", evt.name));
 				level.playSound(null, player.blockX, player.blockY, player.blockZ,
 					'minecraft:ambient.cave', 'players', 1.0, 0.5);
 				
@@ -396,7 +396,7 @@ CommonAddedEvents.playerChangeDimension(event => {
 						if (player.persistentData.activeRoomEvent === evt.id) {
 							player.persistentData.activeRoomEvent = '';
 							evt.onEnd(player);
-							player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0005", evt.name.replace(/§./g, '')).italic());
+							player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0006", evt.name.replace(/§./g, '')).italic());
 						}
 					});
 			});	   
@@ -409,7 +409,7 @@ CommonAddedEvents.playerChangeDimension(event => {
 		// Loading Sequence   
         let startMessages = DUNGEON_START_MESSAGES.sort(() => 0.5 - Math.random()).slice(0, 3);
         player.tell(Text.of("-----------------------").bold());
-        player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0005"));
+        player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0008"));
         
         startMessages.forEach((msg, i) => {
             server.scheduleInTicks((i + 1) * 15, () => {
@@ -434,7 +434,7 @@ CommonAddedEvents.playerChangeDimension(event => {
                 rival.customName = rivalName;
                 rival.setCustomNameVisible(true);
                 rival.spawn();
-                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0007", rivalName.replace(/§./g, '')));
+                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0009", rivalName.replace(/§./g, '')));
                 level.playSound(null, player.blockX, player.blockY, player.blockZ,
                     'minecraft:entity.pillager.ambient', 'players', 1.0, 0.8);
             }
@@ -446,10 +446,10 @@ CommonAddedEvents.playerChangeDimension(event => {
             let toNext  = xpToNextRank(totalXP);
 			
             player.tell(Text.of(""));
-            player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0009"));									   
+            player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0011"));									   
             
             // Display Current Rank on Entry
-            player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0010", rank, toNext, rank + 1).italic());
+            player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0012", rank, toNext, rank + 1).italic());
             
             player.level.playSound(null, player.blockX, player.blockY, player.blockZ, 'minecraft:block.note_block.chime', 'players', 0.8, 1.2);
             player.tell(Text.of("-----------------------").bold());
@@ -534,12 +534,12 @@ CommonAddedEvents.playerChangeDimension(event => {
         // Print Summary
         let fakeStats = DUNGEON_EXIT_STATS.sort(() => 0.5 - Math.random()).slice(0, 2);
         
-		player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0012", durStr));
-        player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0013", kills));
+		player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0014", durStr));
+        player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0015", kills));
 		if (p_bossKills > 0)     
-			player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0014", p_bossKills));
+			player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0016", p_bossKills));
         if (p_minibossKills > 0) 
-			player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0015", p_minibossKills));
+			player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0017", p_minibossKills));
         //player.tell(Text.of(`§7Chests Looted: §f${chests}`));
 		
         // Show death count in summary if player died
@@ -556,7 +556,7 @@ CommonAddedEvents.playerChangeDimension(event => {
             player.tell(Text.of(output));
         });
         // XP and Rank Display
-		player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0016", xpEarned, newTotalXP));
+		player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0018", xpEarned, newTotalXP));
 		
 		// Calculate XP earned within current rank tier for bar accuracy
 		let xpIntoRank    = (RAID_CONFIG.xpRequiredPerRank * newRank * (newRank + 1) / 2);
@@ -564,21 +564,21 @@ CommonAddedEvents.playerChangeDimension(event => {
 		let xpProgress    = newTotalXP - xpIntoRank;
 
 		renderProgressBar(player, xpProgress, xpForThisRank, "Rank XP", "§d");
-        player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0017", tokens, tokens !== 1 ? 's' : '', rankMult.toFixed(1)).gold());
+        player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0019", tokens, tokens !== 1 ? 's' : '', rankMult.toFixed(1)).gold());
 
         if (rawTokens > RAID_CONFIG.maxTokensPerRun) {
-            player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0018").italic());
+            player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0020").italic());
         }
 
         player.tell(Text.of("-----------------------").bold());
-		player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0020").italic());
+		player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0022").italic());
 
         // ── RANK-UP ANNOUNCEMENT ───────────────────────────────
         if (newRank > oldRank) {
             server.scheduleInTicks(5, () => {
                 player.tell(Text.of(""));
-                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0022", newRank).bold());
-                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0023", getRankTokenMultiplier(newRank).toFixed(1)));
+                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0024", newRank).bold());
+                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0025", getRankTokenMultiplier(newRank).toFixed(1)));
                 player.level.playSound(null, player.blockX, player.blockY, player.blockZ,
                     'minecraft:ui.toast.challenge_complete', 'players', 1.0, 1.0);
             });
@@ -606,7 +606,7 @@ CommonAddedEvents.playerChangeDimension(event => {
             let rv = player.persistentData.getCompound('raidVault');
             rv.putInt('raidTokens', (rv.getInt('raidTokens') || 0) + tokens);
             player.persistentData.put('raidVault', rv);
-            player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0024", tokens, tokens !== 1 ? 's' : ''));
+            player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0026", tokens, tokens !== 1 ? 's' : ''));
             player.level.playSound(null, player.blockX, player.blockY, player.blockZ,
                 'minecraft:entity.player.levelup', 'players', 1.0, 1.0);
         }
@@ -654,7 +654,7 @@ EntityEvents.hurt(event => {
 
     if (Math.random() < RAID_CONFIG.slownessChance) {
         entity.potionEffects.add('minecraft:slowness', RAID_CONFIG.slownessDuration, 1);
-        entity.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0025").italic());
+        entity.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0027").italic());
         level.playSound(null, entity.blockX, entity.blockY, entity.blockZ,
             'minecraft:entity.stray.ambient', 'players', 0.5, 0.5);
     }
@@ -715,16 +715,16 @@ EntityEvents.death(event => {
 	
     if (isBoss) {
         p.persistentData.raidBossKills = (p.persistentData.raidBossKills || 0) + 1;
-        p.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0026", entityId.split(':')[1], RAID_CONFIG.bossScoreWeight).bold());
+        p.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0028", entityId.split(':')[1], RAID_CONFIG.bossScoreWeight).bold());
         p.level.playSound(null, p.blockX, p.blockY, p.blockZ,
             'minecraft:ui.toast.challenge_complete', 'players', 1.0, 0.8);
     } else if (isMiniboss) {
         p.persistentData.raidMinibossKills = (p.persistentData.raidMinibossKills || 0) + 1;
-        p.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0027", entityId.split(':')[1], RAID_CONFIG.minibossScoreWeight));
+        p.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0029", entityId.split(':')[1], RAID_CONFIG.minibossScoreWeight));
         p.level.playSound(null, p.blockX, p.blockY, p.blockZ,
             'minecraft:entity.player.levelup', 'players', 0.8, 1.4);
     } else if (p.persistentData.raidKills % RAID_CONFIG.killStreakInterval === 0) {
-        p.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0028", p.persistentData.raidKills));
+        p.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0030", p.persistentData.raidKills));
         p.level.playSound(null, p.blockX, p.blockY, p.blockZ,
             'minecraft:entity.experience_orb.pickup', 'players', 0.8, 1.2);
     } else {
@@ -772,13 +772,13 @@ BlockEvents.rightClicked(event => {
         let debuff = CURSED_DEBUFFS[Math.floor(Math.random() * CURSED_DEBUFFS.length)];
         player.potionEffects.add(debuff.id, RAID_CONFIG.cursedDebuffDuration, debuff.amp, false, true);
         player.tell(Text.of(''));
-        player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0030", debuff.name).bold());
-        player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.raid.0011", debuff.name));
+        player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0032", debuff.name).bold());
+        player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.raid.0033", debuff.name));
         level.playSound(null, block.x, block.y, block.z,
             'minecraft:entity.wither.ambient', 'players', 0.8, 1.4);
     } else {
         // 8. Normal feedback
-        player.statusMessage = Text.translate("kubejs.script.server.scripts.custom.raid.0031", chestCount);
+        player.statusMessage = Text.translate("kubejs.script.server.scripts.custom.raid.0034", chestCount);
     }
 
     // 9. Chest guardian — chance to spawn a named mob on chest open
@@ -791,7 +791,7 @@ BlockEvents.rightClicked(event => {
         guardian.customName = '§c👁 Chest Guardian';
         guardian.setCustomNameVisible(true);
         guardian.spawn();
-        player.statusMessage = Text.translate('kubejs.script.server.scripts.custom.raid.0032');
+        player.statusMessage = Text.translate('kubejs.script.server.scripts.custom.raid.0035');
         level.playSound(null, block.x, block.y, block.z,
             'minecraft:entity.zombie.ambient', 'players', 1.0, 0.6);
     }																	  
@@ -827,11 +827,11 @@ PlayerEvents.respawned(event => {
 	player.persistentData.raidDimension = false;
 																	   
     if (xpLost > 0) {
-        player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0033", xpLost, RAID_CONFIG.xpDeathPenalty * 100));
-        player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0034", formatNum(newXP - rankFloorXP), formatNum(RAID_CONFIG.xpRequiredPerRank * (currentRank + 1))));
+        player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0036", xpLost, RAID_CONFIG.xpDeathPenalty * 100));
+        player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0037", formatNum(newXP - rankFloorXP), formatNum(RAID_CONFIG.xpRequiredPerRank * (currentRank + 1))));
     } else {
 
-        player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0035"));
+        player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0038"));
     }
 });
 
@@ -847,23 +847,23 @@ ItemEvents.entityInteracted('kubejs:boss_killer', event => {
     const { player, target, level, item } = event;
 
     if (!player.persistentData.inRaid) {
-        player.tell(Text.translate('kubejs.script.server.scripts.custom.raid.0036'));
+        player.tell(Text.translate('kubejs.script.server.scripts.custom.raid.0039'));
         return;
     }
     if (String(level.dimension) !== 'lrdynamicdungeon:dungeon_dimension') {
-        player.tell(Text.translate('kubejs.script.server.scripts.custom.raid.0037'));
+        player.tell(Text.translate('kubejs.script.server.scripts.custom.raid.0040'));
         return;
     }
     let entityId = String(target.type);
     if (!BOSS_MOB_IDS.includes(entityId)) {
-        player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0038", entityId.split(':')[1]));
+        player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0041", entityId.split(':')[1]));
         return;
     }
 
     item.count--;
     target.attack(target.maxHealth + 1000);
 
-    player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0039", entityId.split(':')[1]).bold());
+    player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0042", entityId.split(':')[1]).bold());
     level.playSound(null, player.blockX, player.blockY, player.blockZ,
         'minecraft:entity.lightning_bolt.impact', 'players', 1.0, 1.2);
 
@@ -875,23 +875,23 @@ ItemEvents.entityInteracted('kubejs:miniboss_killer', event => {
     const { player, target, level, item } = event;
 
     if (!player.persistentData.inRaid) {
-        player.tell(Text.translate('kubejs.script.server.scripts.custom.raid.0040'));
+        player.tell(Text.translate('kubejs.script.server.scripts.custom.raid.0043'));
         return;
     }
     if (String(level.dimension) !== 'lrdynamicdungeon:dungeon_dimension') {
-        player.tell(Text.translate('kubejs.script.server.scripts.custom.raid.0041'));
+        player.tell(Text.translate('kubejs.script.server.scripts.custom.raid.0044'));
         return;
     }
     let entityId = String(target.type);
     if (!MINIBOSS_MOB_IDS.includes(entityId)) {
-        player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0042", entityId.split(':')[1]));
+        player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0045", entityId.split(':')[1]));
         return;
     }
 
     item.count--;
     target.attack(target.maxHealth + 1000);
 
-    player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0043", entityId.split(':')[1]));
+    player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0046", entityId.split(':')[1]));
     level.playSound(null, player.blockX, player.blockY, player.blockZ,
         'minecraft:entity.player.levelup', 'players', 1.0, 1.5);
 
@@ -905,7 +905,7 @@ ItemEvents.rightClicked(event => {
 
     if (item.id == 'kubejs:dungeon_recall') {
         if (!player.persistentData.inRaid) {
-            player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0044"));
+            player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0047"));
             return;
         }
 
@@ -914,7 +914,7 @@ ItemEvents.rightClicked(event => {
         let sz = player.persistentData.getDouble('startZ');
 
         player.teleportTo(sx, sy, sz);
-        player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0045"));
+        player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0048"));
         level.playSound(null, sx, sy, sz, 'minecraft:entity.enderman.teleport', 'players', 1.0, 1.0);
         item.count--;
     }
@@ -922,10 +922,10 @@ ItemEvents.rightClicked(event => {
     // --- FREEZE ITEM ---
     if (item.id == 'kubejs:frost_scroll') {
 		if (!player.persistentData.inRaid) {
-            player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0046"));
+            player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0049"));
             return;
         }
-        player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0047"));
+        player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0050"));
         level.playSound(null, player.blockX, player.blockY, player.blockZ, 'minecraft:entity.player.hurt_freeze', 'players', 1.0, 0.5);
 
         // Find all monsters in radius
@@ -946,11 +946,11 @@ ItemEvents.rightClicked(event => {
     // --- KILL MULTIPLIER ITEM ---
     if (item.id == 'kubejs:kill_multiplier') {
         if (!player.persistentData.inRaid) {
-            player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0048"));
+            player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0051"));
             return;
         }
         if (player.persistentData.killMultiplierActive) {
-            player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0049"));
+            player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0052"));
             return;
         }
 
@@ -958,7 +958,7 @@ ItemEvents.rightClicked(event => {
         item.count--;
 
         let durationSecs = RAID_CONFIG.killMultiplierDuration / 20;
-        player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0050", RAID_CONFIG.killMultiplierAmount, durationSecs).bold());
+        player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0053", RAID_CONFIG.killMultiplierAmount, durationSecs).bold());
         level.playSound(null, player.blockX, player.blockY, player.blockZ,
             'minecraft:entity.player.levelup', 'players', 1.0, 0.8);
         server.runCommandSilent(`particle minecraft:flame ${player.x} ${player.y + 1} ${player.z} 0.3 0.5 0.3 0.1 30`);
@@ -968,19 +968,19 @@ ItemEvents.rightClicked(event => {
         let halfSecs  = Math.floor(durationSecs / 2);
         server.scheduleInTicks(halfTicks, () => {
             if (player.persistentData.killMultiplierActive) {
-                player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.raid.0012", halfSecs));
+                player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.raid.0054", halfSecs));
             }
         });
         server.scheduleInTicks(RAID_CONFIG.killMultiplierDuration - 200, () => {
             if (player.persistentData.killMultiplierActive) {
-                player.setStatusMessage(Text.translate('kubejs.script.server.scripts.custom.raid.0013'));
+                player.setStatusMessage(Text.translate('kubejs.script.server.scripts.custom.raid.0055'));
             }
         });
 
         // Expire
         server.scheduleInTicks(RAID_CONFIG.killMultiplierDuration, () => {
             player.persistentData.killMultiplierActive = false;
-            player.tell(Text.translate('kubejs.script.server.scripts.custom.raid.0051'));
+            player.tell(Text.translate('kubejs.script.server.scripts.custom.raid.0056'));
             level.playSound(null, player.blockX, player.blockY, player.blockZ,
                 'minecraft:block.fire.extinguish', 'players', 0.8, 1.2);
         });
@@ -997,7 +997,7 @@ ItemEvents.rightClicked(event => {
     );
 
     if (hasGuard) {
-        player.setStatusMessage(Text.translate('kubejs.script.server.scripts.custom.raid.0014'));
+        player.setStatusMessage(Text.translate('kubejs.script.server.scripts.custom.raid.0057'));
         return;
     }
 
@@ -1018,7 +1018,7 @@ ItemEvents.rightClicked(event => {
     guard.setCustomNameVisible(true);
     guard.spawn();
 
-    player.setStatusMessage(Text.translate('kubejs.script.server.scripts.custom.raid.0015'));
+    player.setStatusMessage(Text.translate('kubejs.script.server.scripts.custom.raid.0058'));
     level.playSound(null, player.blockX, player.blockY, player.blockZ,
         'minecraft:entity.villager.yes', 'players', 1.0, 1.2);
 
@@ -1120,16 +1120,16 @@ ServerEvents.commandRegistry(event => {
                 let toNext  = xpToNextRank(totalXP);
                 let mult    = getRankTokenMultiplier(rank);
 
-                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0052").bold());
-                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0016", player.username)); 
-                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0053", rank));
-                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0054", totalXP, toNext, rank + 1));
+                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0059").bold());
+                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0060", player.username)); 
+                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0061", rank));
+                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0062", totalXP, toNext, rank + 1));
 
                 let si = (RAID_CONFIG.xpRequiredPerRank * rank * (rank + 1) / 2);
                 let sg = RAID_CONFIG.xpRequiredPerRank * (rank + 1);
 
                 renderProgressBar(player, totalXP - si, sg, "Rank XP", "§6");
-                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0055", mult.toFixed(2)));
+                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0063", mult.toFixed(2)));
                 player.tell(Text.of(`§8---`));
 
                 let totalRuns   = player.persistentData.statTotalRuns   || 0;
@@ -1150,13 +1150,13 @@ ServerEvents.commandRegistry(event => {
 
                 let bestTimeStr = bestTimeSec > 0 ? `${btMin}:${btSec}` : '§8N/A';
 
-                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0057", formatNum(totalRuns)));
-                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0058", formatNum(totalKills)));
-                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0059", formatNum(totalTokens)));
-                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0060", formatNum(totalDeaths)));
-                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0061", formatNum(bestKills)));
+                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0065", formatNum(totalRuns)));
+                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0066", formatNum(totalKills)));
+                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0067", formatNum(totalTokens)));
+                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0068", formatNum(totalDeaths)));
+                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0069", formatNum(bestKills)));
                 player.tell(Text.of("-----------------------").bold());
-				player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0063").italic());
+				player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0071").italic());
                 return 1;
             })
     );
@@ -1174,36 +1174,36 @@ ServerEvents.commandRegistry(event => {
                 let player = ctx.source.player;
                 if (!player) return 0;
  
-                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0064").bold());
-                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0065"));
+                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0072").bold());
+                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0073"));
                 player.tell(Text.of(""));
  
-                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0067").bold());
-                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0068"));
-                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0069"));
+                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0075").bold());
+                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0076"));
+                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0077"));
                 player.tell(Text.of(""));
  
-                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0071").bold());
-                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0072"));
+                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0079").bold());
+                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0080"));
                 player.tell(Text.of(""));
  
-                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0074").bold());
-                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0075"));
+                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0082").bold());
+                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0083"));
                 player.tell(Text.of(""));
  
-                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0077").bold());
-                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0078"));
+                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0085").bold());
+                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0086"));
                 player.tell(Text.of(""));
  
-                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0080").bold());
-                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0081"));
+                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0088").bold());
+                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0089"));
                 player.tell(Text.of(""));
   
-                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0083").bold());
-                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0084"));
-                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0085"));
-                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0086"));
-                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0087"));
+                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0091").bold());
+                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0092"));
+                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0093"));
+                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0094"));
+                player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0095"));
                 player.tell(Text.of("§8------------------------------------").bold());
  
                 return 1;
@@ -1225,11 +1225,11 @@ ServerEvents.commandRegistry(event => {
             let rv      = player.persistentData.getCompound('raidVault');
             let balance = rv.getInt('raidTokens') || 0;
 
-            player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0089").bold());
-            player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0090", formatNum(balance)));
+            player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0097").bold());
+            player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0098", formatNum(balance)));
             player.tell(Text.of("§8---"));
-            player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0092"));
-            player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0093"));
+            player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0100"));
+            player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0101"));
             player.tell(Text.of("-----------------------").bold());
             return 1;
         })
@@ -1240,7 +1240,7 @@ ServerEvents.commandRegistry(event => {
             let item   = player.mainHandItem;
 
             if (String(item.id) !== 'kubejs:coin_raid' || item.count === 0) {
-                player.tell(Text.translate('kubejs.script.server.scripts.custom.raid.0095'));
+                player.tell(Text.translate('kubejs.script.server.scripts.custom.raid.0103'));
                 return 0;
             }
 
@@ -1251,7 +1251,7 @@ ServerEvents.commandRegistry(event => {
             player.persistentData.put('raidVault', rv);
             item.setCount(0);
 
-            player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0096", amount, amount !== 1 ? 's' : '', formatNum(current + amount)));
+            player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0104", amount, amount !== 1 ? 's' : '', formatNum(current + amount)));
             player.level.playSound(null, player.blockX, player.blockY, player.blockZ,
                 'minecraft:entity.villager.yes', 'players', 1.0, 1.0);
             return 1;
@@ -1265,7 +1265,7 @@ ServerEvents.commandRegistry(event => {
                     let amount  = Arguments.INTEGER.getResult(ctx, 'amount');
 
                     if (amount <= 0) {
-                        player.tell(Text.translate('kubejs.script.server.scripts.custom.raid.0097'));
+                        player.tell(Text.translate('kubejs.script.server.scripts.custom.raid.0105'));
                         return 0;
                     }
 
@@ -1273,7 +1273,7 @@ ServerEvents.commandRegistry(event => {
                     let balance = rv.getInt('raidTokens') || 0;
 
                     if (balance < amount) {
-                        player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0098", formatNum(balance)));
+                        player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0106", formatNum(balance)));
                         return 0;
                     }
 
@@ -1281,7 +1281,7 @@ ServerEvents.commandRegistry(event => {
                     player.persistentData.put('raidVault', rv);
                     player.give(Item.of('kubejs:coin_raid', amount));
 
-                    player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0099", amount, amount !== 1 ? 's' : '', formatNum(balance - amount)));
+                    player.tell(Text.translate("kubejs.script.server.scripts.custom.raid.0107", amount, amount !== 1 ? 's' : '', formatNum(balance - amount)));
                     player.level.playSound(null, player.blockX, player.blockY, player.blockZ,
                         'minecraft:block.amethyst_block.break', 'players', 1.0, 1.2);
                     return 1;

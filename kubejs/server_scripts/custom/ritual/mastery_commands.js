@@ -34,7 +34,7 @@ ServerEvents.commandRegistry(event => {
             .executes(ctx => {
                 let player = ctx.source.player;
                 player.persistentData.remove('astrolabe_busy');
-                player.tell(Text.translate("kubejs.script.server.scripts.custom.ritual.mastery.commands.0001"));
+                player.tell(Text.translate("kubejs.script.server.scripts.custom.ritual.mastery.commands.0003"));
                 return 1;
             })
     );

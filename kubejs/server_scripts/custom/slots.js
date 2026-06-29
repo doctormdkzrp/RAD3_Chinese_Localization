@@ -158,7 +158,7 @@ ItemEvents.rightClicked(event => {
     let lastSpin = player.persistentData.slotsLastSpin || 0;
     if (now - lastSpin < SPIN_COOLDOWN_MS) {
         let secsLeft = ((SPIN_COOLDOWN_MS - (now - lastSpin)) / 1000).toFixed(1);
-        player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.slots.0001", secsLeft).bold());
+        player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.slots.0003", secsLeft).bold());
         return;
     }
 
@@ -177,9 +177,9 @@ ItemEvents.rightClicked(event => {
         let msg      = LIMIT_MESSAGES[Math.floor(Math.random() * LIMIT_MESSAGES.length)];
         let timeLeft = Math.ceil((LIMIT_MS - (now - player.persistentData.slotsWindowStart)) / 60000);
         player.tell(" ");
-        player.tell(Text.translate("kubejs.script.server.scripts.custom.slots.0004", msg.name));
-        player.tell(Text.translate("kubejs.script.server.scripts.custom.slots.0005", msg.desc));
-        player.tell(Text.translate("kubejs.script.server.scripts.custom.slots.0006", timeLeft));
+        player.tell(Text.translate("kubejs.script.server.scripts.custom.slots.0005", msg.name));
+        player.tell(Text.translate("kubejs.script.server.scripts.custom.slots.0006", msg.desc));
+        player.tell(Text.translate("kubejs.script.server.scripts.custom.slots.0007", timeLeft));
         player.level.playSound(null, player.blockX, player.blockY, player.blockZ,
             "minecraft:entity.villager.no", "players", 1.0, 1.0);
         return;
@@ -198,7 +198,7 @@ ItemEvents.rightClicked(event => {
         });
 
         if (!consumed) {
-            player.tell(Text.translate("kubejs.script.server.scripts.custom.slots.0007"));
+            player.tell(Text.translate("kubejs.script.server.scripts.custom.slots.0008"));
             return;
         }
 	
@@ -207,7 +207,7 @@ ItemEvents.rightClicked(event => {
     if (coinItem.damageValue >= coinItem.maxDamage) {
         coinItem.count = 0; // Remove the item (it's broken)
         player.level.playSound(null, player.blockX, player.blockY, player.blockZ, "minecraft:entity.item.break", "players", 1.0, 1.0);
-        player.tell(Text.translate("kubejs.script.server.scripts.custom.slots.0008"));
+        player.tell(Text.translate("kubejs.script.server.scripts.custom.slots.0009"));
     }
 	
     player.persistentData.slotsLastSpin       = now;
@@ -218,14 +218,14 @@ ItemEvents.rightClicked(event => {
     let dimPool = DIMENSION_PRIZES[dimId] || DIMENSION_PRIZES["_default"];
 
     // ── Spin animation ─────────────────────────────────────
-    player.tell(Text.translate("kubejs.script.server.scripts.custom.slots.0002").italic());
+    player.tell(Text.translate("kubejs.script.server.scripts.custom.slots.0010").italic());
 
     [5, 10, 15].forEach(ticks => {
         server.scheduleInTicks(ticks, () => {
             let r1 = SPIN_ICONS[Math.floor(Math.random() * SPIN_ICONS.length)];
             let r2 = SPIN_ICONS[Math.floor(Math.random() * SPIN_ICONS.length)];
             let r3 = SPIN_ICONS[Math.floor(Math.random() * SPIN_ICONS.length)];
-            player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.slots.0003", r1, r2, r3));
+            player.setStatusMessage(Text.translate("kubejs.script.server.scripts.custom.slots.0011", r1, r2, r3));
             player.level.playSound(null, player.blockX, player.blockY, player.blockZ,
                 "minecraft:block.note_block.hat", "players", 0.5, 1.8);
         });
@@ -262,14 +262,14 @@ ItemEvents.rightClicked(event => {
 		 player.setStatusMessage(Text.of(""));
 
         player.tell(Text.of("§7╔════════════╗"));
-        player.tell(Text.translate("kubejs.script.server.scripts.custom.slots.0006", c1, s1, c2, s2, c3, s3));
+        player.tell(Text.translate("kubejs.script.server.scripts.custom.slots.0014", c1, s1, c2, s2, c3, s3));
         player.tell(Text.of("§7╚════════════╝"));
 
         if (isJackpot) {
             let prize = weightedPick(dimPool.jackpot);
             player.give(Item.of(prize.item, prize.count));
             recordWin(player, server, "jackpot");
-            server.tell(Text.translate("kubejs.script.server.scripts.custom.slots.0008", player.username, prize.label).gold());
+            server.tell(Text.translate("kubejs.script.server.scripts.custom.slots.0016", player.username, prize.label).gold());
             player.level.playSound(null, player.blockX, player.blockY, player.blockZ,
                 "minecraft:ui.toast.challenge_complete", "players", 1.0, 1.0);
 
@@ -277,12 +277,12 @@ ItemEvents.rightClicked(event => {
             let prize = weightedPick(dimPool.partial);
             player.give(Item.of(prize.item, prize.count));
             recordWin(player, server, "partial");
-            player.tell(Text.translate("kubejs.script.server.scripts.custom.slots.0009", prize.label));
+            player.tell(Text.translate("kubejs.script.server.scripts.custom.slots.0017", prize.label));
             player.level.playSound(null, player.blockX, player.blockY, player.blockZ,
                 "minecraft:entity.experience_orb.pickup", "players", 0.8, 1.2);
 
         } else {
-            player.tell(Text.translate("kubejs.script.server.scripts.custom.slots.0010").gray());
+            player.tell(Text.translate("kubejs.script.server.scripts.custom.slots.0018").gray());
             player.level.playSound(null, player.blockX, player.blockY, player.blockZ,
                 "minecraft:block.note_block.bass", "players", 1.0, 0.5);
         }
@@ -307,17 +307,17 @@ ServerEvents.commandRegistry(event => {
                 board.sort((a, b) => b.wins - a.wins);
 
                 player.tell(" ");
-                player.tell(Text.translate("kubejs.script.server.scripts.custom.slots.0013"));
+                player.tell(Text.translate("kubejs.script.server.scripts.custom.slots.0020"));
                 player.tell("§7▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
                 if (board.length === 0) {
-                    player.tell(Text.translate("kubejs.script.server.scripts.custom.slots.0015"));
+                    player.tell(Text.translate("kubejs.script.server.scripts.custom.slots.0022"));
                 } else {
                     let limit = Math.min(board.length, 10);
                     for (let i = 0; i < limit; i++) {
                         let color    = i === 0 ? "§e" : i < 3 ? "§6" : "§f";
                         let jackpots = (lb[board[i].name].jackpots || 0);
                         player.tell(Text.translate(
-                            "kubejs.script.server.scripts.custom.slots.0011", color, i + 1, board[i].name, board[i].wins, jackpots
+                            "kubejs.script.server.scripts.custom.slots.0023", color, i + 1, board[i].name, board[i].wins, jackpots
                         ));
                     }
                 }
@@ -336,11 +336,11 @@ ServerEvents.commandRegistry(event => {
                 let partials = entry.partials || 0;
 
                 player.tell(" ");
-                player.tell(Text.translate("kubejs.script.server.scripts.custom.slots.0018"));
+                player.tell(Text.translate("kubejs.script.server.scripts.custom.slots.0026"));
                 player.tell("§7▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
-                player.tell(Text.translate("kubejs.script.server.scripts.custom.slots.0020", total));
-                player.tell(Text.translate("kubejs.script.server.scripts.custom.slots.0021", jackpots));
-                player.tell(Text.translate("kubejs.script.server.scripts.custom.slots.0022", partials));
+                player.tell(Text.translate("kubejs.script.server.scripts.custom.slots.0028", total));
+                player.tell(Text.translate("kubejs.script.server.scripts.custom.slots.0029", jackpots));
+                player.tell(Text.translate("kubejs.script.server.scripts.custom.slots.0030", partials));
                 player.tell("§7▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬▬");
                 return 1;
             })
@@ -376,9 +376,9 @@ function recordWin(player, server, type) {
 
 function getDimName(dimId) {
     const names = {
-        "minecraft:overworld":  "kubejs.script.server.scripts.custom.slots.0024",
-        "minecraft:the_nether": "kubejs.script.server.scripts.custom.slots.0025",
-        "minecraft:the_end":    "kubejs.script.server.scripts.custom.slots.0026",
+        "minecraft:overworld":  "kubejs.script.server.scripts.custom.slots.0032",
+        "minecraft:the_nether": "kubejs.script.server.scripts.custom.slots.0033",
+        "minecraft:the_end":    "kubejs.script.server.scripts.custom.slots.0034",
     };
     return names[dimId] || dimId.split(":").pop().replace(/_/g, " ");
 }

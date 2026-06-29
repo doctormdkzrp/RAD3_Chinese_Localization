@@ -255,7 +255,7 @@ ItemEvents.rightClicked('kubejs:item_recycler', event => {
     let recycledName = offhandItem.displayName
     offhandItem.setCount(0)
 
-    player.tell(Text.translate("kubejs.script.server.scripts.custom.recycler.0001", mastery.tier, stackSize, recycledName.string, successCount))
+    player.tell(Text.translate("kubejs.script.server.scripts.custom.recycler.0010", mastery.tier, stackSize, recycledName.string, successCount))
 })
 
 // --- JOURNAL SCRIPT ---
@@ -282,19 +282,19 @@ ItemEvents.rightClicked('kubejs:recycling_journal', event => {
     else if (total >= 3000)   { tier = "§9Craftsman";     nextGoal = 5000;   failRate = "8%";   jackpotRate = "1.5%"; uncommonRate = "9.5%" }
     else if (total >= 1000)   { tier = "§bJourneyman";    nextGoal = 3000;   failRate = "9%";   jackpotRate = "1.2%"; uncommonRate = "9%" }
 
-    player.tell(Text.translate("kubejs.script.server.scripts.custom.recycler.0002").bold())
-    player.tell(Text.translate("kubejs.script.server.scripts.custom.recycler.0003", tier))
+    player.tell(Text.translate("kubejs.script.server.scripts.custom.recycler.0011").bold())
+    player.tell(Text.translate("kubejs.script.server.scripts.custom.recycler.0012", tier))
     if (nextGoal !== null) {
         let remaining = nextGoal - total
-        player.tell(Text.translate("kubejs.script.server.scripts.custom.recycler.0004", remaining.toLocaleString()))
+        player.tell(Text.translate("kubejs.script.server.scripts.custom.recycler.0013", remaining.toLocaleString()))
     } else {
-        player.tell(Text.translate("kubejs.script.server.scripts.custom.recycler.0005"))
+        player.tell(Text.translate("kubejs.script.server.scripts.custom.recycler.0014"))
     }
-    player.tell(Text.translate("kubejs.script.server.scripts.custom.recycler.0006", total.toLocaleString()))
-    player.tell(Text.translate("kubejs.script.server.scripts.custom.recycler.0007", totalXP.toLocaleString()))
+    player.tell(Text.translate("kubejs.script.server.scripts.custom.recycler.0015", total.toLocaleString()))
+    player.tell(Text.translate("kubejs.script.server.scripts.custom.recycler.0016", totalXP.toLocaleString()))
     player.tell(Text.of("§8> §7Current Failure Rate: §c" + failRate))
     player.tell(Text.of("§8> §7Valuable Jackpot Rate: §d" + jackpotRate))
     player.tell(Text.of("§8> §7Uncommon Bonus Rate:  §6" + uncommonRate))
-    player.tell(Text.translate("kubejs.script.server.scripts.custom.recycler.0008"))
+    player.tell(Text.translate("kubejs.script.server.scripts.custom.recycler.0017"))
     player.playSound('minecraft:item.book.page_turn', 1.0, 1.0)
 })

@@ -87,25 +87,25 @@ ServerEvents.commandRegistry(event => {
                         
                     let nick = displayName.toLowerCase().replace(' ', '');  
                     let message = Text.of(coinColor + displayName + " COIN" + ":§2 " + amount + " ");
-                    let withdrawBtn = Text.translate("kubejs.script.server.scripts.custom.vault.0027").hover(Text.of("§8§oUse: /vault withdraw " + nick + " <amount>"));
+                    let withdrawBtn = Text.translate("kubejs.script.server.scripts.custom.vault.0033").hover(Text.of("§8§oUse: /vault withdraw " + nick + " <amount>"));
                     
                     player.tell(withdrawBtn.append(message));
                 }
             });
             
             if (!hasBalance) {
-                player.tell(Text.translate("kubejs.script.server.scripts.custom.vault.0033"));
+                player.tell(Text.translate("kubejs.script.server.scripts.custom.vault.0034"));
             } else {
                 player.tell(" ");
                 player.tell("  §6Total Net Worth: §f" + totalNetWorth + " §7(Gold Value)");
             }
 
-            player.tell(Text.translate("kubejs.script.server.scripts.custom.vault.0035"));
+            player.tell(Text.translate("kubejs.script.server.scripts.custom.vault.0036"));
             player.tell(" "); 
-            player.tell(Text.translate("kubejs.script.server.scripts.custom.vault.0037")); 
-			player.tell(Text.translate("kubejs.script.server.scripts.custom.vault.0038"));
-            player.tell(Text.translate("kubejs.script.server.scripts.custom.vault.0039"));
-			player.tell(Text.translate("kubejs.script.server.scripts.custom.vault.0040"));			
+            player.tell(Text.translate("kubejs.script.server.scripts.custom.vault.0038")); 
+			player.tell(Text.translate("kubejs.script.server.scripts.custom.vault.0039"));
+            player.tell(Text.translate("kubejs.script.server.scripts.custom.vault.0040"));
+			player.tell(Text.translate("kubejs.script.server.scripts.custom.vault.0041"));			
             
             return 1;
         }))
@@ -138,7 +138,7 @@ ServerEvents.commandRegistry(event => {
                     item.setCount(0);
                     return 1;
                 }
-                player.tell(Text.red(Text.translate('kubejs.script.server.scripts.custom.vault.0041')));
+                player.tell(Text.red(Text.translate('kubejs.script.server.scripts.custom.vault.0042')));
                 return 0;
             })
 			
@@ -177,7 +177,7 @@ ServerEvents.commandRegistry(event => {
                     return 1;
                 }
                 
-                player.tell(Text.translate("kubejs.script.server.scripts.custom.vault.0042"));
+                player.tell(Text.translate("kubejs.script.server.scripts.custom.vault.0043"));
                 return 0;
             }))
 			
@@ -235,9 +235,9 @@ ServerEvents.commandRegistry(event => {
 
                 // 2. Safety Check
                 if (totalCountInVault > 500) {
-                    player.tell(Text.translate("kubejs.script.server.scripts.custom.vault.0043"));
-                    player.tell("§8» §7Total: §f" + totalCountInVault + " §8/ 500 max.");
                     player.tell(Text.translate("kubejs.script.server.scripts.custom.vault.0044"));
+                    player.tell("§8» §7Total: §f" + totalCountInVault + " §8/ 500 max.");
+                    player.tell(Text.translate("kubejs.script.server.scripts.custom.vault.0045"));
                     player.runCommandSilent('playsound minecraft:entity.villager.no player @s ~ ~ ~ 3 1.5');
                     return 0;
                 }
@@ -257,7 +257,7 @@ ServerEvents.commandRegistry(event => {
                     player.persistentData.put('cloudVault', vault);
                     player.persistentData.dirty = true;
 
-                    player.tell(Text.translate("kubejs.script.server.scripts.custom.vault.0045"));
+                    player.tell(Text.translate("kubejs.script.server.scripts.custom.vault.0046"));
                     player.tell("§8» §7Items: " + details.join('§7, '));
                     player.tell("§8» §6§lTOTAL COINS: §f" + totalCountInVault);
                     
@@ -265,7 +265,7 @@ ServerEvents.commandRegistry(event => {
                     return 1;
                 }
                 
-                player.tell(Text.translate("kubejs.script.server.scripts.custom.vault.0046"));
+                player.tell(Text.translate("kubejs.script.server.scripts.custom.vault.0047"));
                 return 0;
             }))	
 		
