@@ -1,0 +1,15 @@
+{
+  "block.iron_ender_chests.iron_ender_chest": "铁末影箱",
+  "block.iron_ender_chests.diamond_ender_chest": "钻石末影箱",
+  "block.iron_ender_chests.netherite_ender_chest": "下界合金末影箱",
+  "block.iron_ender_chests.copper_ender_chest": "铜末影箱",
+  "block.iron_ender_chests.gold_ender_chest": "金末影箱",
+  "block.iron_ender_chests.emerald_ender_chest": "绿宝石末影箱",
+  "block.iron_ender_chests.redstone_ender_chest": "红石末影箱",
+  "block.iron_ender_chests.lapis_ender_chest": "青金石末影箱",
+  "tooltip.iron_ender_chests.four_rows": "四行",
+  "tooltip.iron_ender_chests.five_rows": "五行",
+  "tooltip.iron_ender_chests.six_rows": "六行",
+  "tooltip.iron_ender_chests.fire_resistant": "防火",
+  "itemGroup.iron_ender_chests.iron_ender_chests": "铁末影箱"
+}

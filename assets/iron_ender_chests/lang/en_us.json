@@ -1,0 +1,15 @@
+{
+  "block.iron_ender_chests.iron_ender_chest": "Iron Ender Chest",
+  "block.iron_ender_chests.diamond_ender_chest": "Diamond Ender Chest",
+  "block.iron_ender_chests.netherite_ender_chest": "Netherite Ender Chest",
+  "block.iron_ender_chests.copper_ender_chest": "Copper Ender Chest",
+  "block.iron_ender_chests.gold_ender_chest": "Gold Ender Chest",
+  "block.iron_ender_chests.emerald_ender_chest": "Emerald Ender Chest",
+  "block.iron_ender_chests.redstone_ender_chest": "Redstone Ender Chest",
+  "block.iron_ender_chests.lapis_ender_chest": "Lapis Lazuli Ender Chest",
+  "tooltip.iron_ender_chests.four_rows": "Four Rows",
+  "tooltip.iron_ender_chests.five_rows": "Five Rows",
+  "tooltip.iron_ender_chests.six_rows": "Six Rows",
+  "tooltip.iron_ender_chests.fire_resistant": "Fire Resistant",
+  "itemGroup.iron_ender_chests.iron_ender_chests": "Iron Ender Chests"
+}
